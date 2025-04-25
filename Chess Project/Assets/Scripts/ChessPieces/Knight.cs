@@ -18,7 +18,7 @@ public class Knight : ChessPiece
 
         foreach (int[] move in moves) {
             Square s = this.game.getBoard().getSquareAt(this.position.x + move[0], this.position.y + move[1]);
-            if(s != null && s.piece == null) {
+            if(s != null && (s.entity == null || s.entity.getEntityType() != EntityType.Piece)) {
                 possibleMoves.Add(s);
             }
         }

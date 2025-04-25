@@ -15,11 +15,15 @@ public class Bishop : ChessPiece
         foreach (int[] offset in offsets) {
             int distance = 1;
             Square s = this.game.getBoard().getSquareAt(this.position.x + offset[0]*distance, this.position.y + offset[1]*distance);
-            while(s != null && s.piece == null) {
-                possibleMoves.Add(s);        
-                if(s.enemy != null) {
+            while(s != null) {
+                if(s.entity != null) {
+                    if(s.entity.getEntityType() == EntityType.Piece) {
+                        break;
+                    }
+                    possibleMoves.Add(s);
                     break;
                 }
+                possibleMoves.Add(s);
                 distance++;
                 s = this.game.getBoard().getSquareAt(this.position.x + offset[0]*distance, this.position.y + offset[1]*distance);
             }
@@ -38,9 +42,9 @@ public class Bishop : ChessPiece
         foreach (int[] offset in offsets) {
             int distance = 1;
             Square s = this.game.getBoard().getSquareAt(this.position.x + offset[0]*distance, this.position.y + offset[1]*distance);
-            while(s != null ) {
+            while(s != null) {
                 possibleMoves.Add(s);        
-                if(s.enemy != null || s.piece != null) {
+                if(s.entity != null) {
                     break;
                 }
                 distance++;

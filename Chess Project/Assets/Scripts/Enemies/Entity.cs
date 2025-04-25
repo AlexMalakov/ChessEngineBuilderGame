@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum EntityType {
+    Piece, Enemy, Minion,
+}
 public abstract class Entity : MonoBehaviour
 {
     public Game game;
@@ -31,4 +35,6 @@ public abstract class Entity : MonoBehaviour
     public virtual void place(Transform t) {
         this.transform.position = t.position;
     }
+
+    public abstract EntityType getEntityType();
 }

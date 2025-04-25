@@ -18,22 +18,30 @@ public class SquareReporter : MonoBehaviour
         int defense = game.getBoard().calculateDefense(square, false);
         squareName.text = square.squareName;
 
-        if(square.piece != null) {
-            if(game.getPremovePieces().Contains(square.piece)) {
-                defense = game.getBoard().calculateDefense(square, true);
-            }
-            squareImage.gameObject.SetActive(true);
-            squareImage.sprite = square.piece.activeSprite;
-            squareImage.type = Image.Type.Simple;
-            squareImage.preserveAspect = false;
-
-            int attack = defense + square.piece.damage;
-            pieceName.text = square.piece.name;
-            squareStats.text = "health" + square.piece.health + "/" + square.piece.maxHealth + "\ndamage: " + square.piece.damage + "\nattack damage: " + attack + "\ndefense: " + square.piece.defense + "\nincoming defense: "  + defense;
-        } else {
+        if(square.entity == null) { 
             squareImage.gameObject.SetActive(false);
             squareStats.text = "incoming defense: " + defense + "\nincoming damage: " + game.getBoard().calculateDamage(square);
             pieceName.text = "";
+        } else if(square.entity.getEntityType() == EntityType.Piece) {
+            ChessPiece p = (ChessPiece) square.entity;
+            if(game.getPremovePieces().Contains(p)) {
+                defense = game.getBoard().calculateDefense(square, true);
+            }
+            squareImage.gameObject.SetActive(true);
+            squareImage.sprite = p.activeSprite;
+            squareImage.type = Image.Type.Simple;
+            squareImage.preserveAspect = false;
+
+            int attack = defense + p.damage;
+            pieceName.text = p.name;
+            squareStats.text = "health" + p.health + "/" + p.maxHealth + "\ndamage: " + p.damage + "\nattack damage: " + attack + "\ndefense: " + p.defense + "\nincoming defense: "  + defense;
+        } else if(square.entity.getEntityType() == EntityType.Enemy) {
+
+        } else if(square.entity.getEntityType() == EntityType.Minion) {
+
+
+        }else {
+            
         }
     }
 }

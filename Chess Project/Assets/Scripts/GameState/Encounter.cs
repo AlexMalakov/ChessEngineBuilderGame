@@ -26,7 +26,7 @@ public class Encounter : MonoBehaviour
 
         board.generateBoard();
         board.placePieces(this.game.getPieces());
-        board.placeEnemy(this.enemy);
+        board.placeEntity(this.enemy);
         enemy.onEncounterStart();
     }
 

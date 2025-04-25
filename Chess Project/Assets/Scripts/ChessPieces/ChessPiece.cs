@@ -21,9 +21,9 @@ public abstract class ChessPiece : Entity
     public virtual bool move(Square square) {
         foreach (Square s in getPossibleMoves()) {
             if (s.x == square.x && s.y == square.y) {
-                this.position.piece = null;
+                this.position.entity = null;
                 this.position = square;
-                this.position.piece = this;
+                this.position.entity = this;
                 StartCoroutine(this.slide(square));
                 return true;
             }
@@ -38,13 +38,13 @@ public abstract class ChessPiece : Entity
 
     //WILL MOVE A PIECE, do not use unless nessisary
     public virtual void forceMove(Square square) {
-        this.position.piece = null;
+        this.position.entity = null;
         this.position = square;
-        this.position.piece = this;
+        this.position.entity = this;
         StartCoroutine(this.slide(square));
     }
 
-    public void takeDamage(int damage) {
+    public override void takeDamage(int damage) {
         // int extraDefense = this.game.getBoard().calcualteDefense(this.position);
         if(effectiveDefense > damage) {
             effectiveDefense-=damage;
@@ -61,5 +61,13 @@ public abstract class ChessPiece : Entity
 
     public virtual int getPieceDamage() {
         return this.game.getPlayer().getPieceDamage(this.damage);
+    }
+
+    public override EntityType getEntityType() {
+        return EntityType.Piece;
+    }
+
+    public void onSacrifice() {
+        
     }
 }

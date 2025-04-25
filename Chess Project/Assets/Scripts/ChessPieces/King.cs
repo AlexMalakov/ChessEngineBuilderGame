@@ -14,11 +14,11 @@ public class King : ChessPiece
 
     public override bool move(Square c) {
         if(this.canCastle && Math.Abs(this.position.x - c.x) == 2) {
-            foreach( Square s in this.getPossibleMoves()) {
-                if( s == c) {
+            foreach(Square s in this.getPossibleMoves()) {
+                if(s == c) {
                     
                     foreach (Rook r in rooks) {
-                        if( c.x > this.position.x && r.position.x > this.position.x) {
+                        if(c.x > this.position.x && r.position.x > this.position.x) {
                             r.forceMove(this.game.getBoard().getSquareAt(this.position.x + 1, this.position.y));
                         } else if(c.x < this.position.x && r.position.x < this.position.x) {
                             r.forceMove(this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y));
@@ -52,7 +52,7 @@ public class King : ChessPiece
 
         foreach (int[] move in moves) {
             Square s = this.game.getBoard().getSquareAt(this.position.x + move[0], this.position.y + move[1]);
-            if(s != null && s.piece == null) {
+            if(s != null && s.entity == null) {
                 possibleMoves.Add(s);
             }
         }
@@ -98,7 +98,7 @@ public class King : ChessPiece
 
     private bool canCastleWith(Rook r) {
         for(int i = Math.Min(this.position.x, r.position.x)+1; i < Math.Max(this.position.x, r.position.x); i++) {
-            if(this.game.getBoard().getSquareAt(i,this.position.y).piece != null) {
+            if(this.game.getBoard().getSquareAt(i,this.position.y).entity != null) {
                 return false;
             }
         }

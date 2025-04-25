@@ -9,6 +9,7 @@ public class Enemy : Entity
     public List<EnemyAction> actionQueue;
     public List<EnemyAction> actionLoop;
     int currentAct = 0;
+    int minionsFinished; bool enemyFinished;
 
     public List<ChessPiece> attackers;
     public List<Minion> minions;
@@ -22,6 +23,8 @@ public class Enemy : Entity
     }
 
     public virtual void takeTurn() {
+        enemyFinished = true;
+        minionsFinished = 0;
         if(currentAct < actionQueue.Count) {
             StartCoroutine(actionQueue[currentAct].takeAction());
         } else {
@@ -37,12 +40,22 @@ public class Enemy : Entity
     protected virtual void summonMinions() {
         foreach(Minion m in this.minions) {
             m.gameObject.SetActive(true);
-            m.onSummon();
+            m.onSummon(this);
         }
     }
 
     public virtual void onTurnOver() {
-        this.game.startPlayerTurn();
+        enemyFinished = true;
+        if(minionsFinished == minions.Count) {
+            this.game.startPlayerTurn();
+        }
+    }
+    
+    public virtual void onMinionFinished() {
+        minionsFinished++;
+        if(enemyFinished && minionsFinished == minions.Count) {
+            this.game.startPlayerTurn();
+        }
     }
 
     public override void takeDamage(int damage/*, ChessPiece attacker*/) {
@@ -52,12 +65,28 @@ public class Enemy : Entity
     }
 
     public override void onDeath() {
+        foreach(Minion m in this.minions) {
+            m.onEnemyDeath();
+        }
         this.game.getEncounter().onEnemyDefeat();
     }
 
     public override IEnumerator slide(Square toSquare) {
-        this.position.enemy = null;
-        toSquare.enemy = this;
+        this.position.entity = null;
+        toSquare.entity = this;
         yield return base.slide(toSquare);
+    }
+
+    //revives all dead minions :)
+    public void reviveMinions() {
+        foreach(Minion m in this.minions) {
+            if(!m.alive) {
+                m.onSummon(this);
+            }
+        }
+    }
+
+    public override EntityType getEntityType() {
+        return EntityType.Enemy;
     }
 }

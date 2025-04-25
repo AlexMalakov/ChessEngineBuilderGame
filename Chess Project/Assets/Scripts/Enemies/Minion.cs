@@ -5,18 +5,54 @@ using UnityEngine;
 public class Minion : Entity
 {
 
+    //minoins also have this lol
+    public List<EnemyAction> actionQueue;
+    public List<EnemyAction> actionLoop;
+    int currentAct = 0;
+    public Enemy enemy;
+    public bool alive = false;
 
 
-    public void onSummon() {
+    public void onSummon(Enemy enemy) {
+        gameObject.SetActive(true);
+        this.alive = true;
+        this.enemy = enemy;
         health = maxHealth;
     }
 
-    public void takeTurn() {
+    public virtual void takeTurn() {
+        if(!this.alive) { //PLACE HOLDER, DEAD MINIONS DONT TAKE ACTIONS!
+            this.enemy.onMinionFinished();
+            return;
+        }
 
+        if(currentAct < actionQueue.Count) {
+            StartCoroutine(actionQueue[currentAct].takeAction());
+        } else {
+            StartCoroutine(actionLoop[(currentAct - actionQueue.Count)%actionLoop.Count].takeAction());
+        }
+        currentAct++;
+    }
+
+
+    public virtual void onTurnOver() {
+        this.enemy.onMinionFinished();
     }
 
 
     public override void onDeath() {
+        this.alive = false;
+        this.position.entity = null;
+        this.position = null;
+        gameObject.SetActive(false);
 
+    }
+
+    public void onEnemyDeath() {
+        this.onDeath();
+    }
+
+    public override EntityType getEntityType() {
+        return EntityType.Minion;
     }
 }

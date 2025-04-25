@@ -35,16 +35,14 @@ public class Board : MonoBehaviour
 
     public virtual void placePieces(List<ChessPiece> pieces) {
         foreach(ChessPiece p in pieces) {
-            p.place(this.squaresOnBoard[p.startingX, p.startingY].transform);
-            this.squaresOnBoard[p.startingX,p.startingY].piece = p;
-            p.position = this.squaresOnBoard[p.startingX, p.startingY];
+            placeEntity(p);
         }
     }
 
-    public virtual void placeEnemy(Enemy enemy) {
-        enemy.position = this.squaresOnBoard[enemy.startingX, enemy.startingY];
-        this.squaresOnBoard[enemy.startingX, enemy.startingY].enemy = enemy;
-        enemy.place(enemy.position.transform);
+    public virtual void placeEntity(Entity entity) {
+        entity.position = this.squaresOnBoard[entity.startingX, entity.startingY];
+        this.squaresOnBoard[entity.startingX, entity.startingY].entity = entity;
+        entity.place(entity.position.transform);
     }
 
 
@@ -52,9 +50,10 @@ public class Board : MonoBehaviour
 
         wipeTargetableSquares();
 
-        if(newClickedSquare.piece != null){
+        if(newClickedSquare.hasChessPiece()){
+            ChessPiece p = (ChessPiece)newClickedSquare.entity;
             this.wipeMoveableSquares();
-            foreach(Square s in newClickedSquare.piece.getPossibleMoves()) {
+            foreach(Square s in p.getPossibleMoves()) {
                 s.setMoveable(true);
             }
 
@@ -68,20 +67,20 @@ public class Board : MonoBehaviour
             this.clickedSquare.unclickSquare();
             this.clickedSquare=null;
             this.wipeMoveableSquares();
-        }else if(newClickedSquare.isMoveable && this.clickedSquare.piece != null){ //null check as safety precaution but not really needed
+        }else if(newClickedSquare.isMoveable && this.clickedSquare.hasChessPiece()){ //null check as safety precaution but not really needed
             this.wipeMoveableSquares();
             this.clickedSquare.unclickSquare();
 
-
+            ChessPiece p = (ChessPiece)this.clickedSquare.entity;
             
-            bool moveMade = this.clickedSquare.piece.move(newClickedSquare);
+            bool moveMade = p.move(newClickedSquare);
 
             if(moveMade && !premove) {
                 game.onPlayerMove();
                 //problem check
             } else if(moveMade) {
                 game.onPlayerPremove();
-                game.getPlayer().premovePiece(this.clickedSquare.piece);
+                game.getPlayer().premovePiece(p);
             }
             newClickedSquare.unclickSquare();
             //REMOVE A MOVE FROM THE PLAYER if true
@@ -194,7 +193,7 @@ public class Board : MonoBehaviour
     }
 
     public void onPieceTaken(ChessPiece p) {
-        p.position.piece = null;
+        p.position.entity = null;
         this.game.player.onPieceDeath(p);
         this.game.graveyard.addToGraveyard(p);
     }

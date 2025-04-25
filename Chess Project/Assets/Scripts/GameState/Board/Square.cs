@@ -15,9 +15,7 @@ public class Square : MonoBehaviour
     public GameObject attackableSprite;
     public GameObject canTargetSprite;
 
-    public ChessPiece piece;
-    public Enemy enemy; //this will be updated later ig
-    public Minion minion;
+    public Entity entity;
 
     public bool isMoveable;
     public bool isTargeting;
@@ -46,14 +44,6 @@ public class Square : MonoBehaviour
         selectedSprite.SetActive(false);
     }
 
-    public void pieceOnSquare(ChessPiece p) {
-        this.piece = p;
-    }
-    
-    public void pieceOffSquare() {
-        this.piece = null;
-    }
-
     public void setMoveable(bool moveable) {
         this.isMoveable = moveable;
         this.moveableSprite.SetActive(moveable);
@@ -75,5 +65,9 @@ public class Square : MonoBehaviour
     public void toggleTarget(bool targeting) {
         this.isTargeting = targeting;
         this.canTargetSprite.SetActive(targeting);
+    }
+
+    public bool hasChessPiece() {
+        return this.entity != null && this.entity.getEntityType() == EntityType.Piece;
     }
 }

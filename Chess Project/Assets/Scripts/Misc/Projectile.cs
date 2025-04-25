@@ -24,10 +24,13 @@ public class Projectile : MonoBehaviour
 
             x+= deltaX; y+= deltaY;
             
-            if((game.getBoard().getSquareAt(x,y).piece != null && targetPieces) || (game.getBoard().getSquareAt(x,y).enemy != null && targetEnemies)) {
-                this.payload.activate(game.getBoard().getSquareAt(x,y), targetPieces, targetEnemies, targetMinions, damage);
-                break;
-            } //else if(game.getBoard().getSquareAt(x,y).minion != null && targetMinions){}
+            if(game.getBoard().getSquareAt(x,y).entity != null) {
+                Entity e = game.getBoard().getSquareAt(x,y).entity;
+                if((e.getEntityType() == EntityType.Piece && targetPieces) || (e.getEntityType() != EntityType.Piece && targetEnemies)) {
+                    this.payload.activate(game.getBoard().getSquareAt(x,y), targetPieces, targetEnemies, targetMinions, damage);
+                    break;
+                }
+            }
         }
 
         GameObject proj = Instantiate(projectileModel, origin.transform.position, Quaternion.identity);
