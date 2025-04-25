@@ -2,16 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
-    public Game game;
-    public int startingX; public int startingY;
-    public int health;
-    public int maxHealth;
-    public int defense;
-    public int damage;
-    public Square position;
-
     public Projectile projectile;
 
     public List<EnemyAction> actionQueue;
@@ -19,50 +11,53 @@ public class Enemy : MonoBehaviour
     int currentAct = 0;
 
     public List<ChessPiece> attackers;
+    public List<Minion> minions;
     public Sprite enemySprite;
     public EnemyReporter reporter;
 
     
-    public void onEncounterStart() {
+    public virtual void onEncounterStart() {
         this.reporter.onEncounterStart();
+        this.summonMinions();
     }
 
-    public void takeTurn() {
+    public virtual void takeTurn() {
         if(currentAct < actionQueue.Count) {
             StartCoroutine(actionQueue[currentAct].takeAction());
         } else {
             StartCoroutine(actionLoop[(currentAct - actionQueue.Count)%actionLoop.Count].takeAction());
         }
         currentAct++;
+
+        foreach(Minion m in this.minions) {
+            m.takeTurn();
+        }
     }
 
-    public void onTurnOver() {
+    protected virtual void summonMinions() {
+        foreach(Minion m in this.minions) {
+            m.gameObject.SetActive(true);
+            m.onSummon();
+        }
+    }
+
+    public virtual void onTurnOver() {
         this.game.startPlayerTurn();
     }
 
-    public void takeDamage(int damage/*, ChessPiece attacker*/) {
-        // if(attacker != null) {
-        //     this.attackers.Add(attacker);
-        // }
-
-        health-=damage;
+    public override void takeDamage(int damage/*, ChessPiece attacker*/) {
+        base.takeDamage(damage);
         game.getBoard().returnDamage(this.position,this.defense);
-
-        if(health <= 0) {
-            this.game.getEncounter().onEnemyDefeat();
-        }
-
         this.reporter.onStatUpdate();
     }
 
-    public IEnumerator slide(Square toSquare) {
-        this.position.enemy = null;
-        this.position = toSquare;
-        // toSquare.enemy = this;
-        yield return this.game.getBoard().slideObj(this.gameObject, toSquare);
+    public override void onDeath() {
+        this.game.getEncounter().onEnemyDefeat();
     }
 
-    public void place(Transform t) {
-        this.transform.position = t.position;
+    public override IEnumerator slide(Square toSquare) {
+        this.position.enemy = null;
+        toSquare.enemy = this;
+        yield return base.slide(toSquare);
     }
 }

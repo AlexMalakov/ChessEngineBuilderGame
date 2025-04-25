@@ -16,7 +16,7 @@ public class SquareReporter : MonoBehaviour
     public void onSquareUpdate(Square square) {
         this.square = square;
         int defense = game.getBoard().calculateDefense(square, false);
-        squareName.text = square.name;
+        squareName.text = square.squareName;
 
         if(square.piece != null) {
             if(game.getPremovePieces().Contains(square.piece)) {

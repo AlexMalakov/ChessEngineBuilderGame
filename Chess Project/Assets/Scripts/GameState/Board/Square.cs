@@ -17,6 +17,7 @@ public class Square : MonoBehaviour
 
     public ChessPiece piece;
     public Enemy enemy; //this will be updated later ig
+    public Minion minion;
 
     public bool isMoveable;
     public bool isTargeting;

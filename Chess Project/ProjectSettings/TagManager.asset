@@ -47,3 +47,6 @@ TagManager:
   - name: Pieces
     uniqueID: 3894005135
     locked: 0
+  - name: piece-overlay
+    uniqueID: 1903535499
+    locked: 0

@@ -2,16 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ChessPiece : MonoBehaviour
+public abstract class ChessPiece : Entity
 {
-    public int health;
-    public int maxHealth;
-    public int damage;
-    public int defense;
-    public Square position;
-    public int startingX;
-    public int startingY;
-    public Game game;
     int effectiveDefense;
 
     public abstract List<Square> getPossibleMoves();
@@ -20,12 +12,9 @@ public abstract class ChessPiece : MonoBehaviour
     public abstract List<Square> getAllMoves();
     public Sprite activeSprite;
 
-    public void place(Transform moveTo) {
-        this.transform.position = moveTo.position;
-    }
 
-    public void slide(Square moveTo) {
-        StartCoroutine(this.game.getBoard().slideObj(this.gameObject, moveTo));
+    public override IEnumerator slide(Square moveTo) {
+        yield return this.game.getBoard().slideObj(this.gameObject, moveTo);
     }
 
     //returns true if succesful and false if not
@@ -35,7 +24,7 @@ public abstract class ChessPiece : MonoBehaviour
                 this.position.piece = null;
                 this.position = square;
                 this.position.piece = this;
-                this.slide(square);
+                StartCoroutine(this.slide(square));
                 return true;
             }
         }
@@ -52,7 +41,7 @@ public abstract class ChessPiece : MonoBehaviour
         this.position.piece = null;
         this.position = square;
         this.position.piece = this;
-        this.slide(square);
+        StartCoroutine(this.slide(square));
     }
 
     public void takeDamage(int damage) {
@@ -60,14 +49,14 @@ public abstract class ChessPiece : MonoBehaviour
         if(effectiveDefense > damage) {
             effectiveDefense-=damage;
         } else {
-            this.health = this.health + effectiveDefense - damage;
+            damage -= effectiveDefense;
             effectiveDefense = 0;
-
+            base.takeDamage(damage);
         }
+    }
 
-        if(this.health <= 0) {
-            this.game.getBoard().onPieceTaken(this);
-        }
+    public override void onDeath() {
+        this.game.getBoard().onPieceTaken(this);
     }
 
     public virtual int getPieceDamage() {
