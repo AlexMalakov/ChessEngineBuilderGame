@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ChessPiece : Entity
 {
-    int effectiveDefense;
+    public int effectiveDefense;
 
     public abstract List<Square> getPossibleMoves();
 
@@ -68,6 +68,6 @@ public abstract class ChessPiece : Entity
     }
 
     public void onSacrifice() {
-        
+
     }
 }
