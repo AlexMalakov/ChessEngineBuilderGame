@@ -60,5 +60,9 @@ public class Pawn : ChessPiece
         }
         return false;
     }
+
+    public override PieceType getPieceType() {
+        return PieceType.Pawn;
+    }
 }
  

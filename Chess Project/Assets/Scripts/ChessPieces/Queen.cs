@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Queen : ChessPiece
 {
+
     public override List<Square> getPossibleMoves() {
         List<Square> possibleMoves = new List<Square>();
         List<int[]> offsets = new List<int[]>();
@@ -60,5 +61,9 @@ public class Queen : ChessPiece
             }
         }
         return possibleMoves;
+    }
+
+    public override PieceType getPieceType() {
+        return PieceType.Queen;
     }
 }

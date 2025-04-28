@@ -62,4 +62,8 @@ public class Rook : ChessPiece
         }
         return possibleMoves;
     }
+
+    public override PieceType getPieceType() {
+        return PieceType.Rook;
+    }
 }

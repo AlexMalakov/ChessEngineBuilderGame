@@ -53,4 +53,8 @@ public class Bishop : ChessPiece
         }
         return possibleMoves;
     }
+
+    public override PieceType getPieceType() {
+        return PieceType.Bishop;
+    }
 }

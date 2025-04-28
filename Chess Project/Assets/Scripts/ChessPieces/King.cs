@@ -104,4 +104,9 @@ public class King : ChessPiece
         }
         return true;
     }
+
+    public override PieceType getPieceType() {
+        return PieceType.King;
+    }
+
 }

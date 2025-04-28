@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Knight : ChessPiece
 {
+
     public override List<Square> getPossibleMoves() {
         List<Square> possibleMoves = new List<Square>();
         List<int[]> moves = new List<int[]>();
@@ -44,5 +45,10 @@ public class Knight : ChessPiece
             }
         }
         return possibleMoves;
+    }
+
+
+    public override PieceType getPieceType() {
+        return PieceType.Knight;
     }
 }

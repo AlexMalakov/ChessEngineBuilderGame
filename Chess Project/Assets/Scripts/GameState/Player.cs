@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     public List<ChessPiece> premovingPieces;
     public List<ChessPiece> nonPremovingPieces;
 
+    [Header ("rewards")]
+    public List<PieceUpgradeReward> myPieceUpgrades;
+
 
     public void onTurnStart() {
         premovingPieces = new List<ChessPiece>();
@@ -64,5 +67,19 @@ public class Player : MonoBehaviour
         }
         return damage;
         
+    }
+
+    public void upgradePieces(PieceUpgradeReward reward) {
+        myPieceUpgrades.Add(reward);
+        foreach(ChessPiece p in livingPieces) {
+            if(reward.getPieceTarget() == PieceType.ChessPiece || reward.getPieceTarget() == p.getPieceType()) {
+                p.mountPieceUpgrade(reward);
+            }
+        }
+        foreach(ChessPiece p in deadPieces) {
+            if(reward.getPieceTarget() == PieceType.ChessPiece || reward.getPieceTarget() == p.getPieceType()) {
+                p.mountPieceUpgrade(reward);
+            }
+        }
     }
 }
