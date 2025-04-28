@@ -78,4 +78,8 @@ public class Square : MonoBehaviour
     public bool canKillSquare(int damage) {
         return this.hasChessPiece() && (((ChessPiece)this.entity).effectiveDefense + this.entity.health <= damage);
     }
+
+    public bool hasPiece(PieceType pieceType) {
+        return this.hasChessPiece() && ((ChessPiece)this.entity).getPieceType() == pieceType;
+    }
 }

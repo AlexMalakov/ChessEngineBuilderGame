@@ -144,7 +144,7 @@ public class Board : MonoBehaviour
 
         int damage = 0;
         foreach(ChessPiece p in damageDealers) {
-            damage += p.getPieceDamage() + calculateDefense(p.position, false);
+            damage += p.getPieceDamage(target) + calculateDefense(p.position, false);
         }
 
         damageDealers = new List<ChessPiece>();
@@ -159,7 +159,7 @@ public class Board : MonoBehaviour
         }
 
         foreach(ChessPiece p in damageDealers) {
-            damage += p.getPieceDamage() + calculateDefense(p.position, true);
+            damage += p.getPieceDamage(target) + calculateDefense(p.position, true);
         }
 
         return damage;

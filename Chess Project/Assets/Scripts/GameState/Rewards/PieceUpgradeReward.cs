@@ -4,37 +4,58 @@ using UnityEngine;
 
 public abstract class PieceUpgradeReward : Reward
 {
+    public int priority; //may not do anything, but could be a good way to determine if 
+
     public override void applyEffect() {
         this.game.getPlayer().upgradePieces(this);
     }
 
-    public abstract void onBind(ChessPiece p);
+    //returns every method that this upgrade will modify
+    public abstract List<PieceMethods> getAffectedMethods();
+
+    public virtual void onBind(ChessPiece p) {}
 
     public abstract PieceType getPieceTarget();
 
     //called by a piece when running getAllMoves/getPossibleMoves, returns new squares that should be considered
+    //all is if it includes defensive moves or not :)
     //this might need to be tweaked to account for complete move behavior changes
-    public abstract List<Square> changePossibleMoves(bool all);
+    public virtual List<Square> changePossibleMoves(ChessPiece p, bool all) {
+        return new List<Square>();
+    }
     
     //called when a piece is moving to a square, adds new behavior
-    public abstract bool changeMove(Square square);
+    public virtual bool changeMove(ChessPiece p, Square square) {
+        return true;
+    }
+
+    public virtual Operation changeEffectiveDefense(ChessPiece p, int defense) {
+        return new Operation(OperationTypes.Ignore, 0);
+    }
 
     //called when a piece is getting it's defense value, changes how its calcualted
-    public abstract int changeDefense();
+    public virtual Operation changeDefense(ChessPiece p) {
+        return new Operation(OperationTypes.Ignore, 0);
+    }
 
     //called when a piece is forcefully moved (castling, cc???), changes how it responds
-    public abstract void changeForceMove(Square square);
+    //returns true if behavior was changed
+    public virtual bool changeForceMove(ChessPiece p, Square square) {
+        return false;
+    }
 
     //called when a piece takes damage, changes how it responds??
-    public abstract void changeTakeDamage(int damage);
+    public virtual void changeTakeDamage(ChessPiece p, int damage) {}
 
     //called when a piece dies, adds a new behavior
-    public abstract void changeOnDeath();
+    public virtual void changeOnDeath(ChessPiece p) {}
 
     //changes how a piece's damage is calculated
-    public abstract int changePieceDamage();
+    public virtual Operation changePieceDamage(ChessPiece Piece, Square target){
+        return new Operation(OperationTypes.Ignore, 0);
+    }
 
     //adds new sacrifice behavior/damage???
-    public abstract void changeOnSacrifice();
+    public virtual void changeOnSacrifice(ChessPiece p){}
 
 }

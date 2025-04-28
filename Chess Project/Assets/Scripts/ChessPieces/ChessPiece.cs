@@ -13,13 +13,20 @@ public enum PieceType {
     King,
 }
 
+public enum PieceMethods {
+    getMoves, move, assignEffectiveDefense, getDefense, forceMove, takeDamage, onDeath, getPieceDamage, onSacrifice, castle, promote
+}
+
 public abstract class ChessPiece : Entity
 {
     public int effectiveDefense;
 
     //also includes defensive moves :)
     public Sprite activeSprite;
-    public List<PieceUpgradeReward> pieceUpgrades;
+
+    //maps method name as string to pieceUpgrade
+    private Dictionary<PieceMethods, List<PieceUpgradeReward>> pieceUpgrades; 
+
 
 
     //gets all a piece's moves, and all pieces it can move to when "defending"
@@ -89,7 +96,7 @@ public abstract class ChessPiece : Entity
 
     //gets the amount of damage a piece deals
     //at the moment just checks if it crits by asking the player
-    public virtual int getPieceDamage() {
+    public virtual int getPieceDamage(Square target) {
         return this.game.getPlayer().getPieceDamage(this.damage);
     }
 
@@ -105,10 +112,15 @@ public abstract class ChessPiece : Entity
 
     //adds a piece upgrade into its list of upgrades, may change
     public virtual void mountPieceUpgrade(PieceUpgradeReward upgrade) {
-        this.pieceUpgrades.Add(upgrade);
+        foreach(PieceMethods methodName in upgrade.getAffectedMethods()) {
+            if(!this.pieceUpgrades.ContainsKey(methodName)) {
+                pieceUpgrades[methodName] = new List<PieceUpgradeReward>();
+            }
+            this.pieceUpgrades[methodName].Add(upgrade);
+        }
         upgrade.onBind(this);
     }
 
-    //gets a piec's piece type to identify what type of piece it is without checking the class which is annoyting i think
+    //gets a piece's piece type to identify what type of piece it is without checking the class which is annoyting i think
     public abstract PieceType getPieceType();
 }
