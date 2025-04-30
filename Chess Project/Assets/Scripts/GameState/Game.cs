@@ -28,7 +28,6 @@ public class Game : MonoBehaviour
     }
 
     public void startEnemyTurn() {
-        playersTurn = false;
         this.encouters[currentEncounter].startEnemyTurn();
         //notify the enemy;
     }
@@ -41,24 +40,33 @@ public class Game : MonoBehaviour
     }
 
     public void endPlayerTurn() {
+        playersTurn = false;
         if(player.perception / 2 > 0) {
             this.startPlayerPremoves();
         } else {
-            this.startEnemyTurn();
+            this.startPlayerAttacks();
         }
         
+    }
+
+    public void startPlayerAttacks() {
+        StartCoroutine(this.encouters[currentEncounter].startPlayerAttacks());
+    }
+
+    public void endPlayerAttacks() {
+        this.startEnemyTurn();
     }
 
     public void startPlayerPremoves() {
         this.playerPremoveTurn = true;
         this.playerPremoves = player.perception / 2;
-        this.startEnemyTurn(); //PLACEHOLDER
     }
 
     public void onPlayerPremove() {
         playerPremoves--;
         if(playerPremoves <= 0) {
-            this.startEnemyTurn();
+            playerPremoveTurn = false;
+            this.startPlayerAttacks();
         }
     }
 

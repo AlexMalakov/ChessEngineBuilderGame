@@ -12,8 +12,8 @@ public class Square : MonoBehaviour
     [Header ("target sprites")]
     public GameObject selectedSprite;
     public GameObject moveableSprite;
-    public GameObject attackableSprite;
     public GameObject canTargetSprite;
+    public GameObject assistingSprite;
 
     public Entity entity;
 
@@ -65,6 +65,10 @@ public class Square : MonoBehaviour
     public void toggleTarget(bool targeting) {
         this.isTargeting = targeting;
         this.canTargetSprite.SetActive(targeting);
+    }
+
+    public void isAssisting(bool assisting) {
+        this.assistingSprite.SetActive(assisting);
     }
 
     public bool hasChessPiece() {

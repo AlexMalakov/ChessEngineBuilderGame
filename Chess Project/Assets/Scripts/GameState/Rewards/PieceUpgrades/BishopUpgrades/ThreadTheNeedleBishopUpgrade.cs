@@ -19,7 +19,7 @@ public class ThreadTheNeedleBishopUpgrade : PieceUpgradeReward
         int misses = 0;
         int hit = 0;
         List<Square> attackMoves = piece.getPossibleMoves(true);
-        foreach(hit = 0; hit < attackMoves.Count; hit++) {
+        for(hit = 0; hit < attackMoves.Count; hit++) {
             if(attackMoves[hit] == target) {
                 break;
             }

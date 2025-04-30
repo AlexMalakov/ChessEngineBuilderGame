@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //deal base damage to an enemy that can be hit after a move
-public class QuickDischarge : MonoBehaviour
+public class QuickDischarge : PieceUpgradeReward
 {
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
@@ -21,5 +21,6 @@ public class QuickDischarge : MonoBehaviour
                 s.entity.takeDamage(piece.damage);
             }
         }
+        return true;
     }
 }

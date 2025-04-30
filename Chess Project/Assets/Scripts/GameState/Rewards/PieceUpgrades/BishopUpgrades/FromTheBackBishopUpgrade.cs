@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FromTheBackBishopUpgrade : PieceUpgradeReward
 {
-    public ov erride List<PieceMethods> getAffectedMethods() {
+    public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
         changes.Add(PieceMethods.getPieceDamage);
         return changes;

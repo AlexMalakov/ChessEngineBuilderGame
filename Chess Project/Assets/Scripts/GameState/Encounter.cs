@@ -44,9 +44,12 @@ public class Encounter : MonoBehaviour
     }
 
     public void startEnemyTurn() {
-        board.assignEffectiveDefense();
-        enemy.takeDamage(board.calculateDamage(enemy.position));
-        Debug.Log("players turn has ended!");
         enemy.takeTurn();
+        //minoins attack?
+    }
+
+    public IEnumerator startPlayerAttacks() {
+        yield return board.assignEffectiveDefense();
+        yield return enemy.takeDamage(board.calculateDamage(enemy.position));
     }
 }

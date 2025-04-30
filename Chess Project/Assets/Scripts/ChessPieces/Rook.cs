@@ -13,7 +13,7 @@ public class Rook : ChessPiece
         return false;
     }
 
-    public override List<Square> getPossibleMoves(bool atacking) { //NEED TO ADD CASTLE ABILITY NVM WE GOOD
+    public override List<Square> getPossibleMoves(bool attacking) { //NEED TO ADD CASTLE ABILITY NVM WE GOOD
         List<Square> possibleMoves = new List<Square>();
 
         foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
