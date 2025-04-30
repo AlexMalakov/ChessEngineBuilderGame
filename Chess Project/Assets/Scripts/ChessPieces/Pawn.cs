@@ -6,8 +6,12 @@ public class Pawn : ChessPiece
 {
     public bool hasMoved = false;
 
-    public override List<Square> getPossibleMoves() {
+    public override List<Square> getPossibleMoves(bool attacking) {
         List<Square> possibleMoves = new List<Square>();
+
+        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+            possibleMoves.AddRange(upgrade.changePossibleMoves(this, false, attacking));
+        }
 
         if(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1) != null && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1).entity == null) {
             possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1));
@@ -30,6 +34,10 @@ public class Pawn : ChessPiece
 
     public override List<Square> getAllMoves() {
         List<Square> possibleMoves = new List<Square>();
+
+        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+            possibleMoves.AddRange(upgrade.changePossibleMoves(this, true, false));
+        }
 
         if(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1) != null && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1).entity == null) {
             possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1));

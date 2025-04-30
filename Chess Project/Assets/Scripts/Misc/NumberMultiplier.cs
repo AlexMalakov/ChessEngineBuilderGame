@@ -24,9 +24,9 @@ public class NumberMultiplier
     }
 
 
-    public void addOperation(OperationTypes type, int amount) {
-        if(type != OperationTypes.Ignore) {
-            this.operations.Add(new Operation(type,amount));
+    public void addOperation(Operation op) {
+        if(op.type != OperationTypes.Ignore) {
+            this.operations.Add(op);
         }
     }
 

@@ -53,7 +53,7 @@ public class Board : MonoBehaviour
         if(newClickedSquare.hasChessPiece()){
             ChessPiece p = (ChessPiece)newClickedSquare.entity;
             this.wipeMoveableSquares();
-            foreach(Square s in p.getPossibleMoves()) {
+            foreach(Square s in p.getPossibleMoves(false)) {
                 s.setMoveable(true);
             }
 
@@ -134,7 +134,7 @@ public class Board : MonoBehaviour
     public int calculateDamage(Square target) {
         List<ChessPiece> damageDealers = new List<ChessPiece>();
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
-            foreach(Square s in p.getPossibleMoves()) {
+            foreach(Square s in p.getPossibleMoves(true)) {
                 if(s == target) {
                     damageDealers.Add(p);
                     break;
@@ -150,7 +150,7 @@ public class Board : MonoBehaviour
         damageDealers = new List<ChessPiece>();
 
         foreach(ChessPiece p in this.game.getPremovePieces()) {
-            foreach(Square s in p.getPossibleMoves()) {
+            foreach(Square s in p.getPossibleMoves(true)) {
                 if(s == target) {
                     damageDealers.Add(p);
                     break;
@@ -200,7 +200,7 @@ public class Board : MonoBehaviour
 
     public void returnDamage(Square target, int defense) {
         foreach(ChessPiece p in this.game.getPieces()) { //return damage to all since we are assuming premove pieces can deal damage
-            foreach(Square s in p.getPossibleMoves()) {
+            foreach(Square s in p.getPossibleMoves(false)) {
                 if(s == target) {
                     p.takeDamage(defense);
                     break;

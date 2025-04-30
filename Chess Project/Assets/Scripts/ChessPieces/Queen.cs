@@ -5,8 +5,13 @@ using UnityEngine;
 public class Queen : ChessPiece
 {
 
-    public override List<Square> getPossibleMoves() {
+    public override List<Square> getPossibleMoves(bool attacking) {
         List<Square> possibleMoves = new List<Square>();
+
+        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+            possibleMoves.AddRange(upgrade.changePossibleMoves(this, false, attacking));
+        }
+
         List<int[]> offsets = new List<int[]>();
         offsets.Add(new int[]{-1,-1});
         offsets.Add(new int[]{1,-1});
@@ -38,6 +43,11 @@ public class Queen : ChessPiece
 
     public override List<Square> getAllMoves() {
         List<Square> possibleMoves = new List<Square>();
+
+        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+            possibleMoves.AddRange(upgrade.changePossibleMoves(this, true, false));
+        }
+
         List<int[]> offsets = new List<int[]>();
         offsets.Add(new int[]{-1,-1});
         offsets.Add(new int[]{1,-1});

@@ -14,7 +14,7 @@ public class SideStepBishopUpgrade : PieceUpgradeReward
         return PieceType.ChessPiece;
     }
 
-    public override List<Square> changePossibleMoves(ChessPiece p, bool all) {
+    public override List<Square> changePossibleMoves(ChessPiece p, bool all, bool attacking) {
         List<Square> additionalMoves = new List<Square>();
 
         if(checkSquare(p.position.x+1, p.position.y, all)) {

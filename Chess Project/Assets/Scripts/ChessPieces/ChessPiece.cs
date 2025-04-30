@@ -25,7 +25,7 @@ public abstract class ChessPiece : Entity
     public Sprite activeSprite;
 
     //maps method name as string to pieceUpgrade
-    private Dictionary<PieceMethods, List<PieceUpgradeReward>> pieceUpgrades; 
+    protected Dictionary<PieceMethods, List<PieceUpgradeReward>> pieceUpgrades; 
 
 
 
@@ -33,7 +33,7 @@ public abstract class ChessPiece : Entity
     public abstract List<Square> getAllMoves();
 
     //gets all the moves a piece can take including sacrifices
-    public abstract List<Square> getPossibleMoves();
+    public abstract List<Square> getPossibleMoves(bool attacking);
 
     //phisically moves a piece along the board to the square moveTo
     public override IEnumerator slide(Square moveTo) {
@@ -43,7 +43,7 @@ public abstract class ChessPiece : Entity
     //executes the logic behind movement of a piece to the square square
     //returns true if succesful and false if not
     public virtual bool move(Square square) {
-        foreach (Square s in getPossibleMoves()) {
+        foreach (Square s in getPossibleMoves(false)) {
             if (s.x == square.x && s.y == square.y) {
                 this.position.entity = null;
                 this.position = square;
@@ -53,7 +53,8 @@ public abstract class ChessPiece : Entity
             }
         }
 
-        return false;
+        throw new Exception("move not in possible moevs :'(");
+        // return false;
     }
 
     //assigns effective defense to a piece; this lasts for a round of enemy attacks
@@ -97,7 +98,11 @@ public abstract class ChessPiece : Entity
     //gets the amount of damage a piece deals
     //at the moment just checks if it crits by asking the player
     public virtual int getPieceDamage(Square target) {
-        return this.game.getPlayer().getPieceDamage(this.damage);
+        NumberMultiplier damageCalculator = new NumberMultiplier(this.damage);
+        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getPieceDamage]) {
+            damageCalculator.addOperation(upgrade.changePieceDamage(this, target));
+        }
+        return this.game.getPlayer().getPieceDamage(damageCalculator.resolve());
     }
 
     //gets a piece's entity type, to identify it is a piece

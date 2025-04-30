@@ -13,8 +13,13 @@ public class Rook : ChessPiece
         return false;
     }
 
-    public override List<Square> getPossibleMoves() { //NEED TO ADD CASTLE ABILITY NVM WE GOOD
+    public override List<Square> getPossibleMoves(bool atacking) { //NEED TO ADD CASTLE ABILITY NVM WE GOOD
         List<Square> possibleMoves = new List<Square>();
+
+        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+            possibleMoves.AddRange(upgrade.changePossibleMoves(this, false, attacking));
+        }
+
         List<int[]> offsets = new List<int[]>();
         offsets.Add(new int[]{-1,0});
         offsets.Add(new int[]{1,0});
@@ -40,8 +45,13 @@ public class Rook : ChessPiece
         return possibleMoves;
     }
 
-        public override List<Square> getAllMoves() {
+    public override List<Square> getAllMoves() {
         List<Square> possibleMoves = new List<Square>();
+
+        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+            possibleMoves.AddRange(upgrade.changePossibleMoves(this, true, false));
+        }
+
         List<int[]> offsets = new List<int[]>();
         offsets.Add(new int[]{-1,0});
         offsets.Add(new int[]{1,0});

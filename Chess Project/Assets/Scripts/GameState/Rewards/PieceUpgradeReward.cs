@@ -20,12 +20,17 @@ public abstract class PieceUpgradeReward : Reward
     //called by a piece when running getAllMoves/getPossibleMoves, returns new squares that should be considered
     //all is if it includes defensive moves or not :)
     //this might need to be tweaked to account for complete move behavior changes
-    public virtual List<Square> changePossibleMoves(ChessPiece p, bool all) {
+    public virtual List<Square> changePossibleMoves(ChessPiece p, bool all, bool attacking) {
         return new List<Square>();
     }
     
     //called when a piece is moving to a square, adds new behavior
+    //returns true if the move overrides, and false if it doesn't
     public virtual bool changeMove(ChessPiece p, Square square) {
+        return true;
+    }
+
+    public virtual bool changeAfterMove(ChessPiece p, Square square) {
         return true;
     }
 
