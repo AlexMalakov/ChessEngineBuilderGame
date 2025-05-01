@@ -53,10 +53,6 @@ public class Game : MonoBehaviour
         StartCoroutine(this.encouters[currentEncounter].startPlayerAttacks());
     }
 
-    public void endPlayerAttacks() {
-        this.startEnemyTurn();
-    }
-
     public void startPlayerPremoves() {
         this.playerPremoveTurn = true;
         this.playerPremoves = player.perception / 2;

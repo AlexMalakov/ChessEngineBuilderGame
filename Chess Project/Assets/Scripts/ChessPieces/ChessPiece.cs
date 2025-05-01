@@ -27,6 +27,7 @@ public abstract class ChessPiece : Entity
 
     //maps method name as string to pieceUpgrade
     protected Dictionary<PieceMethods, List<PieceUpgradeReward>> pieceUpgrades; 
+    public PopUpManager popupManager;
 
 
 
@@ -129,4 +130,8 @@ public abstract class ChessPiece : Entity
 
     //gets a piece's piece type to identify what type of piece it is without checking the class which is annoyting i think
     public abstract PieceType getPieceType();
+
+    public void popUpAction(PopupType type, int value) {
+        this.popupManager.displayPopUp(type, value)
+    }
 }

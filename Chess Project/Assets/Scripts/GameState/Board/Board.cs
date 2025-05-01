@@ -133,7 +133,7 @@ public class Board : MonoBehaviour
     }
 
     //calculate incoming damage to a square
-    public IEnumerator calculateDamage(Square target) {
+    public int calculateDamage(Square target) {
         List<ChessPiece> damageDealers = new List<ChessPiece>();
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
             foreach(Square s in p.getPossibleMoves(true)) {
@@ -148,8 +148,6 @@ public class Board : MonoBehaviour
         foreach(ChessPiece p in damageDealers) {
             //display
             damage += p.getPieceDamage(target) + calculateDefense(p.position, false);
-            yield return new WaitForSeconds(this.popUpNumberWaitTime);
-            unAssistAllSquares();
         }
 
         damageDealers = new List<ChessPiece>();
@@ -166,8 +164,6 @@ public class Board : MonoBehaviour
         foreach(ChessPiece p in damageDealers) {
             //display
             damage += p.getPieceDamage(target) + calculateDefense(p.position, true);
-            yield return new WaitForSeconds(this.popUpNumberWaitTime);
-            unAssistAllSquares();
         }
 
         return damage; //THIS IS GOING TO CAUSE A BUG BECAUSE IENUMERATOR VERSUS INT RETURN TYPE :(
@@ -175,9 +171,52 @@ public class Board : MonoBehaviour
         //sum the defense damage bonus that they all get
     }
 
+    public IEnumerator performDamagePhase(Enemy target) {
+        List<ChessPiece> damageDealers = new List<ChessPiece>();
+        foreach(ChessPiece p in this.game.getNonPremovePieces()) {
+            foreach(Square s in p.getPossibleMoves(true)) {
+                if(s == target.position) {
+                    damageDealers.Add(p);
+                    break;
+                }
+            }
+        }
+
+        foreach(ChessPiece p in damageDealers) {
+            //display
+            p.popUpAction(PopUpType.damage);
+            int damage = p.getPieceDamage(target.position) + calculateDefense(p.position, false);
+            enemy.takeDamage(damage);
+            yield return new WaitForSeconds(this.popUpNumberWaitTime);
+            unAssistAllSquares();
+
+        }
+
+        damageDealers = new List<ChessPiece>();
+
+        foreach(ChessPiece p in this.game.getPremovePieces()) {
+            foreach(Square s in p.getPossibleMoves(true)) {
+                if(s == target.position) {
+                    damageDealers.Add(p);
+                    break;
+                }
+            }
+        }
+
+        foreach(ChessPiece p in damageDealers) {
+            //display
+            p.popUpAction(PopUpType.damage);
+            int damage = p.getPieceDamage(target.position) + calculateDefense(p.position, true);
+            enemy.takeDamage(damage);
+            yield return new WaitForSeconds(this.popUpNumberWaitTime);
+            unAssistAllSquares();
+        }
+    }
+
     public IEnumerator assignEffectiveDefense() {
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
             //display 
+            p.popUpAction(PopUpType.defense);
             p.assignEffectiveDefense(calculateDefense(p.position, false));
             yield return new WaitForSeconds(this.popUpNumberWaitTime);
             unAssistAllSquares();
@@ -185,6 +224,7 @@ public class Board : MonoBehaviour
 
         foreach(ChessPiece p in this.game.getPremovePieces()) {
             //display
+            p.popUpAction(PopUpType.defense);
             p.assignEffectiveDefense(calculateDefense(p.position, true));
             yield return new WaitForSeconds(this.popUpNumberWaitTime);
             unAssistAllSquares();
