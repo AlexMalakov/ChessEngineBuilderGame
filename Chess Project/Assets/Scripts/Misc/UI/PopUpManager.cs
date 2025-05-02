@@ -9,9 +9,9 @@ public enum PopupType {
 public class PopUpManager : MonoBehaviour
 {
 
-    public Dictionary<PopupType, Image
+    public Dictionary<PopupType, Image> popupImages;
     public void Start() {
-
+        //init popupImages to map correct popup icon to visual element
     }
 
 

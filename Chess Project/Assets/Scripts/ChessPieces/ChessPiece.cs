@@ -104,7 +104,30 @@ public abstract class ChessPiece : Entity
         foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getPieceDamage]) {
             damageCalculator.addOperation(upgrade.changePieceDamage(this, target));
         }
+        
         return this.game.getPlayer().getPieceDamage(damageCalculator.resolve());
+    }
+
+    public virtual IEnumerator attack(Entity entity, List<ChessPiece> defenders) {
+        if(entity.getEntityType() == EntityType.ChessPiece) {
+            Debug.Log("ERROR: ATTACKING ANOTHER CHESS PIECE?");
+        }
+
+        int damage = this.getPieceDamage(entity.position);
+
+        foreach(ChessPiece p in defenders) {
+            damage += p.getDefense();
+            p.defend();
+        }
+
+        this.popUpAction(PopupType.damage, damage);
+        yield return attackAnimation();
+    
+        entity.takeDamage(damage);
+    }
+
+    public virtual IEnumerator attackAnimation() {
+        return null;//make it do the animation?
     }
 
     //gets a piece's entity type, to identify it is a piece

@@ -63,4 +63,6 @@ public abstract class PieceUpgradeReward : Reward
     //adds new sacrifice behavior/damage???
     public virtual void changeOnSacrifice(ChessPiece p){}
 
+    public virtual void notifyRoundOver() {}
+
 }

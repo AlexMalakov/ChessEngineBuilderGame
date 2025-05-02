@@ -24,8 +24,8 @@ public class NumberMultiplier
     }
 
 
-    public void addOperation(Operation op) {
-        if(op.type != OperationTypes.Ignore) {
+    public void addOperation(Operation op) {//don't want to waste our time with 0 multiplier/add, and with ignores
+        if(op.type != OperationTypes.Ignore && op.amount != 0) {
             this.operations.Add(op);
         }
     }

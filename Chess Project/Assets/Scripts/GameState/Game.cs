@@ -13,6 +13,9 @@ public class Game : MonoBehaviour
     public bool playerPremoveTurn;
     public int playerPremoves;
     public int playerMoves;
+
+    [Header ("round over listeners")]
+    public List<PieceUpgradeReward> roundListeners;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +23,17 @@ public class Game : MonoBehaviour
         startPlayerTurn();
     }
 
+    public void addRoundOverListener(PieceUpgradeReward roundListener) {
+        roundListeners.Add(roundListener);
+    }
+    public void removeRoundOverListener(PieceUpgradeReward roundListener) {
+        roundListeners.Remove(roundListener);
+    }
 
     public void startPlayerTurn() {
+        foreach(PieceUpgradeReward r in this.roundListeners) {
+            r.notifyRoundOver();
+        }
         playersTurn = true;
         playerMoves = player.agility;
         player.onTurnStart(); //removes premove status from pieces
