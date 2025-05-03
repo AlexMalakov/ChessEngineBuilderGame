@@ -60,9 +60,15 @@ public abstract class PieceUpgradeReward : Reward
         return new Operation(OperationTypes.Ignore, 0);
     }
 
+    public virtual IENumerator changeAttack(ChessPiece p, Entity target) {
+        return null;
+    }
+
     //adds new sacrifice behavior/damage???
     public virtual void changeOnSacrifice(ChessPiece p){}
 
     public virtual void notifyRoundOver() {}
+
+    public virtual void changePromote(ChessPiece p) {}
 
 }
