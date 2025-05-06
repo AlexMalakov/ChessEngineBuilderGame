@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public void onTurnStart() {
         premovingPieces = new List<ChessPiece>();
         nonPremovingPieces = new List<ChessPiece>(livingPieces);
+        this.reporter.onPlayerUpdate();
     }
 
     public void onPieceDeath(ChessPiece p) {

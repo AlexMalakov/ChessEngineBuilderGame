@@ -16,6 +16,7 @@ public class Encounter : MonoBehaviour
     public Board board;
     public Game game;
     public RewardSystem rewards;
+    public SquareReporter reporter;
 
 
     public void startEncounter() {
@@ -28,6 +29,7 @@ public class Encounter : MonoBehaviour
         board.placePieces(this.game.getPieces());
         board.placeEntity(this.enemy);
         enemy.onEncounterStart();
+        reporter.onEncounterStart();
     }
 
     public void onEnemyDefeat() {

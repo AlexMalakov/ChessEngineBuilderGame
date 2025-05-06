@@ -17,11 +17,11 @@ public class Game : MonoBehaviour
 
     [Header ("round over listeners")]
     public List<PieceUpgradeReward> roundListeners;
+    public TurnButton turnButton;
     // Start is called before the first frame update
     void Start()
     {
         startEncounter();
-        player.reporter.onPlayerUpdate();
         startPlayerTurn();
     }
 
@@ -39,6 +39,7 @@ public class Game : MonoBehaviour
         playersTurn = true;
         playerMoves = player.agility;
         player.onTurnStart(); //removes premove status from pieces
+        turnButton.onTurnUpdate();
     }
 
     public void startEnemyTurn() {
@@ -64,21 +65,35 @@ public class Game : MonoBehaviour
         
     }
 
+    public void forceTurnOver() {
+        if(playersTurn) {
+            this.endPlayerTurn();
+        } else {
+            this.endPlayerPremoveTurn();
+        }
+    }
+
     public void startPlayerAttacks() {
+        turnButton.onTurnUpdate();
         StartCoroutine(this.encouters[currentEncounter].startPlayerAttacks());
     }
 
     public void startPlayerPremoves() {
         this.playerPremoveTurn = true;
         this.playerPremoves = player.perception / 2;
+        turnButton.onTurnUpdate();
     }
 
     public void onPlayerPremove() {
         playerPremoves--;
         if(playerPremoves <= 0) {
-            playerPremoveTurn = false;
-            this.startPlayerAttacks();
+            this.endPlayerPremoveTurn();
         }
+    }
+
+    public void endPlayerPremoveTurn() {
+        playerPremoveTurn = false;
+        this.startPlayerAttacks();
     }
 
     public void onEncounterOver() {

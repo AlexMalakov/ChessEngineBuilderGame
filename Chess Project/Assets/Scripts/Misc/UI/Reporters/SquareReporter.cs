@@ -13,6 +13,16 @@ public class SquareReporter : MonoBehaviour
     public TMP_Text pieceName;
     public Image squareImage;
 
+    public void onEncounterStart() {
+        foreach(ChessPiece p in this.game.getPieces()) {
+            if(p.getPieceType() == PieceType.King) {
+                this.onSquareUpdate(p.position);
+                return;
+            }
+        }
+        this.onSquareUpdate(this.game.getPieces()[Random.Range(0, this.game.getPieces().Count)].position);
+    }
+
     public void onSquareUpdate(Square square) {
         this.square = square;
         int defense = game.getBoard().calculateDefense(square, false);
