@@ -123,4 +123,9 @@ public class King : ChessPiece
         return PieceType.King;
     }
 
+    public override void takeDamage(int damage) {
+        base.takeDamage(damage);
+        this.game.getPlayer().reporter.onPlayerUpdate();
+    }
+
 }

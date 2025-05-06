@@ -19,6 +19,8 @@ public class StatReward : Reward
         } else if(stat == "????") {
             this.game.getPlayer().luck += increaseAmount;//placeholder
         }
+
+        this.game.getPlayer().reporter.onPlayerUpdate();
         
     }
 }

@@ -21,6 +21,7 @@ public class Game : MonoBehaviour
     void Start()
     {
         startEncounter();
+        player.reporter.onPlayerUpdate();
         startPlayerTurn();
     }
 
@@ -50,6 +51,7 @@ public class Game : MonoBehaviour
         if(playerMoves <= 0) {
             this.endPlayerTurn();
         }
+        player.reporter.onPlayerUpdate();
     }
 
     public void endPlayerTurn() {

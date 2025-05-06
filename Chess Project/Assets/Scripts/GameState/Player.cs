@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     [Header ("rewards")]
     public List<PieceUpgradeReward> myPieceUpgrades;
 
+    [Header ("other")]
+    public PlayerReporter reporter;
+
 
     public void onTurnStart() {
         premovingPieces = new List<ChessPiece>();
@@ -81,5 +84,14 @@ public class Player : MonoBehaviour
                 p.mountPieceUpgrade(reward);
             }
         }
+    }
+
+    public int getPlayerHP() {
+        foreach(ChessPiece p in livingPieces) {
+            if(p.getPieceType() == PieceType.King) {
+                return p.health;
+            }
+        }
+        return 0;
     }
 }
