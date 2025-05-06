@@ -9,15 +9,19 @@ public class Pawn : ChessPiece
     public override List<Square> getPossibleMoves(bool attacking) {
         List<Square> possibleMoves = new List<Square>();
 
-        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
-            possibleMoves.AddRange(upgrade.changePossibleMoves(this, false, attacking));
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.getMoves)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+                possibleMoves.AddRange(upgrade.changePossibleMoves(this, false, attacking));
+            }
         }
 
-        if(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1) != null && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1).entity == null) {
-            possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1));
+        if(!attacking) {
+            if(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1) != null && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1).entity == null) {
+                possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1));
 
-            if(!hasMoved && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2) != null && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2).entity == null)
-                possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2));
+                if(!hasMoved && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2) != null && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2).entity == null)
+                    possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2));
+            }
         }
         
         if(this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y + 1)!= null && (!this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y + 1).hasChessPiece() && this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y + 1).entity != null)) {
@@ -32,25 +36,20 @@ public class Pawn : ChessPiece
     }
 
 
-    public override List<Square> getAllMoves() {
+    public override List<Square> getDefensiveMoves() {
         List<Square> possibleMoves = new List<Square>();
 
-        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
-            possibleMoves.AddRange(upgrade.changePossibleMoves(this, true, false));
-        }
-
-        if(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1) != null && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1).entity == null) {
-            possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 1));
-
-            if(!hasMoved && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2) != null && this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2).entity == null)
-                possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x, this.position.y + 2));
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.getMoves)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+                possibleMoves.AddRange(upgrade.changePossibleMoves(this, true, false));
+            }
         }
         
-        if(this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y + 1)!= null && this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y + 1).entity != null) {
+        if(this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y + 1)!= null && this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y + 1).hasChessPiece()) {
             possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x - 1, this.position.y + 1));
         }
 
-        if(this.game.getBoard().getSquareAt(this.position.x + 1, this.position.y + 1) != null && this.game.getBoard().getSquareAt(this.position.x + 1, this.position.y + 1).entity != null) {
+        if(this.game.getBoard().getSquareAt(this.position.x + 1, this.position.y + 1) != null && this.game.getBoard().getSquareAt(this.position.x + 1, this.position.y + 1).hasChessPiece()) {
             possibleMoves.Add(this.game.getBoard().getSquareAt(this.position.x + 1, this.position.y + 1));
         }
         

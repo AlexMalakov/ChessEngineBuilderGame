@@ -17,10 +17,10 @@ public abstract class PieceUpgradeReward : Reward
 
     public abstract PieceType getPieceTarget();
 
-    //called by a piece when running getAllMoves/getPossibleMoves, returns new squares that should be considered
+    //called by a piece when running getDefenseMoves/getPossibleMoves, returns new squares that should be considered
     //all is if it includes defensive moves or not :)
     //this might need to be tweaked to account for complete move behavior changes
-    public virtual List<Square> changePossibleMoves(ChessPiece p, bool all, bool attacking) {
+    public virtual List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
         return new List<Square>();
     }
     
@@ -60,7 +60,7 @@ public abstract class PieceUpgradeReward : Reward
         return new Operation(OperationTypes.Ignore, 0);
     }
 
-    public virtual IENumerator changeAttack(ChessPiece p, Entity target) {
+    public virtual IEnumerator changeAttack(ChessPiece p, Entity target) {
         return null;
     }
 

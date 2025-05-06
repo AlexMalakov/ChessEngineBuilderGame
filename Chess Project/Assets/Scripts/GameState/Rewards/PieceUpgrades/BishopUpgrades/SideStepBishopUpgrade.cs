@@ -14,30 +14,30 @@ public class SideStepBishopUpgrade : PieceUpgradeReward
         return PieceType.Bishop;
     }
 
-    public override List<Square> changePossibleMoves(ChessPiece p, bool all, bool attacking) {
+    public override List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
         List<Square> additionalMoves = new List<Square>();
 
-        if(attacking || all) {
+        if(attacking || defending) {
             return additionalMoves;
         }
 
-        if(checkSquare(p.position.x+1, p.position.y, all)) {
+        if(checkSquare(p.position.x+1, p.position.y)) {
             additionalMoves.Add(this.game.getBoard().getSquareAt(p.position.x+1, p.position.y));
         }
-        if(checkSquare(p.position.x-1, p.position.y, all)) {
+        if(checkSquare(p.position.x-1, p.position.y)) {
             additionalMoves.Add(this.game.getBoard().getSquareAt(p.position.x-1, p.position.y));
         }
-        if(checkSquare(p.position.x, p.position.y+1, all)) {
+        if(checkSquare(p.position.x, p.position.y+1)) {
             additionalMoves.Add(this.game.getBoard().getSquareAt(p.position.x, p.position.y+1));
         }
-        if(checkSquare(p.position.x, p.position.y-1, all)) {
+        if(checkSquare(p.position.x, p.position.y-1)) {
             additionalMoves.Add(this.game.getBoard().getSquareAt(p.position.x, p.position.y-1));
         }
 
         return additionalMoves;
     }
 
-    private bool checkSquare(int x, int y, bool all) {
-        return this.game.getBoard().getSquareAt(x, y) != null && ((this.game.getBoard().getSquareAt(x, y).entity == null) || (all && this.game.getBoard().getSquareAt(x, y).entity.getEntityType() == EntityType.Piece));
+    private bool checkSquare(int x, int y) {
+        return this.game.getBoard().getSquareAt(x, y) != null && this.game.getBoard().getSquareAt(x, y).entity == null;
     }
 }

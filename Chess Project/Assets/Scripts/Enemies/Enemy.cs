@@ -60,8 +60,11 @@ public class Enemy : Entity
 
     public override void takeDamage(int damage/*, ChessPiece attacker*/) {
         base.takeDamage(damage);
-        game.getBoard().returnDamage(this.position,this.defense);
         this.reporter.onStatUpdate();
+    }
+
+    public virtual void returnDamage() {
+        game.getBoard().returnDamage(this.position,this.defense);
     }
 
     public override void onDeath() {

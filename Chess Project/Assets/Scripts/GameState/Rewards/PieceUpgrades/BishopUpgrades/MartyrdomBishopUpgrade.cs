@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MartyrdomBishopUpgrade : PieceUpgradeReward
 {
-    private bool oddSquareSac = 0;
-    private bool evenSquareSac = 0;
+    private int oddSquareSac = 0;
+    private int evenSquareSac = 0;
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
         changes.Add(PieceMethods.onSacrifice);
@@ -21,7 +21,7 @@ public class MartyrdomBishopUpgrade : PieceUpgradeReward
         if(p.getPieceType() == PieceType.Bishop) {
 
             if(oddSquareSac == 0 && evenSquareSac == 0) {
-                addRoundOverListener(this);
+                this.game.addRoundOverListener(this);
             }
 
             if((p.position.x + p.position.y) % 2 == 0) {
@@ -38,7 +38,6 @@ public class MartyrdomBishopUpgrade : PieceUpgradeReward
         } else {
             return new Operation(OperationTypes.Multiply, oddSquareSac);
         }
-        return new Operation(OperationTypes.Ignore, 0);
     }
 
     public override void notifyRoundOver() {

@@ -21,6 +21,7 @@ public class NumberMultiplier
 
     public NumberMultiplier(int val) {
         this.val = val;
+        operations = new List<Operation>();
     }
 
 
@@ -47,6 +48,7 @@ public class NumberMultiplier
         }
 
         res = (int)(res * multiplier/100.0);
+        Debug.Log("* : " + res + ", " + multiplier);
         foreach (Operation operation in operations) {
             if(operation.type == OperationTypes.PostAdd) {
                 res += operation.amount;

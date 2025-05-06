@@ -17,12 +17,11 @@ public class QueenOfPietyBishopUpgrade : PieceUpgradeReward
         return PieceType.Bishop;
     }
 
-    public override IENumerator changeAttack(ChessPiece p, Entity target) {
+    public override IEnumerator changeAttack(ChessPiece bishop, Entity target) {
         foreach(ChessPiece p in this.game.getPieces()) {
-            if(p.getPieceType() == PieceType.Queen) {
-                yield return p.attack(target);
+            if(p.getPieceType() == PieceType.Queen && p.getDefensiveMoves().Contains(bishop.position)) {
+                yield return p.attack(target, new List<ChessPiece>());
             }
         }
-        return null;
     }
 }

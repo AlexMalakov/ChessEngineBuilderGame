@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         //2 things need to be calculated: crit chance and crit damage, lets say crit chance will just be luck/10
         //lets say crit damage will be just + .2 to the total damage, also always round up :)
         if(luck >= 10 || Random.Range(0, 10) < luck) {
-            return Mathf.CeilToInt(damage * critDamage);
+            return Mathf.CeilToInt(damage * (1+critDamage));
         }
         return damage;
         

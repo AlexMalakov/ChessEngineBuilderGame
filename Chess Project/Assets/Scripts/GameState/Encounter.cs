@@ -50,7 +50,8 @@ public class Encounter : MonoBehaviour
 
     public IEnumerator startPlayerAttacks() {
         yield return board.assignEffectiveDefense();
-        yield return board.performDamagePhase(enemy);
+        yield return board.performDamagePhase();
+        this.enemy.returnDamage();
         this.game.startEnemyTurn();
     }
 }

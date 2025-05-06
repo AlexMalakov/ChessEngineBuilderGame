@@ -57,6 +57,10 @@ public class Square : MonoBehaviour
         return a.x == b.x && a.y == b.y;
     }
 
+    //these are uselss but im getting a warning and it's bothering me >:(
+    public override int GetHashCode(){return 0;} //zero reason to use this
+    public override bool Equals(object obj){return false;} //don't use this tbh
+
     public static bool operator !=(Square a, Square b)
     {
         return !(a == b);
@@ -68,6 +72,9 @@ public class Square : MonoBehaviour
     }
 
     public void isAssisting(bool assisting) {
+        if(assisting) {
+            Debug.Log("IS ASSTING?" + assisting + " xy " + x + ", " + y);
+        }
         this.assistingSprite.SetActive(assisting);
     }
 
@@ -85,5 +92,9 @@ public class Square : MonoBehaviour
 
     public bool hasPiece(PieceType pieceType) {
         return this.hasChessPiece() && ((ChessPiece)this.entity).getPieceType() == pieceType;
+    }
+
+    public bool hasOpponent() {
+        return this.entity != null && (this.entity.getEntityType() == EntityType.Minion || this.entity.getEntityType() == EntityType.Enemy);
     }
 }

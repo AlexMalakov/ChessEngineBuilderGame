@@ -44,6 +44,9 @@ TagManager:
   - name: Board
     uniqueID: 2014111531
     locked: 0
+  - name: Board-overlay
+    uniqueID: 793918653
+    locked: 0
   - name: Pieces
     uniqueID: 3894005135
     locked: 0

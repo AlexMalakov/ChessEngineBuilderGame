@@ -8,8 +8,10 @@ public class Queen : ChessPiece
     public override List<Square> getPossibleMoves(bool attacking) {
         List<Square> possibleMoves = new List<Square>();
 
-        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
-            possibleMoves.AddRange(upgrade.changePossibleMoves(this, false, attacking));
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.getMoves)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+                possibleMoves.AddRange(upgrade.changePossibleMoves(this, false, attacking));
+            }
         }
 
         List<int[]> offsets = new List<int[]>();
@@ -41,11 +43,13 @@ public class Queen : ChessPiece
         return possibleMoves;
     }
 
-    public override List<Square> getAllMoves() {
+    public override List<Square> getDefensiveMoves() {
         List<Square> possibleMoves = new List<Square>();
 
-        foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
-            possibleMoves.AddRange(upgrade.changePossibleMoves(this, true, false));
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.getMoves)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getMoves]) {
+                possibleMoves.AddRange(upgrade.changePossibleMoves(this, true, false));
+            }
         }
 
         List<int[]> offsets = new List<int[]>();

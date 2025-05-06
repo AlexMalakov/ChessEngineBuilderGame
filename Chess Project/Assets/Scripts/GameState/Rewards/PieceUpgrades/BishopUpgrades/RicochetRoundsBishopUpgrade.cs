@@ -14,7 +14,7 @@ public class RicochetRoundsBishopUpgrade : PieceUpgradeReward
         return PieceType.Bishop;
     }
 
-    public override List<Square> changePossibleMoves(ChessPiece p, bool all, bool attacking) {
+    public override List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
         List<Square> additionalMoves = new List<Square>();
         if(attacking) {
             List<int[]> offsets = new List<int[]>();
@@ -23,10 +23,9 @@ public class RicochetRoundsBishopUpgrade : PieceUpgradeReward
             offsets.Add(new int[]{-1,1});
             offsets.Add(new int[]{1,1});
 
-            Square s = p.position;
             foreach (int[] offset in offsets) {
                 bool bounced = false;
-                Square s;
+                Square s = p.position;
                 while(true) {
                     if(this.game.getBoard().getSquareAt(s.x + offset[0], s.y + offset[1]) == null && !bounced) {
                         bounced = true;
@@ -61,9 +60,5 @@ public class RicochetRoundsBishopUpgrade : PieceUpgradeReward
         }
 
         return additionalMoves;
-    }
-
-    private bool checkSquare(int x, int y, bool all) {
-        return this.game.getBoard().getSquareAt(x, y) != null && ((this.game.getBoard().getSquareAt(x, y).entity == null) || (all && this.game.getBoard().getSquareAt(x, y).entity.getEntityType() == EntityType.Piece));
     }
 }

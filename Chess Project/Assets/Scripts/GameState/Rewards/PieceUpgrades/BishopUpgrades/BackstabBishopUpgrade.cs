@@ -15,9 +15,9 @@ public class BackstabBishopUpgrade : PieceUpgradeReward
     }
     
     public override Operation changePieceDamage(ChessPiece p, Square target) {
-        if(Mathf.Abs(p.position.x - target.x) == 1 && Mathf.Abs(p.position.y - target.y) == 1 && p.position.y > target.position.y) {
-            return new Operation(OperationType.Multiply, 100);
+        if(Mathf.Abs(p.position.x - target.x) == 1 && Mathf.Abs(p.position.y - target.y) == 1 && p.position.y > target.y) {
+            return new Operation(OperationTypes.Multiply, 100);
         }
-        return new Operation(OperationType.Ignore, 0);
+        return new Operation(OperationTypes.Ignore, 0);
     }
 }

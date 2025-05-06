@@ -5,6 +5,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public Player player;
+    public PopUpManager popUpManager;
     public List<Encounter> encouters;
 
     int currentEncounter = 0;
@@ -118,6 +119,10 @@ public class Game : MonoBehaviour
 
     public Player getPlayer() {
         return this.player;
+    }
+
+    public PopUpManager getPopUpManager() {
+        return this.popUpManager;
     }
 
 }

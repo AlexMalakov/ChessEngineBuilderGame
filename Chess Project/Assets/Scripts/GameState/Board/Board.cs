@@ -28,7 +28,7 @@ public class Board : MonoBehaviour
                     square = Instantiate(this.lightSquare, offset, Quaternion.identity);
                 }
                 Square fromSquare = square.GetComponent<Square>();
-                fromSquare.init(i, j, this, ""+(char)('a'+i) + (char)(j));
+                fromSquare.init(i, j, this, ""+(char)('a'+i) + (char)('0'+j));
                 this.squaresOnBoard[i, j] = fromSquare;
             }
         }
@@ -94,7 +94,7 @@ public class Board : MonoBehaviour
         //don't need this ig
         // if(this.clickedSquare != null) {
         //     foreach(ChessPiece p in this.game.getPieces()) {
-        //         foreach(Square s in p.getAllMoves()) {
+        //         foreach(Square s in p.getDefensiveMoves()) {
         //             if(s == this.clickedSquare) {
         //                 p.position.toggleTarget(true);
         //                 break;
@@ -147,7 +147,9 @@ public class Board : MonoBehaviour
         int damage = 0;
         foreach(ChessPiece p in damageDealers) {
             //display
-            damage += p.getPieceDamage(target) + calculateDefense(p.position, false);
+            int dam = p.getPieceDamage(target); int def = this.calculateDefense(p.position, false);
+            // damage += p.getPieceDamage(target) + this.calculateDefense(p.position, false);
+            damage += dam + def;
         }
 
         damageDealers = new List<ChessPiece>();
@@ -166,108 +168,90 @@ public class Board : MonoBehaviour
             damage += p.getPieceDamage(target) + calculateDefense(p.position, true);
         }
 
-        return damage; //THIS IS GOING TO CAUSE A BUG BECAUSE IENUMERATOR VERSUS INT RETURN TYPE :(
-        //get all the pieces attacking a square
-        //sum the defense damage bonus that they all get
+        return damage;
     }
 
-    public IEnumerator performDamagePhase(Enemy target) {
-        List<ChessPiece> damageDealers = new List<ChessPiece>();
+    public IEnumerator performDamagePhase() {
+        Debug.Log("STARTING PERFORMING DAMAGE PHASE");
+
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
             foreach(Square s in p.getPossibleMoves(true)) {
-                if(s == target.position) {
-                    damageDealers.Add(p);
-                    break;
+                if(s.hasOpponent()) {
+                    yield return p.attack(s.entity, this.getSquareTargetingPieces(p.position, false));
                 }
             }
         }
-
-        foreach(ChessPiece p in damageDealers) {
-            //display
-            p.popUpAction(PopUpType.damage);
-            int damage = p.getPieceDamage(target.position) + calculateDefense(p.position, false);
-            enemy.takeDamage(damage);
-            yield return new WaitForSeconds(this.popUpNumberWaitTime);
-            unAssistAllSquares();
-
-        }
-
-        damageDealers = new List<ChessPiece>();
 
         foreach(ChessPiece p in this.game.getPremovePieces()) {
             foreach(Square s in p.getPossibleMoves(true)) {
-                if(s == target.position) {
-                    damageDealers.Add(p);
-                    break;
+                if(s.hasOpponent()) {
+                    yield return p.attack(s.entity, this.getSquareTargetingPieces(p.position, true));
                 }
             }
         }
-
-        foreach(ChessPiece p in damageDealers) {
-            //display
-            p.popUpAction(PopUpType.damage);
-            int damage = p.getPieceDamage(target.position) + calculateDefense(p.position, true);
-            enemy.takeDamage(damage);
-            yield return new WaitForSeconds(this.popUpNumberWaitTime);
-            unAssistAllSquares();
-        }
+        Debug.Log("DONE PERFORMING DAMAGE PHASE");
     }
 
     public IEnumerator assignEffectiveDefense() {
+        Debug.Log("STARTING PERFORMING EFFICTIV ED");
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
-            //display 
-            p.popUpAction(PopUpType.defense);
-            p.assignEffectiveDefense(calculateDefense(p.position, false));
-            yield return new WaitForSeconds(this.popUpNumberWaitTime);
-            unAssistAllSquares();
+            yield return p.assignEffectiveDefense(this.getSquareTargetingPieces(p.position, false));
         }
 
         foreach(ChessPiece p in this.game.getPremovePieces()) {
-            //display
-            p.popUpAction(PopUpType.defense);
-            p.assignEffectiveDefense(calculateDefense(p.position, true));
-            yield return new WaitForSeconds(this.popUpNumberWaitTime);
-            unAssistAllSquares();
+            yield return p.assignEffectiveDefense(this.getSquareTargetingPieces(p.position, true));
         }
+        Debug.Log("DONE WITH ASSIGNING EFFECTIVE D!");
     }
 
-    private void unAssistAllSquares() {
-        foreach(Square s in this.squaresOnBoard) {
-            s.isAssisting(false);
-        }
-    }
 
     public int calculateDefense(Square square, bool premove) {
+        Debug.Log("STARTING PERFORMING DEFENES CALC");
         int defense = 0;
         List<ChessPiece> defenders = (premove) ? this.game.getPremovePieces() : this.game.getNonPremovePieces();
         foreach(ChessPiece d in defenders) {
-            foreach(Square s in d.getAllMoves()) {
+            foreach(Square s in d.getDefensiveMoves()) {
                 if(s == square) {
                     defense += d.defense;
-                    s.isAssisting(true);
                     break;
                 }
             }
         }
-
+        Debug.Log("DONE WITH DEFENSE CALCULATING!");
         return defense;
+    }
+
+    public List<ChessPiece> getSquareTargetingPieces(Square defending, bool premove) {
+        List<ChessPiece> defenders = new List<ChessPiece>();
+        foreach(ChessPiece p in ((premove) ? this.game.getPremovePieces() : this.game.getNonPremovePieces())) {
+            foreach(Square s in p.getDefensiveMoves()) {
+                if(s == defending) {
+                    defenders.Add(p);
+                    break;
+                }
+            }
+        }
+        return defenders;
     }
 
     public void onPieceTaken(ChessPiece p) {
         p.position.entity = null;
         this.game.player.onPieceDeath(p);
         this.game.graveyard.addToGraveyard(p);
+        Debug.Log("THE PIECE IS DEAD NOW!");
     }
 
     public void returnDamage(Square target, int defense) {
-        foreach(ChessPiece p in this.game.getPieces()) { //return damage to all since we are assuming premove pieces can deal damage
-            foreach(Square s in p.getPossibleMoves(false)) {
+        for(int i = this.game.getPieces().Count - 1; i >= 0; i--) {
+            foreach(Square s in this.game.getPieces()[i].getPossibleMoves(false)) { //backwards to avoid modification being an issue
                 if(s == target) {
-                    p.takeDamage(defense);
+                    this.game.getPieces()[i].takeDamage(defense);
                     break;
                 }
             }
+            Debug.Log("returning damage");
         }
+        Debug.Log("DONE RETURNING DAMAGE");
     }
 
     public IEnumerator slideObj(GameObject obj, Square destination) {
