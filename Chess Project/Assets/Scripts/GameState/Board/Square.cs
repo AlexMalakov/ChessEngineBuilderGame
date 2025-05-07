@@ -93,7 +93,7 @@ public class Square : MonoBehaviour
         return this.hasChessPiece() && ((ChessPiece)this.entity).getPieceType() == pieceType;
     }
 
-    public bool hasOpponent() {
+    public bool hasHostile() {
         return this.entity != null && (this.entity.getEntityType() == EntityType.Minion || this.entity.getEntityType() == EntityType.Enemy);
     }
 }

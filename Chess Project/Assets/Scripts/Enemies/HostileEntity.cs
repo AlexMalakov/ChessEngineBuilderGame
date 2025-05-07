@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class HostileEntity : Entity
 {
-    public Projectile projectile;
+    public List<GameObject> projectiles;
 
     public List<HostileEntityAction> actionQueue;
     public List<HostileEntityAction> actionLoop;
@@ -28,4 +28,9 @@ public abstract class HostileEntity : Entity
     }
 
     public abstract void returnDamage();
+
+    public virtual void launchProjectile(int projectileNumber, int deltaX, int deltaY, int projectileDamage) {
+        GameObject proj = Instantiate(projectiles[projectileNumber]); //consider object pooling? at the moment not needed but maybe in the future
+        StartCoroutine(proj.GetComponent<Projectile>().launch(this.position, deltaX, deltaY, projectileDamage));
+    }
 }

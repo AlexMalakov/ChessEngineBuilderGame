@@ -175,7 +175,7 @@ public class Board : MonoBehaviour
 
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
             foreach(Square s in p.getPossibleMoves(true)) {
-                if(s.hasOpponent()) {
+                if(s.hasHostile()) {
                     yield return p.attack(s.entity, this.getSquareTargetingPieces(p.position, false));
                 }
             }
@@ -183,7 +183,7 @@ public class Board : MonoBehaviour
 
         foreach(ChessPiece p in this.game.getPremovePieces()) {
             foreach(Square s in p.getPossibleMoves(true)) {
-                if(s.hasOpponent()) {
+                if(s.hasHostile()) {
                     yield return p.attack(s.entity, this.getSquareTargetingPieces(p.position, true));
                 }
             }
