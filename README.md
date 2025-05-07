@@ -8,4 +8,4 @@ If you're interested in helping out, bugs will be added to issues as I discover 
 
 If you are an artist and are interested please please please pretty please 🥺🥺🥺🥺🥺🥺🥺🥺 reach out i am terrible at making sprites
 
-<img width="722" alt="Screenshot 2025-05-05 at 11 07 45 PM" src="https://github.com/user-attachments/assets/71e5a09f-d9d5-499d-a748-03bbf1509054" />
+<img width="620" alt="Screenshot 2025-05-06 at 3 19 20 PM" src="https://github.com/user-attachments/assets/ec9c193d-339e-4bd4-b9f0-a43eb26076ee" />
