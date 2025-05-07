@@ -1383,7 +1383,8 @@ MonoBehaviour:
   board: {fileID: 0}
   game: {fileID: 1230606952}
   rewards: {fileID: 1449368378}
-  reporter: {fileID: 684306584}
+  sqReporter: {fileID: 0}
+  encReporter: {fileID: 0}
 --- !u!4 &107429392
 Transform:
   m_ObjectHideFlags: 0
@@ -3881,7 +3882,7 @@ GameObject:
   - component: {fileID: 304923316}
   - component: {fileID: 304923319}
   - component: {fileID: 304923318}
-  - component: {fileID: 304923317}
+  - component: {fileID: 304923320}
   m_Layer: 5
   m_Name: rewardsPanel
   m_TagString: Untagged
@@ -3911,22 +3912,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1386, y: -453}
   m_SizeDelta: {x: 400, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &304923317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 304923315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffe6a939b05044a5083d9511316cbb59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game: {fileID: 1230606952}
-  enemyName: {fileID: 112312768}
-  enemyStats: {fileID: 0}
-  enemyImage: {fileID: 0}
 --- !u!114 &304923318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3965,6 +3950,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304923315}
   m_CullTransparentMesh: 1
+--- !u!114 &304923320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304923315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba78f05dba37c4ef2844ab184d6ca1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &322290647
 GameObject:
   m_ObjectHideFlags: 0
@@ -5913,6 +5910,90 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &426159124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426159125}
+  - component: {fileID: 426159126}
+  m_Layer: 0
+  m_Name: black_bishop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &426159125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426159124}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.24, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1903949382}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &426159126
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426159124}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: be248b51b37004519b320d9a05d318eb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.18, y: 0.19}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &429241787
 GameObject:
   m_ObjectHideFlags: 0
@@ -6650,7 +6731,8 @@ MonoBehaviour:
   board: {fileID: 0}
   game: {fileID: 1230606952}
   rewards: {fileID: 1449368378}
-  reporter: {fileID: 684306584}
+  sqReporter: {fileID: 0}
+  encReporter: {fileID: 0}
 --- !u!1 &504889155
 GameObject:
   m_ObjectHideFlags: 0
@@ -13272,7 +13354,7 @@ GameObject:
   - component: {fileID: 1283418042}
   - component: {fileID: 1283418041}
   - component: {fileID: 1283418040}
-  - component: {fileID: 1283418039}
+  - component: {fileID: 1283418043}
   m_Layer: 0
   m_Name: bishop_enemy
   m_TagString: Untagged
@@ -13289,43 +13371,14 @@ Transform:
   m_GameObject: {fileID: 1283418037}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.25, z: 0}
+  m_LocalPosition: {x: 0, y: 2.2499998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1688188479}
   - {fileID: 1085303787}
-  m_Father: {fileID: 1386708380}
+  m_Father: {fileID: 1905467356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1283418039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93926bdbeb0fb4caa87c571b286d83f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game: {fileID: 1230606952}
-  startingX: 4
-  startingY: 7
-  health: 50
-  maxHealth: 50
-  defense: 2
-  damage: 1
-  position: {fileID: 0}
-  projectile: {fileID: 1688188481}
-  actionQueue:
-  - {fileID: 0}
-  actionLoop:
-  - {fileID: 0}
-  attackers: []
-  minions: []
-  enemySprite: {fileID: 21300000, guid: be248b51b37004519b320d9a05d318eb, type: 3}
-  reporter: {fileID: 1515168599}
 --- !u!114 &1283418040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13338,7 +13391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c4a0636fc1194a0b9f156030594a2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  opponent: {fileID: 0}
   powerGain: 1
 --- !u!114 &1283418041
 MonoBehaviour:
@@ -13352,7 +13405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3993262b9e5004e67aa5c79fef9ffdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  opponent: {fileID: 0}
+  timeBetweenShot: 0
 --- !u!114 &1283418042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13365,7 +13419,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9532041fb0447b9b1940e224057410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  opponent: {fileID: 0}
+--- !u!114 &1283418043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283418037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331d432766db9414c9608295a3713260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 1230606952}
+  startingX: 4
+  startingY: 7
+  health: 50
+  maxHealth: 50
+  defense: 1
+  damage: 2
+  position: {fileID: 0}
+  projectiles: []
+  actionQueue: []
+  actionLoop: []
+  minions: []
+  enemySprite: {fileID: 21300000, guid: be248b51b37004519b320d9a05d318eb, type: 3}
 --- !u!1 &1296474983
 GameObject:
   m_ObjectHideFlags: 0
@@ -14102,7 +14181,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1417178098}
-  - {fileID: 1283418038}
+  - {fileID: 1905467356}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1403718968
@@ -14238,7 +14317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3993262b9e5004e67aa5c79fef9ffdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1417178102}
+  opponent: {fileID: 0}
+  timeBetweenShot: 0
 --- !u!114 &1417178100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14251,7 +14331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9532041fb0447b9b1940e224057410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1417178102}
+  opponent: {fileID: 0}
 --- !u!114 &1417178101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14264,7 +14344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c4a0636fc1194a0b9f156030594a2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1417178102}
+  opponent: {fileID: 0}
   powerGain: 1
 --- !u!114 &1417178102
 MonoBehaviour:
@@ -14286,16 +14366,14 @@ MonoBehaviour:
   defense: 2
   damage: 1
   position: {fileID: 0}
-  projectile: {fileID: 1821074207}
+  projectiles: []
   actionQueue:
   - {fileID: 1417178100}
   actionLoop:
   - {fileID: 1417178099}
   - {fileID: 1417178101}
-  attackers: []
   minions: []
   enemySprite: {fileID: 21300000, guid: 6822761936ed9460dba9c6fc7a0ade83, type: 3}
-  reporter: {fileID: 1515168599}
 --- !u!1 &1427293451
 GameObject:
   m_ObjectHideFlags: 0
@@ -17076,8 +17154,7 @@ MonoBehaviour:
   game: {fileID: 0}
   projectileModel: {fileID: 1835919517}
   targetPieces: 1
-  targetEnemies: 0
-  targetMinions: 0
+  targetHostile: 0
   flySpeed: 0.2
 --- !u!1 &1716427403
 GameObject:
@@ -17830,6 +17907,70 @@ MonoBehaviour:
   effectiveDefense: 0
   activeSprite: {fileID: 21300000, guid: a63cbe546f951480289d49f599b15c23, type: 3}
   canCastle: 1
+--- !u!1 &1768738746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1768738747}
+  - component: {fileID: 1768738749}
+  - component: {fileID: 1768738748}
+  m_Layer: 0
+  m_Name: projectile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1768738747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768738746}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1903949382}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1768738748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768738746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 292b50310f82d4842b309c54e89c5f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 0}
+--- !u!114 &1768738749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768738746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1f2676951cc407780c96a1d41eaa3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  payload: {fileID: 1768738748}
+  game: {fileID: 0}
+  projectileModel: {fileID: 1835919517}
+  targetPieces: 1
+  targetHostile: 0
+  flySpeed: 0.2
 --- !u!1 &1791966802
 GameObject:
   m_ObjectHideFlags: 0
@@ -18372,8 +18513,7 @@ MonoBehaviour:
   game: {fileID: 1230606952}
   projectileModel: {fileID: 1835919517}
   targetPieces: 1
-  targetEnemies: 0
-  targetMinions: 0
+  targetHostile: 0
   flySpeed: 0.2
 --- !u!114 &1821074208
 MonoBehaviour:
@@ -19383,6 +19523,144 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1899513085}
   m_CullTransparentMesh: 1
+--- !u!1 &1903949381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1903949382}
+  - component: {fileID: 1903949386}
+  - component: {fileID: 1903949385}
+  - component: {fileID: 1903949384}
+  - component: {fileID: 1903949383}
+  m_Layer: 0
+  m_Name: 'bishop_minion '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1903949382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.75, y: 2.2499998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1768738747}
+  - {fileID: 426159125}
+  m_Father: {fileID: 1905467356}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1903949383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3985bbf770af49d3a72175bc8bd2547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: {fileID: 1230606952}
+  startingX: 3
+  startingY: 7
+  health: 50
+  maxHealth: 50
+  defense: 1
+  damage: 2
+  position: {fileID: 0}
+  projectiles: []
+  actionQueue:
+  - {fileID: 0}
+  actionLoop:
+  - {fileID: 0}
+  enemy: {fileID: 1283418043}
+  alive: 0
+--- !u!114 &1903949384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4a0636fc1194a0b9f156030594a2fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 0}
+  powerGain: 1
+--- !u!114 &1903949385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3993262b9e5004e67aa5c79fef9ffdcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 0}
+  timeBetweenShot: 0
+--- !u!114 &1903949386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe9532041fb0447b9b1940e224057410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 0}
+--- !u!1 &1905467355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905467356}
+  m_Layer: 0
+  m_Name: bishops
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1905467356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905467355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1283418038}
+  - {fileID: 1903949382}
+  m_Father: {fileID: 1386708380}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1907457729
 GameObject:
   m_ObjectHideFlags: 0
