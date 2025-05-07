@@ -2,34 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Entity
+public class Enemy : HostileEntity
 {
-    public Projectile projectile;
-
-    public List<EnemyAction> actionQueue;
-    public List<EnemyAction> actionLoop;
-    int currentAct = 0;
     protected int minionsFinished; protected bool enemyFinished;
 
-    public List<ChessPiece> attackers;
+
     public List<Minion> minions;
     public Sprite enemySprite;
-    public EnemyReporter reporter;
 
-    
-    public virtual void onEncounterStart() {
-        this.reporter.onEncounterStart();
-    }
+    public virtual void onEncounterStart(){}
 
-    public virtual void takeTurn() {
+    public override void takeTurn() {
         enemyFinished = false;
         minionsFinished = 0;
-        if(currentAct < actionQueue.Count) {
-            StartCoroutine(actionQueue[currentAct].takeAction());
-        } else {
-            StartCoroutine(actionLoop[(currentAct - actionQueue.Count)%actionLoop.Count].takeAction());
-        }
-        currentAct++;
+
+        base.takeTurn();
 
         foreach(Minion m in this.minions) {
             m.takeTurn();
@@ -43,7 +30,7 @@ public class Enemy : Entity
         }
     }
 
-    public virtual void onTurnOver() {
+    public override void onTurnOver() {
         enemyFinished = true;
         if(minionsFinished == minions.Count) {
             this.game.startPlayerTurn();
@@ -57,12 +44,7 @@ public class Enemy : Entity
         }
     }
 
-    public override void takeDamage(int damage/*, ChessPiece attacker*/) {
-        base.takeDamage(damage);
-        this.reporter.onStatUpdate();
-    }
-
-    public virtual void returnDamage() {
+    public override void returnDamage() {
         game.getBoard().returnDamage(this.position,this.defense);
         foreach(Minion m in this.minions) {
             m.returnDamage();
@@ -74,12 +56,6 @@ public class Enemy : Entity
             m.onEnemyDeath();
         }
         this.game.getEncounter().onEnemyDefeat();
-    }
-
-    public override IEnumerator slide(Square toSquare) {
-        this.position.entity = null;
-        toSquare.entity = this;
-        yield return base.slide(toSquare);
     }
 
     //revives all dead minions :)

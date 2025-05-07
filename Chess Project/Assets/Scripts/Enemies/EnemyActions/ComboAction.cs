@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ComboAction : EnemyAction
+public class ComboAction : HostileEntityAction
 {
-    public List<EnemyAction> actions;
+    public List<HostileEntityAction> actions;
 
     public override IEnumerator act() {
-        foreach (EnemyAction action in actions) {
+        foreach (HostileEntityAction action in actions) {
             yield return action.act();
         }
     }

@@ -27,7 +27,7 @@ public class MultiEnemies : Enemy
 
     public override void returnDamage() {
         if(!this.slain) {
-            game.getBoard().returnDamage(this.position,this.defense);
+            base.returnDamage();
         }
     }
 

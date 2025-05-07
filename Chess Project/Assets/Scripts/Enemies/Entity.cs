@@ -28,6 +28,8 @@ public abstract class Entity : MonoBehaviour
     }
 
     public virtual IEnumerator slide(Square toSquare) {
+        this.position.entity = null;
+        toSquare.entity = this;
         this.position = toSquare;
         yield return this.game.getBoard().slideObj(this.gameObject, toSquare);
     }

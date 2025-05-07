@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class EnemyReporter : MonoBehaviour
+public class EncounterReporter : MonoBehaviour
 {
     public Game game;
     public TMP_Text enemyName;

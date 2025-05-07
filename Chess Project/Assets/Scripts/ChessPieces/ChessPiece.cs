@@ -37,11 +37,6 @@ public abstract class ChessPiece : Entity
     //gets all the moves a piece can take including sacrifices
     public abstract List<Square> getPossibleMoves(bool attacking);
 
-    //phisically moves a piece along the board to the square moveTo
-    public override IEnumerator slide(Square moveTo) {
-        yield return this.game.getBoard().slideObj(this.gameObject, moveTo);
-    }
-
     //executes the logic behind movement of a piece to the square square
     //returns true if succesful and false if not
     public virtual bool move(Square square) {

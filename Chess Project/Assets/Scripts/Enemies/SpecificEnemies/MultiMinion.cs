@@ -20,9 +20,9 @@ public class MultiMinion : Minion
         enemy.onDeath();
     }
 
-    public override void onEnemyDeath() {} //we don't care cuz we're a multi minion
+    public override void onEnemyDeath() {} //we don't care cuz we're a multi minion >:)
 
-    public override void returnDamage() {
+    public override void returnDamage() { //multi minions act like enemies so they do return damage >:)
         game.getBoard().returnDamage(this.position,this.defense);
     }
 }
