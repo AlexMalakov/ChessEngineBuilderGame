@@ -172,7 +172,6 @@ public class Board : MonoBehaviour
     }
 
     public IEnumerator performDamagePhase() {
-        Debug.Log("STARTING PERFORMING DAMAGE PHASE");
 
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
             foreach(Square s in p.getPossibleMoves(true)) {
@@ -189,11 +188,9 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        Debug.Log("DONE PERFORMING DAMAGE PHASE");
     }
 
     public IEnumerator assignEffectiveDefense() {
-        Debug.Log("STARTING PERFORMING EFFICTIV ED");
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
             yield return p.assignEffectiveDefense(this.getSquareTargetingPieces(p.position, false));
         }
@@ -201,12 +198,10 @@ public class Board : MonoBehaviour
         foreach(ChessPiece p in this.game.getPremovePieces()) {
             yield return p.assignEffectiveDefense(this.getSquareTargetingPieces(p.position, true));
         }
-        Debug.Log("DONE WITH ASSIGNING EFFECTIVE D!");
     }
 
 
     public int calculateDefense(Square square, bool premove) {
-        Debug.Log("STARTING PERFORMING DEFENES CALC");
         int defense = 0;
         List<ChessPiece> defenders = (premove) ? this.game.getPremovePieces() : this.game.getNonPremovePieces();
         foreach(ChessPiece d in defenders) {
@@ -217,7 +212,6 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        Debug.Log("DONE WITH DEFENSE CALCULATING!");
         return defense;
     }
 
@@ -238,7 +232,6 @@ public class Board : MonoBehaviour
         p.position.entity = null;
         this.game.player.onPieceDeath(p);
         this.game.graveyard.addToGraveyard(p);
-        Debug.Log("THE PIECE IS DEAD NOW!");
     }
 
     public void returnDamage(Square target, int defense) {
@@ -249,9 +242,7 @@ public class Board : MonoBehaviour
                     break;
                 }
             }
-            Debug.Log("returning damage");
         }
-        Debug.Log("DONE RETURNING DAMAGE");
     }
 
     public IEnumerator slideObj(GameObject obj, Square destination) {

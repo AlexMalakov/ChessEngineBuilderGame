@@ -9,7 +9,7 @@ public class Enemy : Entity
     public List<EnemyAction> actionQueue;
     public List<EnemyAction> actionLoop;
     int currentAct = 0;
-    int minionsFinished; bool enemyFinished;
+    protected int minionsFinished; protected bool enemyFinished;
 
     public List<ChessPiece> attackers;
     public List<Minion> minions;
@@ -19,11 +19,10 @@ public class Enemy : Entity
     
     public virtual void onEncounterStart() {
         this.reporter.onEncounterStart();
-        this.summonMinions();
     }
 
     public virtual void takeTurn() {
-        enemyFinished = true;
+        enemyFinished = false;
         minionsFinished = 0;
         if(currentAct < actionQueue.Count) {
             StartCoroutine(actionQueue[currentAct].takeAction());
@@ -65,6 +64,9 @@ public class Enemy : Entity
 
     public virtual void returnDamage() {
         game.getBoard().returnDamage(this.position,this.defense);
+        foreach(Minion m in this.minions) {
+            m.returnDamage();
+        }
     }
 
     public override void onDeath() {

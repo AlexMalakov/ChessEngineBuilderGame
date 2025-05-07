@@ -23,7 +23,6 @@ public class RewardSystem : MonoBehaviour
         
         this.selectedReward = reward;
         this.selectedReward.toggleOutline(true);
-        Debug.Log("REWARD SELECTED!");
     }
 
     public void onRewardLockin() {

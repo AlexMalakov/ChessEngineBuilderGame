@@ -73,7 +73,6 @@ public class Square : MonoBehaviour
 
     public void isAssisting(bool assisting) {
         if(assisting) {
-            Debug.Log("IS ASSTING?" + assisting + " xy " + x + ", " + y);
         }
         this.assistingSprite.SetActive(assisting);
     }

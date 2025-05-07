@@ -13,7 +13,7 @@ public class Minion : Entity
     public bool alive = false;
 
 
-    public void onSummon(Enemy enemy) {
+    public virtual void onSummon(Enemy enemy) {
         gameObject.SetActive(true);
         this.alive = true;
         this.enemy = enemy;
@@ -39,6 +39,8 @@ public class Minion : Entity
         this.enemy.onMinionFinished();
     }
 
+    public virtual void returnDamage() {}//minions don't return damage by default
+
 
     public override void onDeath() {
         this.alive = false;
@@ -48,7 +50,7 @@ public class Minion : Entity
 
     }
 
-    public void onEnemyDeath() {
+    public virtual void onEnemyDeath() {
         this.onDeath();
     }
 
