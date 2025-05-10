@@ -6,6 +6,6 @@ public class Retreat : HostileEntityAction
 {
 
     public override IEnumerator act() {
-        this.opponent.slide(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x, this.opponent.game.getBoard().height-1));
+        yield return this.opponent.slide(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x, this.opponent.game.getBoard().height-1));
     }
 }
