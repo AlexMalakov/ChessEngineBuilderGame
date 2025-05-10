@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoldTheLinePawnUpgrade : MonoBehaviour
+public class HoldTheLinePawnUpgrade : PieceUpgardeReward
 {
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();

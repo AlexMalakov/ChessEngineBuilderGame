@@ -42,9 +42,6 @@ public abstract class ChessPiece : Entity
     public virtual bool move(Square square) {
         foreach (Square s in getPossibleMoves(false)) {
             if (s.x == square.x && s.y == square.y) {
-                this.position.entity = null;
-                this.position = square;
-                this.position.entity = this;
                 StartCoroutine(this.slide(square));
                 return true;
             }
