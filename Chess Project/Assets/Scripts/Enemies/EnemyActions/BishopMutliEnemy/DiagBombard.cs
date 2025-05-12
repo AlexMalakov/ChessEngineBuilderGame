@@ -78,7 +78,7 @@ public class DiagBombard : HostileEntityAction
                 if(e.health + ((ChessPiece)e).effectiveDefense <= this.opponent.damage) {
                     kills++;
                 }
-                if((ChessPiece)(e).effectiveDefense < this.opponent.damage) {
+                if(((ChessPiece)e).effectiveDefense < this.opponent.damage) {
                     damageDealt += this.opponent.damage - ((ChessPiece)e).effectiveDefense;
                 }
                 hits++;

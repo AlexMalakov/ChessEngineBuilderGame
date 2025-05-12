@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoldTheLinePawnUpgrade : PieceUpgardeReward
+public class HoldTheLinePawnUpgrade : PieceUpgradeReward
 {
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
@@ -14,7 +14,7 @@ public class HoldTheLinePawnUpgrade : PieceUpgardeReward
         return PieceType.Pawn;
     }
 
-    public virtual Operation changeDefense(ChessPiece p) {
+    public override Operation changeDefense(ChessPiece p) {
         int chainSize = followPawnChain(p.position, p.game);
         return new Operation(OperationTypes.PreAdd, chainSize);
     }
@@ -29,6 +29,6 @@ public class HoldTheLinePawnUpgrade : PieceUpgardeReward
             chain = chain + 1 + followPawnChain(g.getBoard().getSquareAt(s.x+1,s.y-1), g);
         }
 
-        return chain
+        return chain;
     }
 }

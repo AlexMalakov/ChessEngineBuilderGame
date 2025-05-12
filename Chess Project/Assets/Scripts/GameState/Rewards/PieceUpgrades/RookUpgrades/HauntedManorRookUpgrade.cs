@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HauntedManorRookUpgrade : MonoBehaviour
+public class HauntedManorRookUpgrade : PieceUpgradeReward
 {
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
-        changes.Add(PieceMethods.getPossibleMoves);
+        changes.Add(PieceMethods.getMoves);
         return changes;
     }
 
@@ -34,7 +34,7 @@ public class HauntedManorRookUpgrade : MonoBehaviour
                     break;
                 }
 
-                s = p.game.getBoard().getSquareAt(s.x + offset[0], s.y + offset[1])
+                s = p.game.getBoard().getSquareAt(s.x + offset[0], s.y + offset[1]);
                 if(!passedEntity && s.entity != null) {
                     passedEntity = true;
                 }

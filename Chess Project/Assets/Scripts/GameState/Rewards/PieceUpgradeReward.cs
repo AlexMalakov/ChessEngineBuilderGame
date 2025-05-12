@@ -60,7 +60,7 @@ public abstract class PieceUpgradeReward : Reward
         return new Operation(OperationTypes.Ignore, 0);
     }
 
-    public virtual IEnumerator changeAttack(ChessPiece p, Entity target) {
+    public virtual IEnumerator changeAttack(ChessPiece p, Entity target, List<ChessPiece> defenders) {
         return null;
     }
 

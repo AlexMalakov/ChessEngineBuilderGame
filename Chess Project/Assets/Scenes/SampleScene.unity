@@ -13352,8 +13352,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1283418038}
   - component: {fileID: 1283418042}
-  - component: {fileID: 1283418041}
-  - component: {fileID: 1283418040}
+  - component: {fileID: 1283418048}
+  - component: {fileID: 1283418047}
+  - component: {fileID: 1283418046}
+  - component: {fileID: 1283418045}
+  - component: {fileID: 1283418044}
   - component: {fileID: 1283418043}
   m_Layer: 0
   m_Name: bishop_enemy
@@ -13379,34 +13382,6 @@ Transform:
   - {fileID: 1085303787}
   m_Father: {fileID: 1905467356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1283418040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4a0636fc1194a0b9f156030594a2fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  powerGain: 1
---- !u!114 &1283418041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3993262b9e5004e67aa5c79fef9ffdcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  timeBetweenShot: 0
 --- !u!114 &1283418042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13419,7 +13394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9532041fb0447b9b1940e224057410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
+  opponent: {fileID: 1283418043}
 --- !u!114 &1283418043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13441,10 +13416,86 @@ MonoBehaviour:
   damage: 2
   position: {fileID: 0}
   projectiles: []
-  actionQueue: []
-  actionLoop: []
+  actionQueue:
+  - {fileID: 1283418042}
+  actionLoop:
+  - {fileID: 1283418048}
+  - {fileID: 1283418047}
+  - {fileID: 1283418044}
   minions: []
   enemySprite: {fileID: 21300000, guid: be248b51b37004519b320d9a05d318eb, type: 3}
+--- !u!114 &1283418044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283418037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 1283418043}
+  actions:
+  - {fileID: 1283418046}
+  - {fileID: 1283418045}
+--- !u!114 &1283418045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283418037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8cfa313554f4848be48abd203f2433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 1283418043}
+  targetsToHeal: []
+  amount: 5
+--- !u!114 &1283418046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283418037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8948a9f43cf16432b8dd4add5e120fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 0}
+--- !u!114 &1283418047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283418037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64a0259d4230496e93f050aa22926a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 1283418043}
+  timeBetweenShots: 0.3
+--- !u!114 &1283418048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283418037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52095a7485f2340e9a6eb9a722822f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 1283418043}
+  timeBetweenShot: 0.3
 --- !u!1 &1296474983
 GameObject:
   m_ObjectHideFlags: 0
@@ -19533,8 +19584,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1903949382}
   - component: {fileID: 1903949386}
-  - component: {fileID: 1903949385}
-  - component: {fileID: 1903949384}
+  - component: {fileID: 1903949390}
+  - component: {fileID: 1903949389}
+  - component: {fileID: 1903949388}
+  - component: {fileID: 1903949387}
   - component: {fileID: 1903949383}
   m_Layer: 0
   m_Name: 'bishop_minion '
@@ -19582,39 +19635,12 @@ MonoBehaviour:
   position: {fileID: 0}
   projectiles: []
   actionQueue:
-  - {fileID: 0}
+  - {fileID: 1903949386}
   actionLoop:
-  - {fileID: 0}
+  - {fileID: 1903949390}
+  - {fileID: 1903949387}
   enemy: {fileID: 1283418043}
   alive: 0
---- !u!114 &1903949384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903949381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4a0636fc1194a0b9f156030594a2fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  powerGain: 1
---- !u!114 &1903949385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903949381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3993262b9e5004e67aa5c79fef9ffdcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  timeBetweenShot: 0
 --- !u!114 &1903949386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19627,7 +19653,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9532041fb0447b9b1940e224057410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
+  opponent: {fileID: 1903949383}
+--- !u!114 &1903949387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 1903949383}
+  actions:
+  - {fileID: 1903949388}
+  - {fileID: 1903949389}
+--- !u!114 &1903949388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02aaa4390eb8549ff85092e76dfde40b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 1903949383}
+  isEnemy: 0
+  powerGain: 1
+--- !u!114 &1903949389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8948a9f43cf16432b8dd4add5e120fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 1903949383}
+--- !u!114 &1903949390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903949381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0118d81d4910e4b3d830253810a426ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponent: {fileID: 1903949383}
+  MoveSlashDamage: 2
 --- !u!1 &1905467355
 GameObject:
   m_ObjectHideFlags: 0

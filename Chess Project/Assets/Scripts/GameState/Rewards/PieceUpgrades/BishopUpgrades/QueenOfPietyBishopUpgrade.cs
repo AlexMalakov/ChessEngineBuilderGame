@@ -17,7 +17,7 @@ public class QueenOfPietyBishopUpgrade : PieceUpgradeReward
         return PieceType.Bishop;
     }
 
-    public override IEnumerator changeAttack(ChessPiece bishop, Entity target) {
+    public override IEnumerator changeAttack(ChessPiece bishop, Entity target, List<ChessPiece> defenders) {
         foreach(ChessPiece p in this.game.getPieces()) {
             if(p.getPieceType() == PieceType.Queen && p.getDefensiveMoves().Contains(bishop.position)) {
                 yield return p.attack(target, new List<ChessPiece>());

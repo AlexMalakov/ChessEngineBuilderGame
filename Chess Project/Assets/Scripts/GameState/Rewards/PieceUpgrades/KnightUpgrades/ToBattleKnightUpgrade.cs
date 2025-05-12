@@ -9,7 +9,7 @@ public class ToBattleKnightUpgrade : PieceUpgradeReward
 
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
-        changes.Add(PieceMethods.possibleMoves);
+        changes.Add(PieceMethods.getMoves);
         changes.Add(PieceMethods.move);
         changes.Add(PieceMethods.getDefense);
         changes.Add(PieceMethods.attack);
@@ -22,7 +22,7 @@ public class ToBattleKnightUpgrade : PieceUpgradeReward
     }
 
 
-    public virtual List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
+    public override List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
         if(!defending && !attacking) {
             return addMountMoves(p);
         } else if(this.mountRiders.ContainsKey(p)){
@@ -60,7 +60,7 @@ public class ToBattleKnightUpgrade : PieceUpgradeReward
     }
     
 
-    public virtual bool changeMove(ChessPiece p, Square s) {
+    public override bool changeMove(ChessPiece p, Square s) {
         if(Mathf.Abs(p.position.x - s.x) <= 1 && Mathf.Abs(p.position.y - s.y) <= 1 && s.hasPiece(PieceType.Knight)) {
             this.mountRiders.Add((ChessPiece)s.entity, p);
             //issue, s.entity = the rider, not the mounnt
@@ -71,24 +71,24 @@ public class ToBattleKnightUpgrade : PieceUpgradeReward
         return true;
     }
 
-    public virtual Operation changeDefense(ChessPiece p) {
+    public override Operation changeDefense(ChessPiece p) {
         if(this.mountRiders.ContainsKey(p)) {
             return new Operation(OperationTypes.PostAdd, this.mountRiders[p].getDefense());
         }
         return new Operation(OperationTypes.Ignore, 0);
     }
 
-    public virtual void changeOnDeath(ChessPiece p) {
+    public override void changeOnDeath(ChessPiece p) {
         if(this.mountRiders.ContainsKey(p)) {
             this.mountRiders.Remove(p);
         }
     }
 
-    public virtual IEnumerator changeAttack(ChessPiece p, Entity target) {
+    public override IEnumerator changeAttack(ChessPiece p, Entity target, List<ChessPiece> defenders) {
         if(this.mountRiders.ContainsKey(p)) {
-            yield return this.mountRiders[p].attack();
+            yield return this.mountRiders[p].attack(target, defenders);
         }
-        return null;
+        yield return null;
     }
 
 }

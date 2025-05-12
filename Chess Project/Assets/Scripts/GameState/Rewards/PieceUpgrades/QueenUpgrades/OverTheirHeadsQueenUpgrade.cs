@@ -2,27 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverTheirHeadsQueenUpgrade : PieceUpgardeReward
+public class OverTheirHeadsQueenUpgrade : PieceUpgradeReward
 {
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
         changes.Add(PieceMethods.getPieceDamage);
-        changes.Add(PieceMethods.possibleMoves);
+        changes.Add(PieceMethods.getMoves);
         return changes;
     }
 
     public override PieceType getPieceTarget() {
-        return PieceType.Pawn;
+        return PieceType.Queen;
     }
 
-    public virtual Operation changePieceDamage(ChessPiece p, Square target){
+    public override Operation changePieceDamage(ChessPiece p, Square target){
         int multiplier = 100;
         int delX = target.x - p.position.x;
         delX = delX/Mathf.Abs(delX);
-        int delY = target.y - p.position.y
+        int delY = target.y - p.position.y;
         delY = delY/Mathf.Abs(delY);
 
-        int counter = 1;
         while(true) {
             if(p.game.getBoard().getSquareAt(p.position.x + delX, p.position.y+delY) == null) {
                 Debug.Log("ERROR SHOULD NOT BE POSSIBLE!");
@@ -38,7 +37,7 @@ public class OverTheirHeadsQueenUpgrade : PieceUpgardeReward
         return new Operation(OperationTypes.Multiply, multiplier);
     }
 
-    public virtual List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
+    public override List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
         List<Square> additionalMoves = new List<Square>();
         if(!attacking) {
             return additionalMoves;
@@ -57,10 +56,10 @@ public class OverTheirHeadsQueenUpgrade : PieceUpgardeReward
         foreach (int[] offset in offsets) {
             int distance = 1;
             bool passedPiece = false;
-            Square s = this.game.getBoard().getSquareAt(this.position.x + offset[0]*distance, this.position.y + offset[1]*distance);
+            Square s = this.game.getBoard().getSquareAt(p.position.x + offset[0]*distance, p.position.y + offset[1]*distance);
             while(s != null) {
                 if(passedPiece) {
-                    possibleMoves.Add(s); 
+                    additionalMoves.Add(s); 
                 }      
                 if(s.hasChessPiece() && !passedPiece) {
                     passedPiece = true;
@@ -68,10 +67,10 @@ public class OverTheirHeadsQueenUpgrade : PieceUpgardeReward
                     break;
                 }
                 distance++;
-                s = this.game.getBoard().getSquareAt(this.position.x + offset[0]*distance, this.position.y + offset[1]*distance);
+                s = this.game.getBoard().getSquareAt(p.position.x + offset[0]*distance, p.position.y + offset[1]*distance);
             }
         }
-        return possibleMoves;
+        return additionalMoves;
     }
     
 }

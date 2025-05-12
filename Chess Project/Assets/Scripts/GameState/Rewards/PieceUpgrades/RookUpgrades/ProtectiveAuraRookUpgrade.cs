@@ -6,7 +6,7 @@ public class ProtectiveAuraRookUpgrade : PieceUpgradeReward
 {
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
-        changes.Add(PieceMethods.getPossibleMoves);
+        changes.Add(PieceMethods.getMoves);
         return changes;
     }
 
@@ -37,7 +37,7 @@ public class ProtectiveAuraRookUpgrade : PieceUpgradeReward
         }
 
         passedEntity = false;
-        Square s = p.position;
+        s = p.position;
         while(true) {
             if(s.game.getBoard().getSquareAt(s.x - 1, s.y) == null) {
                 break;
