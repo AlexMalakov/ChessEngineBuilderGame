@@ -22,7 +22,9 @@ public class Projectile : MonoBehaviour
         while (true) {
             if(this.game.getBoard().getSquareAt(s.x+deltaX, s.y+deltaY) == null && releasePayload(s, true, damage)) {
                 break;
-            } 
+            } else if(this.game.getBoard().getSquareAt(s.x+deltaX, s.y+deltaY) == null) {
+                continue;
+            }
 
             s = this.game.getBoard().getSquareAt(s.x+deltaX, s.y+deltaY);
             

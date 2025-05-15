@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
     [Header ("round over listeners")]
     public List<PieceUpgradeReward> roundListeners;
     public TurnButton turnButton;
+    public StrategyCycleButton stratButton;
     // Start is called before the first frame update
     void Start()
     {

@@ -9,8 +9,18 @@ public class MultiEnemies : Enemy
     bool slain;
     public override void onEncounterStart() {
         this.slain = false;
-        base.onEncounterStart();
+
         this.summonMinions();
+
+        List<HostileEntity> enemies = new List<HostileEntity>();
+        enemies.Add(this);
+        enemies.AddRange(this.minions);
+
+        //important that this happens before encounterStart
+        //actually maybe not
+        ((MultiEnemyEncounter)this.game.getEncounter()).setEnemies(enemies);
+        
+        base.onEncounterStart();
     }
 
     public override void takeTurn() {

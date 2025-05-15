@@ -20,7 +20,7 @@ public class Encounter : MonoBehaviour
     public EncounterReporter encReporter;
 
 
-    public void startEncounter() {
+    public virtual void startEncounter() {
         this.board = Instantiate(boardObj, boardStartPos).GetComponent<Board>();
         this.enemy = Instantiate(enemyObj).GetComponent<Enemy>();
         this.board.gameObject.SetActive(true);
@@ -29,12 +29,15 @@ public class Encounter : MonoBehaviour
         board.generateBoard();
         board.placePieces(this.game.getPieces());
         board.placeEntity(this.enemy);
-        enemy.onEncounterStart();
+
+        
+        enemy.onEncounterStart(); //important that this happens before reporters
         sqReporter.onEncounterStart();
         encReporter.onEncounterStart();
+        game.stratButton.onEncounterStart();
     }
 
-    public void onEnemyDefeat() {
+    public virtual void onEnemyDefeat() {
         if(rewards != null) {
             this.rewards.displayRewards();
         } else {
@@ -43,19 +46,32 @@ public class Encounter : MonoBehaviour
         }
     }
 
-    public void onRewardsOver() {
+    public virtual void onRewardsOver() {
         game.onEncounterOver();
     }
 
-    public void startEnemyTurn() {
+    public virtual void startEnemyTurn() {
         enemy.takeTurn();
         //minoins attack?
     }
 
-    public IEnumerator startPlayerAttacks() {
+    public virtual IEnumerator startPlayerAttacks() {
         yield return board.assignEffectiveDefense();
         yield return board.performDamagePhase();
         this.enemy.returnDamage();
         this.game.startEnemyTurn();
+    }
+
+
+
+    // reporter info
+
+    public virtual string getEncounterName() {
+        return this.enemy.gameObject.name;
+    }
+
+    public virtual string getEncounterStats() {
+        return "Health: " + this.enemy.health + "/" + this.enemy.maxHealth 
+            + "\nDamage: " + this.enemy.damage + "\nDefense: " + this.enemy.defense;
     }
 }

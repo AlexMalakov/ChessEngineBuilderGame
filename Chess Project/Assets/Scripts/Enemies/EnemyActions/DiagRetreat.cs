@@ -23,6 +23,7 @@ public class DiagRetreat : HostileEntityAction
                 if(s == null || s.entity != null) {
                     break;
                 } 
+                
                 retreatableLocations.Add(s);
                 if(s.y >= weighExtraCol) {
                     for(int i = 0; i < weighExtraAmount; i++) {

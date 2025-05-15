@@ -8,8 +8,11 @@ public abstract class HostileEntityAction : MonoBehaviour
 
     public abstract IEnumerator act();
 
+    public virtual bool canAct(){return true;}
+
     public virtual IEnumerator takeAction() {
         yield return this.act();
         this.opponent.onTurnOver();
     }
+    
 }

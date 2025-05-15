@@ -81,16 +81,20 @@ public class MoveSlashAction : HostileEntityAction
 
     private int stabCount(Square position) {
         int count = 0;
-        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1).canDamageSquare(MoveSlashDamage)) {
+        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1) != null 
+            && this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1).canDamageSquare(MoveSlashDamage)) {
             count++;
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1).canDamageSquare(MoveSlashDamage)) {
+        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1) != null 
+            && this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1).canDamageSquare(MoveSlashDamage)) {
             count++;
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1).canDamageSquare(MoveSlashDamage)) {
+        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1) != null 
+            && this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1).canDamageSquare(MoveSlashDamage)) {
             count++;
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1).canDamageSquare(MoveSlashDamage)) {
+        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1) != null 
+            && this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1).canDamageSquare(MoveSlashDamage)) {
             count++;
         }
         return count;
@@ -98,16 +102,20 @@ public class MoveSlashAction : HostileEntityAction
 
     private int killCount(Square position) {
         int count = 0;
-        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1).canKillSquare(MoveSlashDamage)) {
+        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1) != null
+            && this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1).canKillSquare(MoveSlashDamage)) {
             count++;
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1).canKillSquare(MoveSlashDamage)) {
+        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1) != null 
+            && this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1).canKillSquare(MoveSlashDamage)) {
             count++;
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1).canKillSquare(MoveSlashDamage)) {
+        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1) != null
+            && this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1).canKillSquare(MoveSlashDamage)) {
             count++;
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1).canKillSquare(MoveSlashDamage)) {
+        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1) != null
+            && this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1).canKillSquare(MoveSlashDamage)) {
             count++;
         }
         return count;

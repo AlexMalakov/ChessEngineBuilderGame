@@ -128,4 +128,15 @@ public class King : ChessPiece
         this.game.getPlayer().reporter.onPlayerUpdate();
     }
 
+    public virtual bool canSwapStrategy() {
+        return true;
+    }
+
+    public virtual void swapStrategy() {
+
+    }
+
+    public virtual List<GameObject> getStrategies() {
+        return new List<GameObject>();
+    }
 }

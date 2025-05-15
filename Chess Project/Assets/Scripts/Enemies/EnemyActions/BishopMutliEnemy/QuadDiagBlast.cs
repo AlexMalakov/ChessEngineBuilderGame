@@ -8,10 +8,10 @@ public class QuadDiagBlast : HostileEntityAction
     //launches an attack across every row
     public override IEnumerator act() {
         
-        this.opponent.launchProjectile(0, -1, -1, this.opponent.damage);
-        this.opponent.launchProjectile(0, -1, 1, this.opponent.damage);
-        this.opponent.launchProjectile(0, 1, -1, this.opponent.damage);
-        this.opponent.launchProjectile(0, 1, 1, this.opponent.damage);
+        this.opponent.launchProjectile(1, -1, -1, this.opponent.damage);
+        this.opponent.launchProjectile(1, -1, 1, this.opponent.damage);
+        this.opponent.launchProjectile(1, 1, -1, this.opponent.damage);
+        this.opponent.launchProjectile(1, 1, 1, this.opponent.damage);
         yield return null;
     }
 }

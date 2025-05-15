@@ -14,8 +14,8 @@ public class EncounterReporter : MonoBehaviour
 
 
     public void onEncounterStart() {
-        enemyName.text = game.getEnemy().gameObject.name;
-        enemyStats.text = "Health: " + game.getEnemy().health + "/" + game.getEnemy().maxHealth + "\nDamage: " + game.getEnemy().damage + "\nDefense: " + game.getEnemy().defense;
+        enemyName.text = game.getEncounter().getEncounterName();
+        enemyStats.text = game.getEncounter().getEncounterStats();
 
         enemyImage.sprite = game.getEnemy().enemySprite;
         enemyImage.type = Image.Type.Simple;
@@ -23,6 +23,6 @@ public class EncounterReporter : MonoBehaviour
     }
 
     public void onStatUpdate() {
-        enemyStats.text = "Health: " + game.getEnemy().health + "/" + game.getEnemy().maxHealth + "\nDamage: " + game.getEnemy().damage + "\nDefense: " + game.getEnemy().defense;
+        enemyStats.text = game.getEncounter().getEncounterStats();
     }
 }

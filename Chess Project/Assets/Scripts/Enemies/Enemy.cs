@@ -6,11 +6,21 @@ public class Enemy : HostileEntity
 {
     protected int minionsFinished; protected bool enemyFinished;
 
-
+    [Header ("Minions")]
+    public List<GameObject> minionsToInstantiate;
     public List<Minion> minions;
+    [Header ("Costmetic")]
     public Sprite enemySprite;
 
     public virtual void onEncounterStart(){}
+
+    public void Awake() {
+        foreach(GameObject minObj in minionsToInstantiate) {
+            Minion minion = Instantiate(minObj).GetComponent<Minion>();
+            minions.Add(minion);
+            minion.gameObject.SetActive(false);
+        }
+    }
 
     public override void takeTurn() {
         enemyFinished = false;
@@ -25,8 +35,11 @@ public class Enemy : HostileEntity
 
     protected virtual void summonMinions() {
         foreach(Minion m in this.minions) {
-            m.gameObject.SetActive(true);
-            m.onSummon(this);
+            if(!m.alive) {
+                m.gameObject.SetActive(true);
+                this.game.getBoard().placeEntity(m);
+                m.onSummon(this);
+            }
         }
     }
 

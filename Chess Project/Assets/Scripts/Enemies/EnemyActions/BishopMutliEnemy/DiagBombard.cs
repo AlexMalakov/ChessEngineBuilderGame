@@ -18,12 +18,14 @@ public class DiagBombard : HostileEntityAction
 
         while(true) {
             if(!moveableSquare(this.opponent.position, bombardInfo[0], bombardInfo[1])) {
-                yield return null;
+                break;
             }
             yield return this.opponent.slide(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + bombardInfo[0], this.opponent.position.y + bombardInfo[1]));
             this.opponent.launchProjectile(0, bombardInfo[2], bombardInfo[3], this.opponent.damage);
             yield return new WaitForSeconds(timeBetweenShots);
         }
+
+        yield return null;
     }
 
     //returns deltaX, deltaY, projDeltaX, projDeltaY
