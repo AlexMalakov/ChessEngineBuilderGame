@@ -17,6 +17,7 @@ public class KnightHop : HostileEntityAction
         moves.Add(new int[]{1,-2});
 
         Square s = this.opponent.position;
+        
         foreach(int[] m in moves) {
             if(this.opponent.game.getBoard().getSquareAt(s.x + m[0], s.y + m[1]) == null 
                 || this.opponent.game.getBoard().getSquareAt(s.x + m[0], s.y + m[1]).entity != null) {

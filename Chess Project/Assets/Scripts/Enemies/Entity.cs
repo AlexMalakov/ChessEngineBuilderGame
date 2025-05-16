@@ -8,13 +8,17 @@ public enum EntityType {
 }
 public abstract class Entity : MonoBehaviour
 {
+    [Header ("game")]
     public Game game;
     public int startingX; public int startingY;
+    public Square position;
+    [Header ("stats")]
     public int health;
     public int maxHealth;
     public int defense;
     public int damage;
-    public Square position;
+    [Header ("status effects")]
+    public List<StatusEffect> statuses;
 
 
     public abstract void onDeath();
@@ -25,6 +29,10 @@ public abstract class Entity : MonoBehaviour
         if(health <= 0) {
             this.onDeath();
         }
+    }
+
+    public virtual void addStatusEffect(StatusEffect effect) {
+        this.statuses.Add(effect);
     }
 
     public virtual IEnumerator slide(Square toSquare) {
