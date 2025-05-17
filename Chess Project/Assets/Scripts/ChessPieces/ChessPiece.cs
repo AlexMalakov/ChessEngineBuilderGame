@@ -40,6 +40,14 @@ public abstract class ChessPiece : Entity
     //executes the logic behind movement of a piece to the square square
     //returns true if succesful and false if not
     public virtual bool move(Square square) {
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.move)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.move]) {
+                if(upgrade.changeMove(this, square)) {
+                    return true; //this is not correct but leaving it like this for now
+                }
+            }
+        }
+        
         foreach (Square s in getPossibleMoves(false)) {
             if (s.x == square.x && s.y == square.y) {
                 StartCoroutine(this.slide(square));
@@ -54,11 +62,22 @@ public abstract class ChessPiece : Entity
     //assigns effective defense to a piece; this lasts for a round of enemy attacks
     //in theory this method should be called before the next enemy attacks
     public IEnumerator assignEffectiveDefense(List<ChessPiece> defenders) {
-        this.effectiveDefense = 0;
+        int effectiveD = 0;
         foreach(ChessPiece d in defenders) {
             d.defend(this);
-            this.effectiveDefense += d.getDefense();
+            effectiveD += d.getDefense();
         }
+
+
+        NumberMultiplier multiplier = new NumberMultiplier(effectiveD);
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.assignEffectiveDefense)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.assignEffectiveDefense]) {
+                multiplier.addOperation(upgrade.changeEffectiveDefense(this, effectiveD));
+            }
+        }
+
+        this.effectiveDefense = multiplier.resolve();
+
         yield return this.popUpAction(PopupType.Block, this.effectiveDefense);
 
         foreach(ChessPiece d in defenders) {
@@ -68,7 +87,15 @@ public abstract class ChessPiece : Entity
 
     //gets a piece's defense
     public virtual int getDefense() {
-        return this.defense;
+        NumberMultiplier multiplier = new NumberMultiplier(this.defense);
+
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.getDefense)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.getDefense]) {
+                multiplier.addOperation(upgrade.changeDefense(this));
+            }
+        }
+
+        return multiplier.resolve();
     }
 
     //moves a piece without checking if a move is possible
@@ -79,10 +106,17 @@ public abstract class ChessPiece : Entity
         this.position = square;
         this.position.entity = this;
         StartCoroutine(this.slide(square));
+        //NOTE: THIS IS NOT BEING EFFECTED BY UPGRADES AT THE MOMENT
     }
 
     //causes a piece to take damage
     public override void takeDamage(int damage) {
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.takeDamage)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.takeDamage]) {
+                upgrade.changeTakeDamage(this, damage);
+            }
+        }
+
         // int extraDefense = this.game.getBoard().calcualteDefense(this.position);
         if(effectiveDefense > damage) {
             effectiveDefense-=damage;

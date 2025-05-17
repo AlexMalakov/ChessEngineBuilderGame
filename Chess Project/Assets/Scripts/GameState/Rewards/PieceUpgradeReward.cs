@@ -27,7 +27,7 @@ public abstract class PieceUpgradeReward : Reward
     //called when a piece is moving to a square, adds new behavior
     //returns true if the move overrides, and false if it doesn't
     public virtual bool changeMove(ChessPiece p, Square square) {
-        return true;
+        return false;
     }
 
     public virtual bool changeAfterMove(ChessPiece p, Square square) {

@@ -23,7 +23,7 @@ public class FullSpeedBishopUpgrade : PieceUpgradeReward
 
     public override bool changeMove(ChessPiece p, Square destination) {
         hasMoved[p] = true;
-        return true;
+        return false;
     }
 
     public override Operation changePieceDamage(ChessPiece piece, Square target) {

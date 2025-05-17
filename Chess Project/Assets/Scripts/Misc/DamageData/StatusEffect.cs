@@ -13,18 +13,27 @@ public abstract class StatusEffect
 
     public virtual void onAttatch(Entity target) {
         this.target = target;
+        target.addStatusEffect(this);
     }
 
-    public virtual int augmentDamage(int damage) {
-        return 0;
+    public virtual void onRemove() {
+        target.removeStatusEffect(this);
     }
 
-    public virtual int augmentDefense(int block) {
-        return 0;
+    public virtual int affectOutgoingDamage(int damage) {
+        return damage;
+    }
+
+    public virtual int affectOutgoingDefense(int defense) {
+        return defense;
+    }
+
+    public virtual int affectIncomingDamage(int incomingDamage) {
+        return incomingDamage;
     }
 
     //returns true if the movement will be succesful, and false if it fails ig?
-    public virtual bool augmentMove(Square destination) {
+    public virtual bool affectMoveAttempt(Square destination) {
         return true;
     }
 

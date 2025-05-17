@@ -95,4 +95,13 @@ public class Player : MonoBehaviour
         }
         return 0;
     }
+
+    //returns true if hit
+    public bool rollWithLuck(float targetThreshold, bool positiveLuck) {
+        //should be rewritten in the future to actually use luck lmao
+        float rng = Random.Range(0f, 1f);
+
+        return rng < targetThreshold;
+
+    }
 }

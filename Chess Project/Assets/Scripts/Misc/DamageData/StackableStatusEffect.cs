@@ -12,6 +12,9 @@ public abstract class StackableStatusEffect : StatusEffect
 
     public virtual void addStacks(int stacks) {
         this.stacks += stacks;
+        if(this.stacks <= 0) {
+            this.onRemove();
+        }
     }
 
     public override void onAttatch(Entity target) {
