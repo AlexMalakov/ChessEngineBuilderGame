@@ -5,7 +5,12 @@ using UnityEngine;
 public class StatReward : Reward
 {
     public string stat;
-    public int increaseAmount = 1;
+    public int increaseAmount;
+
+    public StatReward(string stat, int increaseAmount) {
+        this.stat = stat;
+        this.increaseAmount = increaseAmount;
+    }
 
     public override void applyEffect() {
         if(stat == "agility") {
@@ -21,6 +26,14 @@ public class StatReward : Reward
         }
 
         this.game.getPlayer().reporter.onPlayerUpdate();
-        
+    }
+
+    public static List<StatReward> getStatRewards(int rarityNum) {
+        List<StatReward> rewards = new List<StatReward>();
+        rewards.Add(new StatReward("agility", rarityNum));
+        rewards.Add(new StatReward("luck", rarityNum));
+        rewards.Add(new StatReward("endurance", rarityNum));
+        rewards.Add(new StatReward("perception", rarityNum));
+        return rewards;
     }
 }

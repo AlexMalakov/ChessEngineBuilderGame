@@ -23,8 +23,7 @@ public class KnightGuard : HostileEntityAction
         foreach(int[] m in moves) {
             if(this.opponent.game.getBoard().getSquareAt(s.x + m[0], s.y + m[1]) != null 
                 || this.opponent.game.getBoard().getSquareAt(s.x + m[0], s.y + m[1]).hasHostile()) {
-                
-                //give status effect guard to the entity
+                new GuardStatusEffect(guardAmount).onAttatch(this.opponent.game.getBoard().getSquareAt(s.x + m[0], s.y + m[1]).entity);
             }
         }
 
