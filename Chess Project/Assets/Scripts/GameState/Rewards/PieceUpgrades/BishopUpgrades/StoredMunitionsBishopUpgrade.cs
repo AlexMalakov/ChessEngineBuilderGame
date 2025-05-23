@@ -30,4 +30,17 @@ public class StoredMunitionsBishopUpgrade : PieceUpgradeReward
         attackCharges[piece]+=1;
         return new Operation(OperationTypes.Ignore, 0);
     }
+
+    public override string getRewardName() {
+        return "Stored Munitions";
+    }
+    public override string getRewardDescription() {
+        return "Each round that a bishop doesn't attack stores it's base damage. When it attacks, all charges are spent as extra damage.";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

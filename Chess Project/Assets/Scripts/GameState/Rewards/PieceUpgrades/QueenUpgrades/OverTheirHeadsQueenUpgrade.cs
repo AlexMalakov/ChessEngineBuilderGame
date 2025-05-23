@@ -73,4 +73,16 @@ public class OverTheirHeadsQueenUpgrade : PieceUpgradeReward
         return additionalMoves;
     }
     
+    public override string getRewardName() {
+        return "Over Their Heads";
+    }
+    public override string getRewardDescription() {
+        return "Can attack through allied pieces. Gains 10% extra damage per piece an attack travels through.";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "queen";
+    }
 }

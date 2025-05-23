@@ -10,7 +10,7 @@ public class HinderStatusEffect : StatusEffect //rollWithLuck
         return (this.target.game.getPlayer().rollWithLuck(.3f, this.target.position.hasChessPiece())) ? 0 : damage;
     }
 
-    public virtual bool affectMoveAttempt(Square destination) {
+    public override bool affectMoveAttempt(Square destination) {
         return (this.target.game.getPlayer().rollWithLuck(.3f, this.target.position.hasChessPiece())) ? false : true;
     }
 

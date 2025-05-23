@@ -44,4 +44,17 @@ public class MartyrdomBishopUpgrade : PieceUpgradeReward
         this.oddSquareSac = 0; this.evenSquareSac = 0;
         this.game.removeRoundOverListener(this);
     }
+
+    public override string getRewardName() {
+        return "Martyrdom";
+    }
+    public override string getRewardDescription() {
+        return "After a bishop is sacrificed, grant all pieces on it's diagonal 100% increased damage";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

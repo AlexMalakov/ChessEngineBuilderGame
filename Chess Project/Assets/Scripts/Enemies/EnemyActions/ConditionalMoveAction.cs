@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ConditionalMoveAction : HostileEntityAction
 {
-    public override void act() {
+    public override IEnumerator act() {
         Square bestSq = this.opponent.position;
         int best = -1;
         foreach(Square s in this.opponentMoves()) {

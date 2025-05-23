@@ -61,4 +61,17 @@ public class RicochetRoundsBishopUpgrade : PieceUpgradeReward
 
         return additionalMoves;
     }
+
+    public override string getRewardName() {
+        return "Ricochet Rounds";
+    }
+    public override string getRewardDescription() {
+        return "Bishop's attacks bounce off the edge of the board";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

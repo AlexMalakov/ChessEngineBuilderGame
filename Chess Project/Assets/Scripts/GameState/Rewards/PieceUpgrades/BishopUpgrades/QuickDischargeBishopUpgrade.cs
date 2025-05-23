@@ -23,4 +23,17 @@ public class QuickDischarge : PieceUpgradeReward
         }
         return true;
     }
+
+    public override string getRewardName() {
+        return "Quick Discharge";
+    }
+    public override string getRewardDescription() {
+        return "After a bishop moves, it attacks at it's destination, dealing only base damage";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

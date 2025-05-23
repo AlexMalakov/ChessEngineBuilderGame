@@ -55,4 +55,17 @@ public class ProtectiveAuraRookUpgrade : PieceUpgradeReward
 
         return additionalMoves;
     }
+
+    public override string getRewardName() {
+        return "Protective Aura";
+    }
+    public override string getRewardDescription() {
+        return "grants bonus defense to all pieces in it's rank, even if the rook cannot reach them";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "rook";
+    }
 }

@@ -20,4 +20,17 @@ public class ShanksBishopUpgrade : PieceUpgradeReward
         }
         return new Operation(OperationTypes.Ignore, 0);
     }
+
+    public override string getRewardName() {
+        return "Shanks";
+    }
+    public override string getRewardDescription() {
+        return "Bishops deal increased damage to targets 1 diagonal away";
+    }
+    public override string getRewardFlavorText() {
+        return "";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

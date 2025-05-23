@@ -10,7 +10,7 @@ public class FrozenStatusEffect : StatusEffect
         return 0;
     }
 
-    public virtual bool affectMoveAttempt(Square destination) {
+    public override bool affectMoveAttempt(Square destination) {
         return false;
     }
 

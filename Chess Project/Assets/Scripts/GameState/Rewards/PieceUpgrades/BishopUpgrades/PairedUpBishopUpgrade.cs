@@ -34,4 +34,17 @@ public class PairedUpBishopUpgrade : PieceUpgradeReward
     private bool checkSquare(int x, int y) {
         return this.game.getBoard().getSquareAt(x, y) != null && this.game.getBoard().getSquareAt(x, y).hasPiece(PieceType.Bishop);
     }
+
+    public override string getRewardName() {
+        return "Paired Up";
+    }
+    public override string getRewardDescription() {
+        return "Grants bishops double damage if adjacent to another bishop";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

@@ -41,4 +41,17 @@ public class ThreadTheNeedleBishopUpgrade : PieceUpgradeReward
         }
         return new Operation(OperationTypes.PreAdd, misses);
     }
+
+    public override string getRewardName() {
+        return "Thread the Needle";
+    }
+    public override string getRewardDescription() {
+        return "Grants bonus damage for each enemy or piece an attack passes by.";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

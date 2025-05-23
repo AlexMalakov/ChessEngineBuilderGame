@@ -46,4 +46,17 @@ public class HauntedManorRookUpgrade : PieceUpgradeReward
         }
         return additionalMoves;
     }
+
+    public override string getRewardName() {
+        return "Haunted Manor";
+    }
+    public override string getRewardDescription() {
+        return "Rooks can move through friendly pieces, and grants those pieces guard";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "rook";
+    }
 }

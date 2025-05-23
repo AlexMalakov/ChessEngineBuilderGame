@@ -36,7 +36,7 @@ public abstract class Entity : MonoBehaviour
     }
 
     public virtual void removeStatusEffect(StatusEffect effect) {
-        this.statuses.Remove(effect)
+        this.statuses.Remove(effect);
     }
 
     public virtual IEnumerator slide(Square toSquare) {

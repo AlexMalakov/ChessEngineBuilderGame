@@ -21,4 +21,17 @@ public class FromTheBackBishopUpgrade : PieceUpgradeReward
         }
         return new Operation(OperationTypes.Ignore, 0);
     }
+
+    public override string getRewardName() {
+        return "From the Back";
+    }
+    public override string getRewardDescription() {
+        return "grants 25% increased damage to a bishop when attacking from rank 1 or 2";
+    }
+    public override string getRewardFlavorText() {
+        return "I'll just be back here...";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

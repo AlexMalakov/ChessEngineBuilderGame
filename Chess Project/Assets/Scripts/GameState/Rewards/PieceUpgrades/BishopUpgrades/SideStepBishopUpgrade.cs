@@ -40,4 +40,17 @@ public class SideStepBishopUpgrade : PieceUpgradeReward
     private bool checkSquare(int x, int y) {
         return this.game.getBoard().getSquareAt(x, y) != null && this.game.getBoard().getSquareAt(x, y).entity == null;
     }
+
+    public override string getRewardName() {
+        return "Side Step";
+    }
+    public override string getRewardDescription() {
+        return "Bishops can move one square adjacent.";
+    }
+    public override string getRewardFlavorText() {
+        return "";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

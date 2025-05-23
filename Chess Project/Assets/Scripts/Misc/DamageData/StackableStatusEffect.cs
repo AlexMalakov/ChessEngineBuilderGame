@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class StackableStatusEffect : StatusEffect
 {
-    int stacks;
+    protected int stacks;
 
-    public StackableStatusEffect(string statusName, int stacks) : base(statusName) {
+    public StackableStatusEffect(int stacks, string statusName) : base(statusName) {
         this.stacks = stacks;
     }
 

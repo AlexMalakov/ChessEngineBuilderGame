@@ -1,15 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Reflection;
+using UnityEngine.UI;
 
 public class RewardSystem : MonoBehaviour
 {
     public List<Reward> possibleRewards;
     public Encounter encounter;
     public GameObject rewardCanvas;
-    public transform rewardParent;
+    public Transform rewardParent;
     public GameObject rewardHolder;
 
 
@@ -21,17 +23,24 @@ public class RewardSystem : MonoBehaviour
 
     public void displayRewards(RewardType type, Rarity rarity, int amount) {
         List<Reward> displayingR = selectedPosibleRewards(type, rarity, amount);
+
+        foreach(Reward r in displayingR) {
+            RewardSelector selector = Instantiate(rewardHolder).GetComponent<RewardSelector>();
+            r.init(this.encounter.game, selector);
+            selector.assignReward(r);
+        }
+
         selectedReward = null;
         this.rewardCanvas.SetActive(true);
     }
 
     public void onRewardSelected(Reward reward) {
-        if(this.selectedReward) {
-            this.selectedReward.toggleOutline(false);
+        if(this.selectedReward != null) {
+            this.selectedReward.selector.toggleOutline(false);
         }
-        
+
         this.selectedReward = reward;
-        this.selectedReward.toggleOutline(true);
+        this.selectedReward.selector.toggleOutline(true);
     }
 
     public void onRewardLockin() {
@@ -40,25 +49,27 @@ public class RewardSystem : MonoBehaviour
         }
 
         foreach(Reward r in this.possibleRewards) {
-            r.unassignUI();
+            r.selected = false;
         }
+
+        this.possibleRewards.Remove(selectedReward);
+
         this.rewardCanvas.SetActive(false);
         this.selectedReward.applyEffect();
         this.encounter.onRewardsOver();
     }
 
-    private List<PieceUpgradeReward> pieceUpgrades() {
+    private List<Reward> pieceUpgrades() {
         List<Type> subclasses = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(assembly => assembly.GetTypes())
             .Where(type => type.IsSubclassOf(typeof(PieceUpgradeReward)) && !type.IsAbstract)
             .ToList();
         
-        List<PieceUpgradeReward> allPieceUpgrades = new List<PieceUpgradeReward>();
+        List<Reward> allPieceUpgrades = new List<Reward>();
 
         foreach(var subclass in subclasses) {
             PieceUpgradeReward r = Activator.CreateInstance(subclass) as PieceUpgradeReward;
             if(r != null) {
-                r.init(this, this.game);
                 allPieceUpgrades.Add(r);
             }
         }
@@ -69,7 +80,7 @@ public class RewardSystem : MonoBehaviour
     private List<Reward> selectedPosibleRewards(RewardType type, Rarity rarity, int amount) {
         switch(type) {
             case RewardType.Stat:
-                return StatReward.getStatRewards(rarity);
+                return StatReward.getStatRewards((int)rarity);
             case RewardType.Upgrade:
                 List<Reward> chosenRewards = new List<Reward>();;
                 while(true) {
@@ -77,15 +88,16 @@ public class RewardSystem : MonoBehaviour
                         break;
                     }
 
-                    Reward rngReward = this.possibleRewards[Random.Range(0, this.possibleRewards.Count)];
-                    if(!rngReward.isActive()) {
+                    Reward rngReward = this.possibleRewards[UnityEngine.Random.Range(0, this.possibleRewards.Count)];
+                    if(!rngReward.selected) {
                         //assign UI
-                        GameObject uiElement = Instantiate(rewardHolder, rewardParent);
-                        rngReward.assignUI(rewardHolder.GetComponent<Outline>(), rewardHolder.GetComponent<Button>());
+                        rngReward.selected = true;
                         chosenRewards.Add(rngReward);
                     }
                 }
-                break;
+                return chosenRewards;
         }
+        Debug.Log("NO REWARDS WERE SEELCTED!");
+        return new List<Reward>();
     }
 }

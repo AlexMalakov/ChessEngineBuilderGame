@@ -24,4 +24,17 @@ public class QueenOfPietyBishopUpgrade : PieceUpgradeReward
             }
         }
     }
+
+    public override string getRewardName() {
+        return "Queen of Piety";
+    }
+    public override string getRewardDescription() {
+        return "After a bishop attacks, all queens attack the bishops target";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

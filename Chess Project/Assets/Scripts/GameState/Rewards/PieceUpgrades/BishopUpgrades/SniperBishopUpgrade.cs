@@ -35,4 +35,17 @@ public class SniperBishopUpgrade : PieceUpgradeReward
         }
         return new Operation(OperationTypes.PreAdd, distance);
     }
+
+    public override string getRewardName() {
+        return "Sniper";
+    }
+    public override string getRewardDescription() {
+        return "Bishops deal increased damage for every square it's attack travels";
+    }
+    public override string getRewardFlavorText() {
+        return "placeholder";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

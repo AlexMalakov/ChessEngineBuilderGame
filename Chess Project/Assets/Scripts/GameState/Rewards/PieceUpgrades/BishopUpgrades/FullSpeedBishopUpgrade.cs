@@ -37,4 +37,17 @@ public class FullSpeedBishopUpgrade : PieceUpgradeReward
         hasMoved[piece]=false;
         return new Operation(OperationTypes.Ignore, 0);
     }
+
+    public override string getRewardName() {
+        return "Full Speed";
+    }
+    public override string getRewardDescription() {
+        return "Bishops deal 25% increased if they have moved this round";
+    }
+    public override string getRewardFlavorText() {
+        return "gotta go fast";
+    }
+    public override string getRewardImage() {
+        return "bishop";
+    }
 }

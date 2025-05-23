@@ -6,6 +6,7 @@ public class Game : MonoBehaviour
 {
     public Player player;
     public PopUpManager popUpManager;
+    public RewardSystem rewardSystem;
     public List<Encounter> encouters;
 
     int currentEncounter = 0;
@@ -16,7 +17,7 @@ public class Game : MonoBehaviour
     public int playerMoves;
 
     [Header ("round over listeners")]
-    public List<PieceUpgradeReward> roundListeners;
+    public List<PieceUpgradeReward> roundListeners = new List<PieceUpgradeReward>();
     public TurnButton turnButton;
     public StrategyCycleButton stratButton;
     // Start is called before the first frame update

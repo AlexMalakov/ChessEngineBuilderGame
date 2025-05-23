@@ -15,9 +15,12 @@ public class Encounter : MonoBehaviour
     public Enemy enemy; //replace this later
     public Board board;
     public Game game;
-    public RewardSystem rewards;
     public SquareReporter sqReporter;
     public EncounterReporter encReporter;
+    [Header ("reward stuff")]
+    public RewardType rewardType;
+    public Rarity rewardRarity;
+    public int rewardCount;
 
 
     public virtual void startEncounter() {
@@ -38,12 +41,7 @@ public class Encounter : MonoBehaviour
     }
 
     public virtual void onEnemyDefeat() {
-        if(rewards != null) {
-            this.rewards.displayRewards();
-        } else {
-            Debug.Log("ENCOUNTER HAS ENDED WITHOUT REWARDS!");
-            game.onEncounterOver();
-        }
+        this.game.rewardSystem.displayRewards(rewardType, rewardRarity, rewardCount);
     }
 
     public virtual void onRewardsOver() {

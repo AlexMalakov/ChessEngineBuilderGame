@@ -10,8 +10,21 @@ public class MockPieceUpgrade : PieceUpgradeReward
         List<PieceMethods> changes = new List<PieceMethods>();
         return changes;
     }
-    
+
     public override PieceType getPieceTarget() {
         return PieceType.ChessPiece;
+    }
+
+    public override string getRewardName() {
+        return "";
+    }
+    public override string getRewardDescription() {
+        return "";
+    }
+    public override string getRewardFlavorText() {
+        return "";
+    }
+    public override string getRewardImage() {
+        return "";
     }
 }

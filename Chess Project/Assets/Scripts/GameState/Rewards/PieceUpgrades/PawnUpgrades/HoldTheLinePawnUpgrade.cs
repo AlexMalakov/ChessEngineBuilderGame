@@ -31,4 +31,17 @@ public class HoldTheLinePawnUpgrade : PieceUpgradeReward
 
         return chain;
     }
+
+    public override string getRewardName() {
+        return "Hold the Line";
+    }
+    public override string getRewardDescription() {
+        return "Grants bonus defense for each pawn in a chain.";
+    }
+    public override string getRewardFlavorText() {
+        return "pawns together strong";
+    }
+    public override string getRewardImage() {
+        return "pawn";
+    }
 }
