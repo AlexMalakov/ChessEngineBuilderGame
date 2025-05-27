@@ -192,12 +192,16 @@ public class Board : MonoBehaviour
 
     public IEnumerator assignEffectiveDefense() {
         foreach(ChessPiece p in this.game.getNonPremovePieces()) {
-            yield return p.assignEffectiveDefense(this.getSquareTargetingPieces(p.position, false));
+            p.assignEffectiveDefense(this.getSquareTargetingPieces(p.position, false));
+            yield return new WaitForSeconds(.1f);
         }
 
         foreach(ChessPiece p in this.game.getPremovePieces()) {
-            yield return p.assignEffectiveDefense(this.getSquareTargetingPieces(p.position, true));
+            p.assignEffectiveDefense(this.getSquareTargetingPieces(p.position, true));
+            yield return new WaitForSeconds(.1f);
         }
+
+        yield return new WaitForSeconds(this.game.defendPopUpDuration);
     }
 
 

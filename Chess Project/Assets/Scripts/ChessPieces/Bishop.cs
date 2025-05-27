@@ -77,8 +77,8 @@ public class Bishop : ChessPiece
 
         GameObject firing = Instantiate(this.bishopProjectile, transform.position, rotation);
         float elapsed = 0f;
-        while(elapsed < this.game.playerAttackDuration) {
-            firing.transform.position = Vector3.Lerp(transform.position, opponentSq.transform.position, elapsed/this.game.playerAttackDuration);
+        while(elapsed < this.game.playerAttackDuration*2) {
+            firing.transform.position = Vector3.Lerp(transform.position, opponentSq.transform.position, elapsed/this.game.playerAttackDuration*2);
             elapsed += Time.deltaTime;
             yield return null;
         }

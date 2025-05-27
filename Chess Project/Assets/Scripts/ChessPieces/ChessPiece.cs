@@ -61,7 +61,7 @@ public abstract class ChessPiece : Entity
 
     //assigns effective defense to a piece; this lasts for a round of enemy attacks
     //in theory this method should be called before the next enemy attacks
-    public IEnumerator assignEffectiveDefense(List<ChessPiece> defenders) {
+    public void assignEffectiveDefense(List<ChessPiece> defenders) {
         int effectiveD = 0;
         foreach(ChessPiece d in defenders) {
             d.defend(this);
@@ -78,7 +78,7 @@ public abstract class ChessPiece : Entity
 
         this.effectiveDefense = multiplier.resolve();
 
-        yield return this.popUpAction(PopupType.Block, this.effectiveDefense);
+        StartCoroutine(this.popUpAction(PopupType.Block, this.effectiveDefense));
 
         foreach(ChessPiece d in defenders) {
             d.position.isAssisting(false);
@@ -170,7 +170,7 @@ public abstract class ChessPiece : Entity
             yield return null;
         }
 
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.3f);
 
         yield return this.attackAnimation(entity.position);
 

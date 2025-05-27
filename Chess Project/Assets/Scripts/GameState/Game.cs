@@ -22,6 +22,7 @@ public class Game : MonoBehaviour
     public float playerAttackDuration;
     public float pieceAttackGrowDuration;
     public float sizeIncrease;
+    public float defendPopUpDuration;
 
     [Header ("round over listeners")]
     public TurnButton turnButton;
