@@ -24,7 +24,7 @@ public abstract class ChessPiece : Entity
 
     //also includes defensive moves :)
     public Sprite activeSprite;
-
+  
     //maps method name as string to pieceUpgrade
     protected Dictionary<PieceMethods, List<PieceUpgradeReward>> pieceUpgrades = new Dictionary<PieceMethods, List<PieceUpgradeReward>>(); 
 
@@ -159,13 +159,31 @@ public abstract class ChessPiece : Entity
             p.defend(this);
         }
 
-        // StartCoroutine(this.popUpAction(PopupType.damage, damage));
-        // yield return attackAnimation();
-    
-        yield return this.popUpAction(PopupType.Damage, damageToDeal);
+        StartCoroutine(this.popUpAction(PopupType.Damage, damageToDeal));
+
+        float elapsed = 0f;
+        Vector3 initialScale = this.transform.localScale;
+        Vector3 targetScale = initialScale * this.game.sizeIncrease;
+        while(elapsed < this.game.pieceAttackGrowDuration) {
+            this.transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsed / this.game.pieceAttackGrowDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(.2f);
+
+        yield return this.attackAnimation(entity.position);
+
         entity.takeDamage(damageToDeal);
         foreach(ChessPiece p in defenders) {
             p.position.isAssisting(false);
+        }
+
+        elapsed = 0f;
+        while(elapsed < this.game.pieceAttackGrowDuration) {
+            this.transform.localScale = Vector3.Lerp(targetScale, initialScale, elapsed / this.game.pieceAttackGrowDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
         }
     }
 
@@ -174,10 +192,6 @@ public abstract class ChessPiece : Entity
         this.position.isAssisting(true);
         return null;
     }
-
-    // public virtual IEnumerator attackAnimation() {
-    //     return null;//make it do the animation?
-    // }
 
     //gets a piece's entity type, to identify it is a piece
     public override EntityType getEntityType() {
@@ -202,6 +216,27 @@ public abstract class ChessPiece : Entity
 
     //gets a piece's piece type to identify what type of piece it is without checking the class which is annoyting i think
     public abstract PieceType getPieceType();
+
+    //on default the piece moves to it's target and back
+    public virtual IEnumerator attackAnimation(Square opponentSq) {
+        //check if there are any animation override requests
+        //if yes choose the best one
+        float elapsed = 0f;
+        Vector3 start = transform.position;
+        while(elapsed < this.game.playerAttackDuration) {
+            transform.position = Vector3.Lerp(start, opponentSq.transform.position, elapsed/this.game.playerAttackDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        elapsed = 0f;
+        start = transform.position;
+        while(elapsed < this.game.playerAttackDuration) {
+            transform.position = Vector3.Lerp(start, this.position.transform.position, elapsed/this.game.playerAttackDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
 
     public IEnumerator popUpAction(PopupType type, int value) {
         yield return this.game.getPopUpManager().displayPopUp(type, value, this.transform);

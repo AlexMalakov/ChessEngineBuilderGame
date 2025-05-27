@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bishop : ChessPiece
 {
+    public GameObject bishopProjectile;
+
     public override List<Square> getPossibleMoves(bool attacking) {
         List<Square> possibleMoves = new List<Square>();
 
@@ -66,6 +68,21 @@ public class Bishop : ChessPiece
             }
         }
         return possibleMoves;
+    }
+
+    public override IEnumerator attackAnimation(Square opponentSq) {
+        Vector3 direction = (opponentSq.transform.position - this.transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+        GameObject firing = Instantiate(this.bishopProjectile, transform.position, rotation);
+        float elapsed = 0f;
+        while(elapsed < this.game.playerAttackDuration) {
+            firing.transform.position = Vector3.Lerp(transform.position, opponentSq.transform.position, elapsed/this.game.playerAttackDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(firing);
     }
 
     public override PieceType getPieceType() {

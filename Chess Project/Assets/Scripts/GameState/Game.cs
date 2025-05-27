@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    [Header ("important objects")]
     public Player player;
     public PopUpManager popUpManager;
     public RewardSystem rewardSystem;
     public List<Encounter> encouters;
 
-    int currentEncounter = 0;
     public Graveyard graveyard;
+
+    [Header ("important data")]
     public bool playersTurn;
     public bool playerPremoveTurn;
     public int playerPremoves;
     public int playerMoves;
 
+    [Header ("config stuff")]
+    public float playerAttackDuration;
+    public float pieceAttackGrowDuration;
+    public float sizeIncrease;
+
     [Header ("round over listeners")]
-    public List<PieceUpgradeReward> roundListeners = new List<PieceUpgradeReward>();
     public TurnButton turnButton;
     public StrategyCycleButton stratButton;
+    public List<PieceUpgradeReward> roundListeners = new List<PieceUpgradeReward>();
+
+    int currentEncounter = 0;
     // Start is called before the first frame update
     void Start()
     {
