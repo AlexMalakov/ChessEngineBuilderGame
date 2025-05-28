@@ -10,7 +10,8 @@ public class RewardSelector : MonoBehaviour
     private Reward reward;
 
     [Header ("sprites")]
-    public Dictionary<string, Sprite> images;
+    public List<string> dictionaryImagesKeys;
+    public List<Sprite> dictionaryImagesValues;
 
     [Header ("UI PARTS")]
     public Button button;
@@ -36,5 +37,12 @@ public class RewardSelector : MonoBehaviour
 
     public void assignReward(Reward r) {
         this.reward = r;
+        this.rewardName.text = r.getRewardName();
+        this.rewardDescription.text = r.getRewardDescription();
+        this.rewardFlavorText.text = r.getRewardFlavorText();
+
+        this.image.sprite = this.dictionaryImagesValues[this.dictionaryImagesKeys.IndexOf(r.getRewardImage())];
+        this.image.type = Image.Type.Simple;
+        this.image.preserveAspect = false;
     }
 }

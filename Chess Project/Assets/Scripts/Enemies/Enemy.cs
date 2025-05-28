@@ -69,6 +69,7 @@ public class Enemy : HostileEntity
             m.onEnemyDeath();
         }
         this.game.getEncounter().onEnemyDefeat();
+        Destroy(this.gameObject);
     }
 
     //revives all dead minions :)

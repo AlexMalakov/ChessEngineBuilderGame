@@ -13,6 +13,7 @@ public class RewardSystem : MonoBehaviour
     public GameObject rewardCanvas;
     public Transform rewardParent;
     public GameObject rewardHolder;
+    public GameObject rewardHolderHolder;
 
 
     private Reward selectedReward;
@@ -25,7 +26,8 @@ public class RewardSystem : MonoBehaviour
         List<Reward> displayingR = selectedPosibleRewards(type, rarity, amount);
 
         foreach(Reward r in displayingR) {
-            RewardSelector selector = Instantiate(rewardHolder).GetComponent<RewardSelector>();
+            RewardSelector selector = Instantiate(rewardHolder, rewardHolderHolder.transform).GetComponent<RewardSelector>();
+            selector.gameObject.SetActive(true);
             r.init(this.encounter.game, selector);
             selector.assignReward(r);
         }
@@ -50,6 +52,10 @@ public class RewardSystem : MonoBehaviour
 
         foreach(Reward r in this.possibleRewards) {
             r.selected = false;
+            if(r.selector != null) {
+                Destroy(r.selector);
+                r.selector = null;
+            }
         }
 
         this.possibleRewards.Remove(selectedReward);
@@ -97,7 +103,7 @@ public class RewardSystem : MonoBehaviour
                 }
                 return chosenRewards;
         }
-        Debug.Log("NO REWARDS WERE SEELCTED!");
+        Debug.Log("NO REWARDS WERE SELECTED!");
         return new List<Reward>();
     }
 }

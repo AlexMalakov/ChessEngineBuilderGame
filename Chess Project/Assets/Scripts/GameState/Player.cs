@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     public List<ChessPiece> nonPremovingPieces;
 
     [Header ("rewards")]
-    public List<PieceUpgradeReward> myPieceUpgrades;
+    public List<PieceUpgradeReward> myPieceUpgrades = new List<PieceUpgradeReward>();
 
     [Header ("other")]
     public PlayerReporter reporter;

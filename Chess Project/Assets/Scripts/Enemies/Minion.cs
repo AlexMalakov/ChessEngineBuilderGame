@@ -41,6 +41,7 @@ public class Minion : HostileEntity
 
     public virtual void onEnemyDeath() {
         this.onDeath();
+        Destroy(this.gameObject);
     }
 
     public override EntityType getEntityType() {

@@ -42,6 +42,11 @@ public class MultiEnemies : Enemy
     }
 
     public override void onDeath() { //CHANGE THIS?
+        if(!this.slain) {
+            this.position.entity = null;
+            this.position = null;
+            this.gameObject.SetActive(false);
+        }
         this.slain = true;
 
         foreach(Minion m in this.minions) {
@@ -54,7 +59,12 @@ public class MultiEnemies : Enemy
             }
         }
 
+        for(int i = this.minions.Count - 1; i >= 0; i--) {
+            Destroy(this.minions[i].gameObject);
+        }
+
         this.game.getEncounter().onEnemyDefeat();
+        Destroy(this.gameObject);
     }
 }
 
