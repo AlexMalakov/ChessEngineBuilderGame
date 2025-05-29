@@ -31,6 +31,12 @@ public class StoredMunitionsBishopUpgrade : PieceUpgradeReward
         return new Operation(OperationTypes.Ignore, 0);
     }
 
+    public override void onEncounterStart() {
+        foreach(ChessPiece p in this.attackCharges.Keys) {
+            this.attackCharges[p] = -1;
+        }
+    }
+
     public override string getRewardName() {
         return "Stored Munitions";
     }

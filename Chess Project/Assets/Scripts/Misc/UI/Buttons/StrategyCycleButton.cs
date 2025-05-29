@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class StrategyCycleButton : MonoBehaviour
 {
-    public King king;
     public Game game;
     public Button button;
     public GameObject buttonObj;
@@ -16,20 +15,13 @@ public class StrategyCycleButton : MonoBehaviour
     }
 
     public void onEncounterStart() {
-        foreach(ChessPiece p in this.game.getPieces()) {
-            if(p.getPieceType() == PieceType.King && ((King)p).getStrategies().Count > 1) {
-                this.king = (King)p;
-                this.buttonObj.SetActive(true);
-                return;
-            }
-        }
-        this.buttonObj.SetActive(false);
+        this.buttonObj.SetActive(this.game.getPlayer().canSwapKingStrategy());
     }
 
     public void onButtonClick()
     {
-        if(this.king.canSwapStrategy()) {
-            this.king.swapStrategy();
+        if(this.game.getPlayer().canSwapKingStrategy()) {
+            this.game.getPlayer().swapKingStrategy();
         }
     }
 

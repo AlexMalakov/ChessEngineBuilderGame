@@ -27,9 +27,8 @@ public abstract class ChessPiece : Entity
   
     //maps method name as string to pieceUpgrade
     protected Dictionary<PieceMethods, List<PieceUpgradeReward>> pieceUpgrades = new Dictionary<PieceMethods, List<PieceUpgradeReward>>(); 
-
-
-
+    //some rewards care about if a piece is dead or not
+    List<PieceUpgradeReward> deathListeners = new List<PieceUpgradeReward>();
 
     //gets all a piece's moves, and all pieces it can move to when "defending"
     public abstract List<Square> getDefensiveMoves();
@@ -129,6 +128,9 @@ public abstract class ChessPiece : Entity
 
     //runs when a piece dies
     public override void onDeath() {
+        foreach(PieceUpgradeReward r in this.deathListeners) {
+            r.notifyOfDeath(this);
+        }
         this.game.getBoard().onPieceTaken(this);
     }
 
@@ -240,5 +242,13 @@ public abstract class ChessPiece : Entity
 
     public IEnumerator popUpAction(PopupType type, int value) {
         yield return this.game.getPopUpManager().displayPopUp(type, value, this.transform);
+    }
+
+    public void addDeathListener(PieceUpgradeReward listener) {
+        deathListeners.Add(listener);
+    }
+
+    public void removeDeathListener(PieceUpgradeReward listener) {
+        deathListeners.Remove(listener);
     }
 }

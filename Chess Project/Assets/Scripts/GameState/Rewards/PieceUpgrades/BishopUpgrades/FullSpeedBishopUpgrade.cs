@@ -5,6 +5,7 @@ using UnityEngine;
 public class FullSpeedBishopUpgrade : PieceUpgradeReward
 {
     public Dictionary<ChessPiece, bool> hasMoved = new Dictionary<ChessPiece, bool>();
+    
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
         changes.Add(PieceMethods.move);

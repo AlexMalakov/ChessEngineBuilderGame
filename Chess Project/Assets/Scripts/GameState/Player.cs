@@ -103,61 +103,65 @@ public class Player : MonoBehaviour
 
         return rng < targetThreshold;
     }
-    
 
-
-
-
+    //strategy stuff
     public bool kingStrategyHasActive() {
         foreach(ChessPiece p in this.livingPieces) {
             if(p.getPieceType() == PieceType.King) {
                 return ((King)p).canActivateStrategy();
             }
         }
+        Debug.Log("COULD NOT FIND KING!");
+        return false;
     }
 
     public void activateKingStrategyAbility() {
         foreach(ChessPiece p in this.livingPieces) {
             if(p.getPieceType() == PieceType.King) {
                 ((King)p).activateCurrentStrategy();
+                return;
             }
         }
+        Debug.Log("COULD NOT FIND KING!");
     }
 
-    //     public bool canActivateStrategy() {
-    //     return this.strategies.Count > 0 && (this.strategies[this.activeStrategy%this.strategies.Count] is KingStanceWithActive);
-    // }
+    public bool canSwapKingStrategy() {
+        foreach(ChessPiece p in this.livingPieces) {
+            if(p.getPieceType() == PieceType.King) {
+                return ((King)p).canSwapStrategy();
+            }
+        }
+        Debug.Log("COULD NOT FIND KING!");
+        return false;
+    }
 
-    // public void activateCurrentStrategy() {
-    //     if(canActivateStrategy()) {
-    //         ((KingStanceWithActive)this.strategies[this.activeStrategy%this.strategies.Count]).onActivate();
-    //     } else {
-    //         Debug.Log("CANNOT ACTIVAT ETHE CURRENT ABILITY");
-    //     }
-    // }
+    public void swapKingStrategy() {
+        foreach(ChessPiece p in this.livingPieces) {
+            if(p.getPieceType() == PieceType.King) {
+                ((King)p).swapStrategy();
+                return;
+            }
+        }
+        Debug.Log("COULD NOT FIND KING!");
+    }
 
-    // public virtual bool canSwapStrategy() {
-    //     return this.strategies.Count > 1 || this.strategies[this.activeStrategy%this.strategies.Count].canSwap();
-    // }
+    public List<KingStance> getCurrentStrategies() {
+        foreach(ChessPiece p in this.livingPieces) {
+            if(p.getPieceType() == PieceType.King) {
+                return ((King)p).getStrategies();
+            }
+        }
+        Debug.Log("COULD NOT FIND KING!");
+        return new List<KingStance>();
+    }
 
-    // public virtual void swapStrategy() {
-    //     this.strategies[this.activeStrategy%this.strategies.Count].setActive(false);
-    //     this.activeStrategy++;
-    //     this.strategies[this.activeStrategy%this.strategies.Count].setActive(true);
-    // }
-
-    // public virtual List<KingStance> getStrategies() {
-    //     return this.strategies
-    // }
-
-    // public virtual void addStrategy(KingStance swappingIn, KingStance swappingOut) {
-    //     if(swappingOut != null) {
-    //         this.strategies.Remove(swappingOut);
-    //         this.strategies.Add(swappingIn);
-    //     } else if(this.strategies.Count < this.maxStrategies) {
-    //         this.strategies.Add(swappingIn);
-    //     } else {
-    //         Debug.Log("CANNOT ADD THE STRATEGY TO THE KING");
-    //     }
-    // }
+    public virtual void addKingStrategy(KingStance swappingIn, KingStance swappingOut) {
+        foreach(ChessPiece p in this.livingPieces) {
+            if(p.getPieceType() == PieceType.King) {
+                ((King)p).addStrategy(swappingIn, swappingOut);
+                return;
+            }
+        }
+        Debug.Log("COULD NOT FIND KING!");
+    }
 }

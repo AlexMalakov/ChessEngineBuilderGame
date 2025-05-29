@@ -38,6 +38,11 @@ public class Encounter : MonoBehaviour
         sqReporter.onEncounterStart();
         encReporter.onEncounterStart();
         game.stratButton.onEncounterStart();
+
+
+        foreach(PieceUpgradeReward r in game.getPlayer().myPieceUpgrades) {
+            r.onEncounterStart();
+        }
     }
 
     public virtual void onEnemyDefeat() {

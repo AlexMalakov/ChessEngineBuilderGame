@@ -147,17 +147,23 @@ public class King : ChessPiece
     }
 
     public virtual bool canSwapStrategy() {
-        return this.strategies.Count > 1 || this.strategies[this.activeStrategy%this.strategies.Count].canSwap();
+        return this.strategies.Count > 1 
+            && this.strategies[this.activeStrategy%this.strategies.Count].canSwap()
+            && this.strategies[(this.activeStrategy+1)%this.strategies.Count].canSwapTo();
     }
 
     public virtual void swapStrategy() {
-        this.strategies[this.activeStrategy%this.strategies.Count].setActive(false);
-        this.activeStrategy++;
-        this.strategies[this.activeStrategy%this.strategies.Count].setActive(true);
+        if(this.canSwapStrategy()) {
+            this.strategies[this.activeStrategy%this.strategies.Count].setActive(false);
+            this.activeStrategy++;
+            this.strategies[this.activeStrategy%this.strategies.Count].setActive(true);
+        } else {
+            Debug.Log("CANNOT PERFORM A STRATEGY SWAP!");
+        }
     }
 
     public virtual List<KingStance> getStrategies() {
-        return this.strategies
+        return this.strategies;
     }
 
     public virtual void addStrategy(KingStance swappingIn, KingStance swappingOut) {

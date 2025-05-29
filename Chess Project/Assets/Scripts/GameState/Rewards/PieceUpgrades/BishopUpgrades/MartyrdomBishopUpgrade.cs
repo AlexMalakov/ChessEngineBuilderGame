@@ -45,6 +45,12 @@ public class MartyrdomBishopUpgrade : PieceUpgradeReward
         this.game.removeRoundOverListener(this);
     }
 
+    public override void onEncounterStart() {
+        if(this.oddSquareSac > 0 || this.evenSquareSac > 0) {
+            this.notifyRoundOver();
+        }
+    }
+
     public override string getRewardName() {
         return "Martyrdom";
     }
