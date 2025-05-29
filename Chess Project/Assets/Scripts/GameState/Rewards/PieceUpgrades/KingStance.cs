@@ -20,6 +20,4 @@ public abstract class KingStance : PieceUpgradeReward
     public abstract void onRoundStart();
 
     public abstract void whileActive();
-
-    public abstract void onActivate();
 }

@@ -11,6 +11,9 @@ public class King : ChessPiece
 {
     public bool canCastle = true;
     public List<Rook> rooks;
+    List<KingStance> strategies = new List<KingStance>();
+    int activeStrategy = 0;
+    public int maxStrategies = 2;
 
     public override bool move(Square c) {
         if(this.canCastle && Math.Abs(this.position.x - c.x) == 2) {
@@ -128,15 +131,43 @@ public class King : ChessPiece
         this.game.getPlayer().reporter.onPlayerUpdate();
     }
 
+
+    //strategy/stance stuff:
+
+    public bool canActivateStrategy() {
+        return this.strategies.Count > 0 && (this.strategies[this.activeStrategy%this.strategies.Count] is KingStanceWithActive);
+    }
+
+    public void activateCurrentStrategy() {
+        if(canActivateStrategy()) {
+            ((KingStanceWithActive)this.strategies[this.activeStrategy%this.strategies.Count]).onActivate();
+        } else {
+            Debug.Log("CANNOT ACTIVAT ETHE CURRENT ABILITY");
+        }
+    }
+
     public virtual bool canSwapStrategy() {
-        return true;
+        return this.strategies.Count > 1 || this.strategies[this.activeStrategy%this.strategies.Count].canSwap();
     }
 
     public virtual void swapStrategy() {
-
+        this.strategies[this.activeStrategy%this.strategies.Count].setActive(false);
+        this.activeStrategy++;
+        this.strategies[this.activeStrategy%this.strategies.Count].setActive(true);
     }
 
-    public virtual List<GameObject> getStrategies() {
-        return new List<GameObject>();
+    public virtual List<KingStance> getStrategies() {
+        return this.strategies
+    }
+
+    public virtual void addStrategy(KingStance swappingIn, KingStance swappingOut) {
+        if(swappingOut != null) {
+            this.strategies.Remove(swappingOut);
+            this.strategies.Add(swappingIn);
+        } else if(this.strategies.Count < this.maxStrategies) {
+            this.strategies.Add(swappingIn);
+        } else {
+            Debug.Log("CANNOT ADD THE STRATEGY TO THE KING");
+        }
     }
 }
