@@ -41,6 +41,9 @@ public class KnightCondHop : ConditionalMoveAction
             }
         } else {
             foreach(Square s in this.getSquaresAround(sq, true)) {
+                if(s.entity == null) {
+                    continue;
+                }
                 if(s.hasChessPiece()) {
                     result++;
                 }

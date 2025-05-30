@@ -18,7 +18,7 @@ public abstract class Entity : MonoBehaviour
     public int defense;
     public int damage;
     [Header ("status effects")]
-    public List<StatusEffect> statuses;
+    public List<StatusEffect> statuses = new List<StatusEffect>();
 
 
     public abstract void onDeath();

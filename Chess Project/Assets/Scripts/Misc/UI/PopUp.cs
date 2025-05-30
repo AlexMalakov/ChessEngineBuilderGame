@@ -10,6 +10,8 @@ public class PopUp : MonoBehaviour
     public GameObject crit;
     public TMP_Text text;
 
+    bool active;
+
     public void activate(PopupType type, int value) {
         text.text = ""+value;
         text.color = Color.black;// or new Color(r, g, b, a)
@@ -24,5 +26,16 @@ public class PopUp : MonoBehaviour
                 break;
         }
         // text.fontMaterial.SetFloat("_OutlineWidth", 0.2f);
+
+        this.setActive(true);
+    }
+
+    public void setActive(bool active) {
+        this.active = active;
+        this.gameObject.SetActive(active);
+    }
+
+    public bool isActive() {
+        return this.active;
     }
 }
