@@ -11,7 +11,7 @@ public class PopUpManager : MonoBehaviour
 
     public GameObject popUp;
     List<PopUp> popUpPool = new List<PopUp>();
-    public int poolSize = 30;
+    public int poolSize = 45;
     public float duration = 1f;
     
     public void Start() {
@@ -37,13 +37,22 @@ public class PopUpManager : MonoBehaviour
         return popup;
     }
 
-    public IEnumerator displayPopUp(PopupType imageToShow, int value, Transform popUpLocation) {
+    public IEnumerator displayNumbers(PopupType imageToShow, int value, Transform popUpLocation) {
         PopUp newPopUp = getNextPopUp();
         newPopUp.transform.SetParent(popUpLocation);
         newPopUp.transform.localPosition = Vector3.zero;
-        newPopUp.activate(imageToShow, value);
+        newPopUp.activateNumbers(imageToShow, value);
 
         yield return new WaitForSeconds(duration);
         newPopUp.setActive(false);
+    }
+
+    public PopUp displayStatusEffect(StatusEffect status, Transform popUpLocation) {
+        PopUp statusHolder = getNextPopUp();
+        statusHolder.transform.SetParent(popUpLocation);
+        statusHolder.transform.localPosition = Vector3.zero;
+        statusHolder.activateStatus(status);
+
+        return statusHolder;
     }
 }

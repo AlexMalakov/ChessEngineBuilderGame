@@ -6,6 +6,7 @@ public abstract class StatusEffect
 {
     public Entity target;
     public string statusName;
+    public PopUp popUp;
 
     public StatusEffect(string statusName) {
         this.statusName = statusName;
@@ -14,6 +15,7 @@ public abstract class StatusEffect
     public virtual void onAttatch(Entity target) {
         this.target = target;
         target.addStatusEffect(this);
+        this.popUp = this.target.game.popUpManager.displayStatusEffect(this, target.transform);
     }
 
     public virtual void onRemove() {

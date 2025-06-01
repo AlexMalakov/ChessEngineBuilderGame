@@ -241,7 +241,7 @@ public abstract class ChessPiece : Entity
     }
 
     public IEnumerator popUpAction(PopupType type, int value) {
-        yield return this.game.getPopUpManager().displayPopUp(type, value, this.transform);
+        yield return this.game.getPopUpManager().displayNumbers(type, value, this.transform);
     }
 
     public void addDeathListener(PieceUpgradeReward listener) {

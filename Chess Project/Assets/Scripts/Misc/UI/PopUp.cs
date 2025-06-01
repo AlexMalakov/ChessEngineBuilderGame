@@ -12,8 +12,8 @@ public class PopUp : MonoBehaviour
 
     bool active;
 
-    public void activate(PopupType type, int value) {
-        text.text = ""+value;
+    public void activateNumbers(PopupType type, int value) {
+        this.text.text = ""+value;
         text.color = Color.black;// or new Color(r, g, b, a)
         switch(type) {
             case PopupType.Damage:
@@ -26,6 +26,23 @@ public class PopUp : MonoBehaviour
                 break;
         }
         // text.fontMaterial.SetFloat("_OutlineWidth", 0.2f);
+
+        this.setActive(true);
+    }
+
+    public void activateStatus(StatusEffect status) {
+        if(status is StackableStatusEffect) {
+            this.text.text = ""+((StackableStatusEffect)status).stacks;
+        } else {
+            this.text.text = "";
+        }
+
+        switch(status.statusName) {
+            case "block":
+                break;
+            default:
+                break;
+        }        
 
         this.setActive(true);
     }
