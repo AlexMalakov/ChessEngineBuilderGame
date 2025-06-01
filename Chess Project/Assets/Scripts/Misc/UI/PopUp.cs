@@ -34,8 +34,7 @@ public class PopUp : MonoBehaviour
             case PopupType.Crit:
                 this.text.text = "";
                 crit.SetActive(true);
-                break;
-                
+                break;     
         }
         // text.fontMaterial.SetFloat("_OutlineWidth", 0.2f);
 

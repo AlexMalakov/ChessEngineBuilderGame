@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
     public List<ChessPiece> deadPieces;
     public List<ChessPiece> premovingPieces;
     public List<ChessPiece> nonPremovingPieces;
+    public List<ChessPiece> temporaryPieces;
+    public List<ChessPiece> tempPremovingPieces;
+    public List<ChessPiece> tempNonPremovingPieces;
 
     [Header ("rewards")]
     public List<PieceUpgradeReward> myPieceUpgrades = new List<PieceUpgradeReward>();
@@ -95,6 +98,11 @@ public class Player : MonoBehaviour
             }
         }
         return 0;
+    }
+
+    public void createTemporaryPiece(PieceType p, Square spawnSquare) {
+        ChessPiece temporaryPiece = Instantiate(p.gameObject);
+        this.temporaryPieces.Add(temporaryPieces);
     }
 
     //returns true if hit
