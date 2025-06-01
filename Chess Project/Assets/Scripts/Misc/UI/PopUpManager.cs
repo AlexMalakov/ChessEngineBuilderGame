@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum PopupType {
-    Damage, Block, DamageTaken
+    Damage, Block, DamageTaken, Crit
 }
 public class PopUpManager : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class PopUpManager : MonoBehaviour
     List<PopUp> popUpPool = new List<PopUp>();
     public int poolSize = 45;
     public float duration = 1f;
+    public float offsetRange = .5f;
     
     public void Start() {
         //init popupImages to map correct popup icon to visual element
@@ -40,7 +41,7 @@ public class PopUpManager : MonoBehaviour
     public IEnumerator displayNumbers(PopupType imageToShow, int value, Transform popUpLocation) {
         PopUp newPopUp = getNextPopUp();
         newPopUp.transform.SetParent(popUpLocation);
-        newPopUp.transform.localPosition = Vector3.zero;
+        newPopUp.transform.localPosition = offsetPosition();
         newPopUp.activateNumbers(imageToShow, value);
 
         yield return new WaitForSeconds(duration);
@@ -50,9 +51,13 @@ public class PopUpManager : MonoBehaviour
     public PopUp displayStatusEffect(StatusEffect status, Transform popUpLocation) {
         PopUp statusHolder = getNextPopUp();
         statusHolder.transform.SetParent(popUpLocation);
-        statusHolder.transform.localPosition = Vector3.zero;
+        statusHolder.transform.localPosition = offsetPosition();
         statusHolder.activateStatus(status);
 
         return statusHolder;
+    }
+
+    private Vector3 offsetPosition() {
+        return new Vector3(Random.Range(-offsetRange, offsetRange), Random.Range(-offsetRange, offsetRange), 0);
     }
 }

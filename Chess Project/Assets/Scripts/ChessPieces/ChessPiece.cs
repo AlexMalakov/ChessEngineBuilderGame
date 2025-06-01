@@ -145,7 +145,12 @@ public abstract class ChessPiece : Entity
             }
         }
         
-        return this.game.getPlayer().getPieceDamage(damageCalculator.resolve());
+        return damageCalculator.resolve();
+    }
+
+    //add more to this maybe idk
+    public void onCrit() {
+        StartCoroutine(this.popUpAction(PopupType.Crit, 0));
     }
 
     //performs an attack pop up, and sends the damage to the entity that is being attacked
@@ -154,7 +159,7 @@ public abstract class ChessPiece : Entity
             Debug.Log("ERROR: ATTACKING ANOTHER CHESS PIECE?");
         }
 
-        int damageToDeal = this.getPieceDamage(entity.position);
+        int damageToDeal = this.game.getPlayer().getPieceDamage(this, this.getPieceDamage(entity.position));
 
         foreach(ChessPiece p in defenders) {
             damageToDeal += p.getDefense();

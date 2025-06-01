@@ -8,22 +8,34 @@ public class PopUp : MonoBehaviour
     public GameObject damage;
     public GameObject block;
     public GameObject crit;
+    public GameObject damageTaken;
     public TMP_Text text;
 
     bool active;
 
     public void activateNumbers(PopupType type, int value) {
-        this.text.text = ""+value;
+        
         text.color = Color.black;// or new Color(r, g, b, a)
         switch(type) {
             case PopupType.Damage:
                 damage.SetActive(true);
+                this.text.text = ""+value;
                 // text.fontMaterial.SetColor("_OutlineColor", Color.red);
                 break;
             case PopupType.Block:
                 block.SetActive(true);
+                this.text.text = ""+value;
                 // text.fontMaterial.SetColor("_OutlineColor", Color.blue);
                 break;
+            case PopupType.DamageTaken:
+                this.text.text = "-"+value;
+                damageTaken.SetActive(true);
+                break;
+            case PopupType.Crit:
+                this.text.text = "";
+                crit.SetActive(true);
+                break;
+                
         }
         // text.fontMaterial.SetFloat("_OutlineWidth", 0.2f);
 
@@ -50,6 +62,12 @@ public class PopUp : MonoBehaviour
     public void setActive(bool active) {
         this.active = active;
         this.gameObject.SetActive(active);
+        if(!active) {
+            this.damage.SetActive(false);
+            this.block.SetActive(false);
+            this.damageTaken.SetActive(false);
+            this.crit.SetActive(false);
+        }
     }
 
     public bool isActive() {
