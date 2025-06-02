@@ -10,13 +10,13 @@ public class FirmlyPlantedPawnUpgrade : PieceUpgradeReward
 
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
-        changes.Add(PieceMethods.getEffectiveDefense);
+        changes.Add(PieceMethods.assignEffectiveDefense);
         return changes;
     }
 
     public virtual Operation changeEffectiveDefense(ChessPiece p, int defense) {
         if(p is Pawn && ((Pawn)p).hasMoved) {
-            return new PreAdd(OperationTypes.Ignore, 3);
+            return new Operation(OperationTypes.PreAdd, 3);
         }
         return new Operation(OperationTypes.Ignore, 0);
     }

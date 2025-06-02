@@ -135,15 +135,24 @@ public class Game : MonoBehaviour
     }
 
     public List<ChessPiece> getPieces() {
-        return this.player.livingPieces;
+        List<ChessPiece> pieces = new List<ChessPiece>();
+        pieces.AddRange(this.player.livingPieces);
+        pieces.AddRange(this.player.temporaryPieces);
+        return pieces;
     }
 
     public List<ChessPiece> getNonPremovePieces() {
-        return this.player.nonPremovingPieces;
+        List<ChessPiece> move = new List<ChessPiece>();
+        move.AddRange(this.player.nonPremovingPieces);
+        move.AddRange(this.player.tempNonPremovingPieces);
+        return move;
     }
 
     public List<ChessPiece> getPremovePieces() {
-        return this.player.premovingPieces;
+        List<ChessPiece> preMove = new List<ChessPiece>();
+        preMove.AddRange(this.player.premovingPieces);
+        preMove.AddRange(this.player.tempPremovingPieces);
+        return preMove;
     }
 
     public Player getPlayer() {

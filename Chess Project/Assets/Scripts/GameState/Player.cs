@@ -47,8 +47,14 @@ public class Player : MonoBehaviour
     }
 
     public void premovePiece(ChessPiece p) {
-        premovingPieces.Add(p);
-        nonPremovingPieces.Remove(p);
+        if(livingPieces.Contains(p)) {
+            premovingPieces.Add(p);
+            nonPremovingPieces.Remove(p);
+        } else if(temporaryPieces.Contains(p)) {
+            tempPremovingPieces.Add(p);
+            tempNonPremovingPieces.Remove(p);
+        }
+        
     }
 
 
@@ -100,9 +106,29 @@ public class Player : MonoBehaviour
         return 0;
     }
 
-    public void createTemporaryPiece(PieceType p, Square spawnSquare) {
-        ChessPiece temporaryPiece = Instantiate(p.gameObject);
-        this.temporaryPieces.Add(temporaryPieces);
+    //this is sloppy, a factory for pieces might be a really good idea actually...
+    public void createTemporaryPiece(ChessPiece p, Square spawnSquare) {
+        if(spawnSquare.entity != null) {
+            Debug.Log("WARNING: cannot create this piece since the square is not empty!");
+            return;
+        }
+        ChessPiece temporaryPiece = Instantiate(p.gameObject).GetComponent<ChessPiece>();
+        this.temporaryPieces.Add(temporaryPiece);
+
+        p.health = p.maxHealth;
+        if(p is Pawn) {
+            ((Pawn)p).hasMoved = false;
+        }
+        if(p is King) {
+            ((King)p).canCastle = true;
+        } 
+        if(p is Rook) {
+            ((Rook)p).canCastle = true;
+        }
+ 
+        spawnSquare.entity = temporaryPiece;
+        temporaryPiece.position = spawnSquare;
+        temporaryPiece.transform.position = spawnSquare.transform.position;
     }
 
     //returns true if hit
