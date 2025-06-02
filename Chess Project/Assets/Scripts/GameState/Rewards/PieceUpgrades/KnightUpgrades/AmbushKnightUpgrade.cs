@@ -50,14 +50,14 @@ public class AmbushKnightUpgrade : PieceUpgradeReward
         }
         if(s.hasChessPiece()) {
             this.toSwap[p] = (ChessPiece)s.entity;
-            this.swapping[p] = s;
+            this.swapping[p] = p.position;
         }
         return true;
     }
 
     public override bool changeAfterMove(ChessPiece p, Square s) {
         if(this.toSwap.ContainsKey(p)) {
-            StartCoroutine(this.toSwap[p].move(this.swapping[p]));
+            this.toSwap[p].forceMove(this.swapping[p]);
             this.toSwap.Remove(p);
         }
         return true;

@@ -10,7 +10,7 @@ public class Game : MonoBehaviour
     public RewardSystem rewardSystem;
     public List<Encounter> encouters;
     public PieceFactory factory;
-
+    public FakeMono mono;
     public Graveyard graveyard;
 
     [Header ("important data")]
