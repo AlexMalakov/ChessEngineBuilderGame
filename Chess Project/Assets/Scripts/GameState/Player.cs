@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Game game;
     [Header ("stats")]
     public int agility; //how many moves you can make between an opponents turn
     public int perception; //knowledge of the opponents future actions + premoves
@@ -106,29 +107,10 @@ public class Player : MonoBehaviour
         return 0;
     }
 
-    //this is sloppy, a factory for pieces might be a really good idea actually...
-    public void createTemporaryPiece(ChessPiece p, Square spawnSquare) {
-        if(spawnSquare.entity != null) {
-            Debug.Log("WARNING: cannot create this piece since the square is not empty!");
-            return;
-        }
-        ChessPiece temporaryPiece = Instantiate(p.gameObject).GetComponent<ChessPiece>();
-        this.temporaryPieces.Add(temporaryPiece);
 
-        p.health = p.maxHealth;
-        if(p is Pawn) {
-            ((Pawn)p).hasMoved = false;
-        }
-        if(p is King) {
-            ((King)p).canCastle = true;
-        } 
-        if(p is Rook) {
-            ((Rook)p).canCastle = true;
-        }
- 
-        spawnSquare.entity = temporaryPiece;
-        temporaryPiece.position = spawnSquare;
-        temporaryPiece.transform.position = spawnSquare.transform.position;
+    public void createTemporaryPiece(PieceType p, Square spawnSquare) {
+        ChessPiece temporaryPiece = this.game.factory.createPiece(p, spawnSquare.x, spawnSquare.y);
+        this.temporaryPieces.Add(temporaryPiece);
     }
 
     //returns true if hit

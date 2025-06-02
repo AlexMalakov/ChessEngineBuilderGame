@@ -14,7 +14,7 @@ public class FirmlyPlantedPawnUpgrade : PieceUpgradeReward
         return changes;
     }
 
-    public virtual Operation changeEffectiveDefense(ChessPiece p, int defense) {
+    public override Operation changeEffectiveDefense(ChessPiece p, int defense) {
         if(p is Pawn && ((Pawn)p).hasMoved) {
             return new Operation(OperationTypes.PreAdd, 3);
         }

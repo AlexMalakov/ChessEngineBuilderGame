@@ -15,9 +15,9 @@ public class CloningTubePawnUpgrade : PieceUpgradeReward
         return changes;
     }
 
-    public virtual void changePromote(ChessPiece p) {
+    public override void changePromote(ChessPiece p) {
         //create a new pawn
-        this.game.getPlayer().createTemporaryPiece(p, this.game.getBoard().getSquareAt(p.startingX, p.startingY));
+        this.game.getPlayer().createTemporaryPiece(PieceType.Pawn, this.game.getBoard().getSquareAt(p.startingX, p.startingY));
     }
 
     public override string getRewardName() {

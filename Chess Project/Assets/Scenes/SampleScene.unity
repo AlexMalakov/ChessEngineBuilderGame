@@ -5995,7 +5995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &448410303
 Transform:
   m_ObjectHideFlags: 0
@@ -11629,11 +11629,11 @@ MonoBehaviour:
   actionQueue: []
   actionLoop:
   - {fileID: 1082168118}
-  minionsToInstantiate: []
-  minions:
-  - {fileID: 562678542}
-  - {fileID: 1515724015}
-  - {fileID: 842741142}
+  minionsToInstantiate:
+  - {fileID: 562678541}
+  - {fileID: 1515724014}
+  - {fileID: 842741140}
+  minions: []
   enemySprite: {fileID: 21300000, guid: 0beb81c1ef37142648abea22ac0cab29, type: 3}
 --- !u!4 &1082168117
 Transform:
@@ -12565,6 +12565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5665e67eacf2e40349ececf2ca55dd64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game: {fileID: 0}
   agility: 3
   perception: 1
   luck: 1
@@ -12590,6 +12591,9 @@ MonoBehaviour:
   deadPieces: []
   premovingPieces: []
   nonPremovingPieces: []
+  temporaryPieces: []
+  tempPremovingPieces: []
+  tempNonPremovingPieces: []
   reporter: {fileID: 322290649}
 --- !u!1 &1146182071
 GameObject:
@@ -13575,8 +13579,8 @@ MonoBehaviour:
   popUpManager: {fileID: 1296474985}
   rewardSystem: {fileID: 1449368378}
   encouters:
-  - {fileID: 495453231}
-  - {fileID: 107429391}
+  - {fileID: 1438653780}
+  factory: {fileID: 0}
   graveyard: {fileID: 67834020}
   playersTurn: 1
   playerPremoveTurn: 0
@@ -14386,7 +14390,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUp: {fileID: 2313806923580789611, guid: ae152a2436cd84653bade63b801bd418, type: 3}
+  poolSize: 30
   duration: 0.8
+  offsetRange: 0.5
 --- !u!1 &1300145083
 GameObject:
   m_ObjectHideFlags: 0

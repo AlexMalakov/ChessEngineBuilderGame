@@ -14,7 +14,7 @@ public class TakeTheInitiativePawnUpgrade : PieceUpgradeReward
         return changes;
     }
 
-    public virtual bool changeAfterMove(ChessPiece p, Square square) {
+    public override bool changeAfterMove(ChessPiece p, Square square) {
         ((Pawn)p).hasMoved = false;
         return true;
     }

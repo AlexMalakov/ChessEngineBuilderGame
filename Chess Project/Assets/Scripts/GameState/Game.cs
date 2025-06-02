@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
     public PopUpManager popUpManager;
     public RewardSystem rewardSystem;
     public List<Encounter> encouters;
+    public PieceFactory factory;
 
     public Graveyard graveyard;
 
