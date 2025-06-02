@@ -7,7 +7,7 @@ public class QuickDischarge : PieceUpgradeReward
 {
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
-        changes.Add(PieceMethods.move);
+        changes.Add(PieceMethods.afterMove);
         return changes;
     }
 

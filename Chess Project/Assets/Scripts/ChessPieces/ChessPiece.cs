@@ -15,7 +15,7 @@ public enum PieceType {
 }
 
 public enum PieceMethods {
-    getMoves, move, assignEffectiveDefense, getDefense, forceMove, takeDamage, onDeath, getPieceDamage, attack, onSacrifice, castle, promote
+    getMoves, move, afterMove, assignEffectiveDefense, getDefense, forceMove, takeDamage, onDeath, getPieceDamage, attack, onSacrifice, castle, promote
 }
 
 public abstract class ChessPiece : Entity

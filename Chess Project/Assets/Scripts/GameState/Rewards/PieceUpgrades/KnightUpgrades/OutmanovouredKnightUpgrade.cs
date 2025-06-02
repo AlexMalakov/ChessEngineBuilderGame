@@ -2,33 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TakeTheInitiativePawnUpgrade : PieceUpgradeReward
+public class OutmanovouredKnightUpgrade : PieceUpgradeReward
 {
-    public override PieceType getPieceTarget() {
-        return PieceType.Pawn;
-    }
-
     public override List<PieceMethods> getAffectedMethods() {
         List<PieceMethods> changes = new List<PieceMethods>();
-        changes.Add(PieceMethods.afterMove);
+        changes.Add(PieceMethods.move);
         return changes;
     }
 
-    public override bool changeAfterMove(ChessPiece p, Square square) {
-        ((Pawn)p).hasMoved = false;
+    public override PieceType getPieceTarget() {
+        return PieceType.Knight;
+    }
+
+    public override bool changeMove(ChessPiece p, Square square) {
+        if(this.game.playerPremoveTurn) {
+            p.effectiveDefense += 5;
+        }
         return true;
     }
 
     public override string getRewardName() {
-        return "Take Initiative";
+        return "Outmanovoured";
     }
     public override string getRewardDescription() {
-        return "The first time a pawn moves, it can perform it's 2-space move again.";
+        return "Knights that premove receive 5 defense that round";
     }
     public override string getRewardFlavorText() {
         return "placeholder";
     }
     public override string getRewardImage() {
-        return "pawn";
+        return "knight";
     }
 }
