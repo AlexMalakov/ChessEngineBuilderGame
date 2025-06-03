@@ -6,6 +6,7 @@ public class Minion : HostileEntity
 {
     public Enemy enemy;
     public bool alive = false;
+    public bool waveMinion = false;
 
 
     public virtual void onSummon(Enemy enemy) {
@@ -36,12 +37,18 @@ public class Minion : HostileEntity
         this.position.entity = null;
         this.position = null;
         gameObject.SetActive(false);
+        if(this.waveMinion) {
+            this.enemy.minions.Remove(this);
+            Destroy(this.gameObject);
+        }
 
     }
 
     public virtual void onEnemyDeath() {
         this.onDeath();
-        Destroy(this.gameObject);
+        if(!this.waveMinion) {
+            Destroy(this.gameObject);
+        }
     }
 
     public override EntityType getEntityType() {
