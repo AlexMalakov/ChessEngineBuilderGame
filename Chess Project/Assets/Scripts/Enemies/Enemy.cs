@@ -22,7 +22,7 @@ public class Enemy : HostileEntity
         int counter = 0;
         for(int mIndex = 0; mIndex < minionsToInstantiate.Count; mIndex++) {
             for(int mAmount = 0; mAmount < this.minionCounts[mIndex]; mAmount++) {
-                minionCounts minion = Instantaite(minionsToInstantiate[mIndex]).GetComponent<Minion>();
+                Minion minion = Instantiate(minionsToInstantiate[mIndex]).GetComponent<Minion>();
                 minions.Add(minion);
                 minion.startingX = minionStartingXs[counter];
                 minion.startingY = minionStartingYs[counter];
@@ -44,7 +44,7 @@ public class Enemy : HostileEntity
     }
 
     //revives all the dead minions
-    protected virtual void summonMinions() {
+    public virtual void summonMinions() {
         foreach(Minion m in this.minions) {
             if(!m.alive) {
                 m.gameObject.SetActive(true);
@@ -62,7 +62,7 @@ public class Enemy : HostileEntity
             counter += minionCounts[i];
         }
         for(int mIndex = 0; mIndex < minionWaveToInstantiate.Count; mIndex++) {
-            for(int mCount = minionsToInstantiate.Count; int < minionCounts.Count; int++) {
+            for(int mCount = minionsToInstantiate.Count; mCount < minionCounts.Count; mCount++) {
                 if(this.game.getBoard().getSquareAt(minionStartingXs[counter], minionStartingYs[counter])) {
                     counter++;
                     continue;
@@ -70,7 +70,7 @@ public class Enemy : HostileEntity
 
                 Minion m = Instantiate(minionWaveToInstantiate[mIndex]).GetComponent<Minion>();
                 m.waveMinion = true;
-                minions.add(m);
+                minions.Add(m);
                 m.startingX = minionStartingXs[counter];
                 m.startingY = minionStartingYs[counter];
                 m.gameObject.SetActive(true);
@@ -78,18 +78,6 @@ public class Enemy : HostileEntity
                 m.onSummon(this);
                 counter++;
             }
-        }
-
-        foreach(GameObject waveMin in this.minionWaveToInstantiate) {
-            minions m = Instantiate(waveMin).GetComponent<Minion>();
-            if(this.game.getBoard().getSquareAt(m.startingX, m.startingY).entity != null) {
-                Destroy(m.gameObject);
-                continue;
-            }
-            minions.add(m);
-            m.gameObjet.SetActive(true);
-            this.game.getBoard().placeEntity(m);
-            m.onSummon(this);
         }
     }
 
