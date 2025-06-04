@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RookEnemy : MonoBehaviour
+public class RookEnemy : Enemy
 {
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class RookEnemy : MonoBehaviour
 
 public class RookBombardAction : HostileEntityAction
 {
-    public RookBombardAction(Rook r) : base(r) {}
+    public RookBombardAction(RookEnemy r) : base(r) {}
     float timeBetweenShot = .5f;
     //launches an attack across every row
     public override IEnumerator act() {

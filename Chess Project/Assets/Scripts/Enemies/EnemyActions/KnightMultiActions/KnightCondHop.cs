@@ -32,31 +32,11 @@ public class KnightCondHop : MoveToBestAction
     }
 
     public override int moveCondition(Square sq) {
-        int result = 0;
         if(guarding) {
-            foreach(Square s in this.getSquaresAround(sq, true)) {
-                if(s.hasHostile()) {
-                    result++;
-                }
-            }
+            return this.maximizeBoost(sq, this.getSquaresAround(sq, true));
         } else {
-            foreach(Square s in this.getSquaresAround(sq, true)) {
-                if(s.entity == null || !s.hasChessPiece()) {
-                    continue;
-                }
-                if(s.hasChessPiece()) {
-                    result++;
-                }
-                if(((ChessPiece)s.entity).effectiveDefense < this.opponent.damage) {
-                    result+=2;
-                }
-
-                if(((ChessPiece)s.entity).effectiveDefense + s.entity.health <= this.opponent.damage) {
-                    result++;
-                }
-            }
+            return this.maximizeDamage(sq, this.getSquaresAround(sq, true));
         }
-        return result;
     }
     
 }
