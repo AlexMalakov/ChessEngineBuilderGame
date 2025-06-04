@@ -2,9 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombardAction : HostileEntityAction
+public class RookEnemy : MonoBehaviour
 {
-    public float timeBetweenShot;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+
+public class RookBombardAction : HostileEntityAction
+{
+    public RookBombardAction(Rook r) : base(r) {}
+    float timeBetweenShot = .5f;
     //launches an attack across every row
     public override IEnumerator act() {
         for(int i = 0; i < this.opponent.game.getBoard().len; i++) {

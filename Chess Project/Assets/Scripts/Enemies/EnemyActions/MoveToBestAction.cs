@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ConditionalMoveAction : HostileEntityAction
+public abstract class MoveToBestAction : HostileEntityAction
 {
+
+    public MoveToBestAction(HostileEntity opponent) : base(opponent) {}
     public override IEnumerator act() {
         Square bestSq = this.opponent.position;
         int best = -1;
