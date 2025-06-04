@@ -62,7 +62,10 @@ public class Encounter : MonoBehaviour
         yield return board.assignEffectiveDefense();
         yield return board.performDamagePhase();
         this.enemy.returnDamage();
-        this.game.startEnemyTurn();
+
+        if(this.enemy.health > 0) {
+            this.game.startEnemyTurn();
+        }
     }
 
 

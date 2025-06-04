@@ -35,7 +35,6 @@ public class Game : MonoBehaviour
     void Start()
     {
         startEncounter();
-        startPlayerTurn();
     }
 
     public void addRoundOverListener(PieceUpgradeReward roundListener) {
@@ -121,6 +120,7 @@ public class Game : MonoBehaviour
 
     public void startEncounter() {
         this.encouters[currentEncounter].startEncounter();
+        startPlayerTurn();
     }
 
     public Encounter getEncounter() {

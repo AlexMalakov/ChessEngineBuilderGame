@@ -43,16 +43,15 @@ public class Projectile : MonoBehaviour
     }
 
     public virtual IEnumerator projectileAnimation(Square origin, Square destination) {
-        Vector3 startingPos = transform.position;
         float elapsed = 0;
         while(elapsed < this.flySpeed) {
-            transform.position = Vector3.Lerp(startingPos, destination.transform.position, elapsed/this.flySpeed);
+            transform.position = Vector3.Lerp(origin.transform.position, destination.transform.position, elapsed/this.flySpeed);
             elapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
 }
