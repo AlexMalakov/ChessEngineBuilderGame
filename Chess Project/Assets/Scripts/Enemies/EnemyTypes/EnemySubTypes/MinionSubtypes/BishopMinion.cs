@@ -19,6 +19,7 @@ public class BishopMinion : MultiMinion
 
 public class BishopStabDiags : HostileEntityAction
 {
+    public BishopStabDiags(BishopMinion b) : base(b) {}
     public override IEnumerator act() {
 
         if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x+1, this.opponent.position.y+1) != null 
@@ -55,7 +56,7 @@ public class BishopStabDiags : HostileEntityAction
 public class BishopMoveSlash : MoveToBestAction
 {
     List<List<Square>> moveDirections;
-
+    public BishopMoveSlash(BishopMinion b) : base(b) {}
 
     public override IEnumerator act() {
         Square best = this.findBest();
@@ -83,13 +84,13 @@ public class BishopMoveSlash : MoveToBestAction
         this.moveDirections = new List<List<Square>>();
 
         foreach(int[] offset in offsets) {
-            bool bounced = false
+            bool bounced = false;
             List<Square> moveDirection = new List<Square>();
             int x = opponent.position.x; int y = opponent.position.y;
             while(true) {
                 Square s = this.opponent.game.getBoard().getSquareAt(x + offset[0], y + offset[1]);
-                if(s == null && !bounce) {
-                    bounce = true;
+                if(s == null && !bounced) {
+                    bounced = true;
                     moveDirection = new List<Square>();
                     if(x + offset[0] >= this.opponent.game.getBoard().len || x + offset[0] < 0) {
                         offset[0] = -offset[0];
@@ -112,24 +113,20 @@ public class BishopMoveSlash : MoveToBestAction
         return moves;
     }
 
-    public Square findConnector() {
-
-    }
-
     public override int moveCondition(Square sq) {
         List<Square> canAttack = new List<Square>();
-        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponentMoves.position.y + 1) != null) {
-            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponentMoves.position.y + 1));
+        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponent.position.y + 1) != null) {
+            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponent.position.y + 1));
         }
-        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponentMoves.position.y + 1) != null) {
-            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponentMoves.position.y + 1));
+        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponent.position.y + 1) != null) {
+            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponent.position.y + 1));
         }
-        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponentMoves.position.y - 1) != null) {
-            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponentMoves.position.y - 1));
+        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponent.position.y - 1) != null) {
+            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponent.position.y - 1));
         }
-        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponentMoves.position.y - 1) != null) {
-            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponentMoves.position.y - 1));
+        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponent.position.y - 1) != null) {
+            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponent.position.y - 1));
         }
-        return this.maximizeDamage(sq, canAttack);
+        return this.maximizeDamage(canAttack);
     }
 }

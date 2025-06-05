@@ -27,7 +27,7 @@ public abstract class MoveToBestAction : HostileEntityAction
     public abstract int moveCondition(Square s);
 
     //can be used as a mvoe condition
-    public int maximizeDamage(Square s, List<Squares> squareAround) {
+    public int maximizeDamage(List<Square> squareAround) {
         int result = 0;
     
         foreach(Square s in squareAround) {
@@ -49,7 +49,7 @@ public abstract class MoveToBestAction : HostileEntityAction
         return result;
     }
     //can be used as a move condition
-    public int maximizeBoost(Square s, List<Squares> squareAround) {
+    public int maximizeBoost(List<Square> squareAround) {
         int result = 0;
         foreach(Square s in squareAround) {
             if(s.hasHostile()) {
