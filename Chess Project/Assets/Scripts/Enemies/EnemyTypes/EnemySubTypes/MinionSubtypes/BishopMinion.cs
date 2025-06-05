@@ -54,50 +54,43 @@ public class BishopStabDiags : HostileEntityAction
 //this is a combo action of moving to the square, and attacking the 4 corners
 public class BishopMoveSlash : MoveToBestAction
 {
-    private Square bestBounced; //this is bad but i dont want to learn how tuples work so womp womp lol
+    List<List<Square>> moveDirections;
 
-    public int MoveSlashDamage;
+
     public override IEnumerator act() {
-        bestBounced = null;
-        Square destination = findLethalSquare();
+        Square best = this.findBest();
 
-        if(bestBounced != null) {
-            yield return this.opponent.slide(bestBounced);
+        if(this.opponent.position.x - best.x == this.opponent.position.y - best.y) {
+            yield return base.act();
+        } else {
+            foreach(List<Square> moveDirection in moveDirections) {
+                if(moveDirection.Contains(best)) {
+                    yield return this.opponent.slide(moveDirection[0]);
+                    yield return this.opponent.slide(best);
+                }
+            }
+            yield return null;
         }
-        yield return this.opponent.slide(destination);
-
-        if(this.opponent.game.getBoard().getSquareAt(destination.x+1, destination.y+1)!= null && this.opponent.game.getBoard().getSquareAt(destination.x+1, destination.y+1).hasChessPiece()) {
-            this.opponent.game.getBoard().getSquareAt(destination.x+1, destination.y+1).entity.takeDamage(MoveSlashDamage);
-        }  
-        if(this.opponent.game.getBoard().getSquareAt(destination.x+1, destination.y-1)!= null && this.opponent.game.getBoard().getSquareAt(destination.x+1, destination.y-1).hasChessPiece()) {
-            this.opponent.game.getBoard().getSquareAt(destination.x+1, destination.y-1).entity.takeDamage(MoveSlashDamage);
-        } 
-        if(this.opponent.game.getBoard().getSquareAt(destination.x-1, destination.y+1)!= null && this.opponent.game.getBoard().getSquareAt(destination.x-1, destination.y+1).hasChessPiece()) {
-            this.opponent.game.getBoard().getSquareAt(destination.x-1, destination.y+1).entity.takeDamage(MoveSlashDamage);
-        } 
-        if(this.opponent.game.getBoard().getSquareAt(destination.x-1, destination.y-1)!= null && this.opponent.game.getBoard().getSquareAt(destination.x-1, destination.y-1).hasChessPiece()) {
-            this.opponent.game.getBoard().getSquareAt(destination.x-1, destination.y-1).entity.takeDamage(MoveSlashDamage);
-        } 
     }
 
-    private Square findLethalSquare() {
-        Square bestDestination = opponent.position;
-        int bestStabs = stabCount(opponent.position);
-        int bestKills = killCount(opponent.position);
-
+    public override List<Square> opponentMoves() {
+        List<Square> moves = new List<Square>();
         List<int[]> offsets = new List<int[]>();
         offsets.Add(new int[]{-1,-1});
         offsets.Add(new int[]{1,-1});
         offsets.Add(new int[]{-1,1});
         offsets.Add(new int[]{1,1});
+        this.moveDirections = new List<List<Square>>();
 
         foreach(int[] offset in offsets) {
-            Square bounce = null;
+            bool bounced = false
+            List<Square> moveDirection = new List<Square>();
             int x = opponent.position.x; int y = opponent.position.y;
             while(true) {
                 Square s = this.opponent.game.getBoard().getSquareAt(x + offset[0], y + offset[1]);
-                if(s == null && bounce == null) {
-                    bounce = this.opponent.game.getBoard().getSquareAt(x,y);
+                if(s == null && !bounce) {
+                    bounce = true;
+                    moveDirection = new List<Square>();
                     if(x + offset[0] >= this.opponent.game.getBoard().len || x + offset[0] < 0) {
                         offset[0] = -offset[0];
                     }
@@ -105,67 +98,38 @@ public class BishopMoveSlash : MoveToBestAction
                         offset[1] = -offset[1];
                     }
                     continue;
-                } else if(s == null) {
+                } else if(s == null || s.entity != null) {
                     break;
                 }
 
-                if(s.entity != null) {
-                    break;
-                }
-
-                if(bestKills < killCount(s) || (bestKills == killCount(s) && bestStabs < stabCount(s)) || bestKills == killCount(s) && bestStabs == stabCount(s) && Random.Range(0, 2) == 0) {
-                    bestDestination = s;
-                    bestStabs = stabCount(s);
-                    bestKills = killCount(s);
-                    bestBounced = bounce;
-                }
-
+                moves.Add(s);
+                moveDirection.Add(s);
                 x += offset[0]; y += offset[1];
             }
+            moveDirections.Add(moveDirection);
         }
 
-        return bestDestination;
+        return moves;
     }
 
-    private int stabCount(Square position) {
-        int count = 0;
-        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1) != null 
-            && this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1).canDamageSquare(MoveSlashDamage)) {
-            count++;
-        }
-        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1) != null 
-            && this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1).canDamageSquare(MoveSlashDamage)) {
-            count++;
-        }
-        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1) != null 
-            && this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1).canDamageSquare(MoveSlashDamage)) {
-            count++;
-        }
-        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1) != null 
-            && this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1).canDamageSquare(MoveSlashDamage)) {
-            count++;
-        }
-        return count;
+    public Square findConnector() {
+
     }
 
-    private int killCount(Square position) {
-        int count = 0;
-        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1) != null
-            && this.opponent.game.getBoard().getSquareAt(position.x+1, position.y+1).canKillSquare(MoveSlashDamage)) {
-            count++;
+    public override int moveCondition(Square sq) {
+        List<Square> canAttack = new List<Square>();
+        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponentMoves.position.y + 1) != null) {
+            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponentMoves.position.y + 1));
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1) != null 
-            && this.opponent.game.getBoard().getSquareAt(position.x+1, position.y-1).canKillSquare(MoveSlashDamage)) {
-            count++;
+        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponentMoves.position.y + 1) != null) {
+            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponentMoves.position.y + 1));
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1) != null
-            && this.opponent.game.getBoard().getSquareAt(position.x-1, position.y+1).canKillSquare(MoveSlashDamage)) {
-            count++;
+        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponentMoves.position.y - 1) != null) {
+            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x + 1, this.opponentMoves.position.y - 1));
         }
-        if(this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1) != null
-            && this.opponent.game.getBoard().getSquareAt(position.x-1, position.y-1).canKillSquare(MoveSlashDamage)) {
-            count++;
+        if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponentMoves.position.y - 1) != null) {
+            canAttack.Add(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x - 1, this.opponentMoves.position.y - 1));
         }
-        return count;
+        return this.maximizeDamage(sq, canAttack);
     }
 }
