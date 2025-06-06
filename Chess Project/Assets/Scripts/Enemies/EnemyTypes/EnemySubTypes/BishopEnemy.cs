@@ -140,6 +140,7 @@ public class BishopQuadDiagBlast : HostileEntityAction
 public class BishopRetreatAction : Retreat {
 
     public BishopRetreatAction(BishopEnemy b) : base(b) {}
+    public BishopRetreatAction(BishopMinion b) : base(b) {}
 
     public override List<Square> getRetreatableSquares() {
         List<Square> moves = new List<Square>();

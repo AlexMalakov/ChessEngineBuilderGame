@@ -7,6 +7,16 @@ public class PawnMinion : Minion
     public override void initActions() {
         this.actionQueue = new List<HostileEntityAction>();
         this.actionLoop = new List<HostileEntityAction>();
+
+        PawnAttackAction attack = new PawnAttackAction(this);
+        PawnMoveAction move = new PawnMoveAction(this);
+        PawnConditionalMoveAction move50 = new PawnConditionalMoveAction(this);
+        PawnGuardAction guard = new PawnGuardAction(this);
+
+        this.actionQueue.Add(new ComboAction(this, new List<HostileEntityAction>(){move, move}));
+        this.actionQueue.Add(new ComboAction(this, new List<HostileEntityAction>(){attack, guard, move50, guard, attack}));
+        
+        this.actionLoop.Add(new ComboAction(this, new List<HostileEntityAction>(){attack, guard, move, guard, attack}));
     }
 }
 

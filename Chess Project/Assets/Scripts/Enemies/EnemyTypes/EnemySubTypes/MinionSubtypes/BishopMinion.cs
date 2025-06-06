@@ -7,6 +7,11 @@ public class BishopMinion : MultiMinion
     public override void initActions() {
         this.actionQueue = new List<HostileEntityAction>();
         this.actionLoop = new List<HostileEntityAction>();
+
+        this.actionQueue.Add(new SleepAction(this));
+
+        this.actionLoop.Add(new ComboAction(this, new List<HostileEntityAction>(){new BishopMoveSlash(this), new BishopStabDiags(this)}));
+        this.actionLoop.Add(new ComboAction(this, new List<HostileEntityAction>(){new BishopStabDiags(this), new BishopRetreatAction(this), new BoostOthersAction(this, BoostType.damage, new string[]{"1"})}));
     }
 }
 
