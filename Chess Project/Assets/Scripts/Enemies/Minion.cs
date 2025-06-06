@@ -11,10 +11,23 @@ public abstract class Minion : HostileEntity
 
     public virtual void onSummon(Enemy enemy) {
         gameObject.SetActive(true);
+        StartCoroutine(summonAnimation());
         this.alive = true;
         this.enemy = enemy;
         health = maxHealth;
         this.initActions();
+    }
+
+    public virtual IEnumerator summonAnimation() {
+        float elapsed = 0f;
+        Vector3 endPos = this.transform.position;
+        Vector3 startPos = endPos + new Vector3(0, 5, 0);
+
+        while(elapsed < this.game.playerAttackDuration) {
+            transform.position = Vector3.Lerp(startPos, endPos, elapsed/this.game.playerAttackDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
     public override void takeTurn() {
