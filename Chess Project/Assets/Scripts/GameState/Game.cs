@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
     public PieceFactory factory;
     public FakeMono mono;
     public Graveyard graveyard;
+    public EffectManager effectManager;
 
     [Header ("important data")]
     public bool playersTurn;
