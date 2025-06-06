@@ -8,4 +8,9 @@ public class KingEnemy : Enemy
         base.onEncounterStart();
         this.summonMinions();
     }
+
+    public override void initActions() {
+        this.actionQueue = new List<HostileEntityAction>();
+        this.actionLoop = new List<HostileEntityAction>();
+    }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : HostileEntity
+public abstract class Enemy : HostileEntity
 {
     protected int minionsFinished; protected bool enemyFinished;
 
@@ -16,7 +16,9 @@ public class Enemy : HostileEntity
     [Header ("Costmetic")]
     public Sprite enemySprite;
 
-    public virtual void onEncounterStart(){}
+    public virtual void onEncounterStart(){
+        this.initActions();
+    }
 
     public void Awake() {
         int counter = 0;

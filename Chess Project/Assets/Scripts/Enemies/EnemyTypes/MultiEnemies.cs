@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 //multiple different "enemies" instead of just one
-public class MultiEnemies : Enemy
+public abstract class MultiEnemies : Enemy
 {
     bool slain;
     public override void onEncounterStart() {

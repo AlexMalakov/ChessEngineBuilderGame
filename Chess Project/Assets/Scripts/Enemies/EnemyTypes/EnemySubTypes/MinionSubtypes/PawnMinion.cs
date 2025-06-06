@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class PawnMinion : Minion
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override void initActions() {
+        this.actionQueue = new List<HostileEntityAction>();
+        this.actionLoop = new List<HostileEntityAction>();
     }
 }
 
@@ -82,7 +75,7 @@ public class PawnMoveAction : HostileEntityAction
 {
     public PawnMoveAction(PawnMinion p ) : base(p) {}
     int promotionDamage = 5;
-    
+
     public override IEnumerator act() {
         if(this.opponent.game.getBoard().getSquareAt(this.opponent.position.x, this.opponent.position.y-1) != null
             && this.opponent.game.getBoard().getSquareAt(this.opponent.position.x, this.opponent.position.y-1).entity == null) {

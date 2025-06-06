@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class RookEnemy : Enemy
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override void initActions() {
+        this.actionQueue = new List<HostileEntityAction>();
+        this.actionLoop = new List<HostileEntityAction>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.actionQueue.Add(new SleepAction(this));
+
+        this.actionLoop.Add(new RookBombardAction(this));
+        this.actionLoop.Add(new BoostSelfAction(this, BoostType.damage, new string[]{"1"}));
     }
 }
 

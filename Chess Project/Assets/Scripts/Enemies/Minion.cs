@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Minion : HostileEntity
+public abstract class Minion : HostileEntity
 {
     public Enemy enemy;
     public bool alive = false;
@@ -14,6 +14,7 @@ public class Minion : HostileEntity
         this.alive = true;
         this.enemy = enemy;
         health = maxHealth;
+        this.initActions();
     }
 
     public override void takeTurn() {

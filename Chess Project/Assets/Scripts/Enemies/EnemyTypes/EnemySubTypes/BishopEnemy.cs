@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class BishopEnemy : MultiEnemies
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override void initActions() {
+        this.actionQueue = new List<HostileEntityAction>();
+        this.actionLoop = new List<HostileEntityAction>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.actionQueue.Add(new SleepAction(this));
+
+        this.actionLoop.Add(new BishopQuadDiagBlast(this));
+        this.actionLoop.Add(new BishopDiagBombard(this));
+        this.actionLoop.Add(new ComboAction(this, new List<HostileEntityAction>(){new BishopRetreatAction(this), new BoostAllAction(this, BoostType.heal, new string[]{"10"})}));
     }
 }
 
@@ -135,5 +134,32 @@ public class BishopQuadDiagBlast : HostileEntityAction
         this.opponent.launchProjectile(1, 1, -1, this.opponent.damage);
         this.opponent.launchProjectile(1, 1, 1, this.opponent.damage);
         yield return null;
+    }
+}
+
+public class BishopRetreatAction : Retreat {
+
+    public BishopRetreatAction(BishopEnemy b) : base(b) {}
+
+    public override List<Square> getRetreatableSquares() {
+        List<Square> moves = new List<Square>();
+        List<int[]> offsets = new List<int[]>();
+        offsets.Add(new int[]{1,1});
+        offsets.Add(new int[]{-1,1});
+        offsets.Add(new int[]{1,-1});
+        offsets.Add(new int[]{-1,-1});
+
+        foreach(int[] offset in offsets) {
+            Square s = this.opponent.position;
+            while(true) {
+                if(this.opponent.game.getBoard().getSquareAt(s.x + offset[0], s.y + offset[1]) == null
+                    || this.opponent.game.getBoard().getSquareAt(s.x + offset[0], s.y + offset[1]).entity != null) {
+                        break;
+                }
+                s = this.opponent.game.getBoard().getSquareAt(s.x + offset[0], s.y + offset[1]);
+                moves.Add(this.opponent.game.getBoard().getSquareAt(s.x + offset[0], s.y + offset[1]));
+            }
+        }
+        return moves;
     }
 }

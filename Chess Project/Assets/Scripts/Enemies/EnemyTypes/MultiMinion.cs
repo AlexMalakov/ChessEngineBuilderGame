@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //minion that is essentially just as important as an enemy
-public class MultiMinion : Minion
+public abstract class MultiMinion : Minion
 {
     public override void onDeath() {
         base.onDeath();

@@ -47,8 +47,8 @@ public abstract class BoostAction : HostileEntityAction
     }
 }
 
-public class BoostSelf : BoostAction {
-    public BoostSelf(HostileEntity opponent, BoostType type, string[] args) : base(opponent, type, args) {}
+public class BoostSelfAction : BoostAction {
+    public BoostSelfAction(HostileEntity opponent, BoostType type, string[] args) : base(opponent, type, args) {}
 
     public override List<HostileEntity> boostTargets() {
         List<HostileEntity> targets = new List<HostileEntity>();
@@ -57,8 +57,8 @@ public class BoostSelf : BoostAction {
     }
 }
 
-public class BoostOthers : BoostAction {
-    public BoostOthers(HostileEntity opponent, BoostType type, string[] args) : base(opponent, type, args) {}
+public class BoostOthersAction : BoostAction {
+    public BoostOthersAction(HostileEntity opponent, BoostType type, string[] args) : base(opponent, type, args) {}
 
     public override List<HostileEntity> boostTargets() {
         List<HostileEntity> targets = new List<HostileEntity>();
@@ -80,8 +80,8 @@ public class BoostOthers : BoostAction {
     }
 }
 
-public class BoostAll : BoostAction {
-    public BoostAll(HostileEntity opponent, BoostType type, string[] args) : base(opponent, type, args) {}
+public class BoostAllAction : BoostAction {
+    public BoostAllAction(HostileEntity opponent, BoostType type, string[] args) : base(opponent, type, args) {}
 
     public override List<HostileEntity> boostTargets() {
         List<HostileEntity> targets = new List<HostileEntity>();

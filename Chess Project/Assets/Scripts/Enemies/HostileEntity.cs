@@ -10,6 +10,8 @@ public abstract class HostileEntity : Entity
     public List<HostileEntityAction> actionLoop;
     int currentAct = 0;
 
+    public abstract void initActions();
+
     public virtual void takeTurn() {
         if(currentAct < actionQueue.Count) {
             StartCoroutine(actionQueue[currentAct].takeAction());
