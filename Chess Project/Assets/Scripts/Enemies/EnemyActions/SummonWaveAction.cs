@@ -18,6 +18,7 @@ public class SummonWaveAction : HostileEntityAction
                 ((Enemy)this.opponent).summonMinionWave();
             }
         }
-        yield return null;
+
+        yield return this.opponent.game.effectManager.displayEffect(this.opponent, "summon", 1f);
     }
 }

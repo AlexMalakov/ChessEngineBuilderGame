@@ -23,12 +23,15 @@ public abstract class BoostAction : HostileEntityAction
             switch(this.type) {
                 case BoostType.heal:
                     boostTarget.health += int.Parse(args[0]);
+                    yield return this.opponent.game.effectManager.displayEffect(this.opponent, "heal", 1f);
                     break;
                 case BoostType.damage:
                     boostTarget.damage += int.Parse(args[0]);
+                    yield return this.opponent.game.effectManager.displayEffect(this.opponent, "damageBuff", 1f);
                     break;
                 case BoostType.defense:
                     boostTarget.defense += int.Parse(args[0]);
+                    yield return this.opponent.game.effectManager.displayEffect(this.opponent, "defenseBuff", 1f);
                     break;
                 case BoostType.status:
                     //TODO status factory
