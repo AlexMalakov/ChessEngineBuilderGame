@@ -3648,9 +3648,6 @@ GameObject:
   m_Component:
   - component: {fileID: 321856282}
   - component: {fileID: 321856283}
-  - component: {fileID: 321856284}
-  - component: {fileID: 321856285}
-  - component: {fileID: 321856286}
   m_Layer: 0
   m_Name: kingEnemy
   m_TagString: Untagged
@@ -3705,50 +3702,6 @@ MonoBehaviour:
   - {fileID: 479760812}
   minions: []
   enemySprite: {fileID: 21300000, guid: bbfe8983423754f71bed69a661a342ee, type: 3}
---- !u!114 &321856284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321856281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95a6198fbcbc04d4d8b376a843f4c283, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 321856283}
-  isWaveSummonOnly: 1
---- !u!114 &321856285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321856281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02aaa4390eb8549ff85092e76dfde40b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 321856283}
-  isEnemy: 1
-  powerGain: 1
---- !u!114 &321856286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321856281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a6a8d3125c5243bc85e6ab685c458cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 321856283}
-  isEnemy: 1
-  guardAmount: 5
 --- !u!1 &322290647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6426,13 +6379,6 @@ GameObject:
   m_Component:
   - component: {fileID: 479760813}
   - component: {fileID: 479760814}
-  - component: {fileID: 479760821}
-  - component: {fileID: 479760820}
-  - component: {fileID: 479760819}
-  - component: {fileID: 479760818}
-  - component: {fileID: 479760817}
-  - component: {fileID: 479760816}
-  - component: {fileID: 479760815}
   m_Layer: 0
   m_Name: pawn
   m_TagString: Untagged
@@ -6466,12 +6412,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 479760812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3985bbf770af49d3a72175bc8bd2547, type: 3}
+  m_Script: {fileID: 11500000, guid: d62656ae99ae34ddb908407faae13f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1230606952}
-  startingX: 3
-  startingY: 7
+  startingX: 0
+  startingY: 6
   position: {fileID: 0}
   health: 15
   maxHealth: 15
@@ -6481,113 +6427,6 @@ MonoBehaviour:
   enemy: {fileID: 321856283}
   alive: 0
   waveMinion: 1
---- !u!114 &479760815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479760812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  actions:
-  - {fileID: 479760820}
-  - {fileID: 479760819}
-  - {fileID: 479760818}
-  - {fileID: 479760819}
---- !u!114 &479760816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479760812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  actions:
-  - {fileID: 479760820}
-  - {fileID: 479760818}
-  - {fileID: 479760819}
---- !u!114 &479760817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479760812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  actions:
-  - {fileID: 479760820}
-  - {fileID: 479760821}
-  - {fileID: 479760820}
-  - {fileID: 479760821}
---- !u!114 &479760818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479760812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8e4b0f6bc2a446a8cc9fbf5b6bb82f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  promotionDamage: 5
---- !u!114 &479760819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479760812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 332efaff674a445069fc214bb571fe8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
---- !u!114 &479760820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479760812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d793776b290e74d839caa09ed9fc0c0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
---- !u!114 &479760821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479760812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a7d25250c654479f8565619ab0f6af8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 0}
-  promotionDamage: 5
 --- !u!1 &485582052
 GameObject:
   m_ObjectHideFlags: 0
@@ -6944,19 +6783,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 562678543}
-  - component: {fileID: 562678542}
-  - component: {fileID: 562678556}
-  - component: {fileID: 562678555}
-  - component: {fileID: 562678554}
-  - component: {fileID: 562678553}
-  - component: {fileID: 562678552}
-  - component: {fileID: 562678551}
-  - component: {fileID: 562678550}
-  - component: {fileID: 562678549}
-  - component: {fileID: 562678548}
-  - component: {fileID: 562678547}
-  - component: {fileID: 562678546}
-  - component: {fileID: 562678545}
   - component: {fileID: 562678544}
   m_Layer: 0
   m_Name: knight_minion_0
@@ -6965,30 +6791,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &562678542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3985bbf770af49d3a72175bc8bd2547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game: {fileID: 1230606952}
-  startingX: 3
-  startingY: 7
-  position: {fileID: 0}
-  health: 35
-  maxHealth: 35
-  defense: 0
-  damage: 2
-  projectiles: []
-  enemy: {fileID: 1082168116}
-  alive: 0
-  waveMinion: 0
 --- !u!4 &562678543
 Transform:
   m_ObjectHideFlags: 0
@@ -7014,198 +6816,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 562678541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a71b475e939e34aa0b5b652f19015540, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f798fc07be94d61aeb44e7394515e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  actions:
-  - {fileID: 562678551}
-  - {fileID: 562678550}
-  - {fileID: 562678549}
-  - {fileID: 562678548}
-  - {fileID: 562678547}
-  - {fileID: 562678546}
-  - {fileID: 562678545}
---- !u!114 &562678545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  actions:
-  - {fileID: 562678544}
-  - {fileID: 562678544}
---- !u!114 &562678546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  actions:
-  - {fileID: 562678550}
-  - {fileID: 562678556}
---- !u!114 &562678547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  actions:
-  - {fileID: 562678555}
-  - {fileID: 562678550}
---- !u!114 &562678548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  actions:
-  - {fileID: 562678556}
-  - {fileID: 562678549}
---- !u!114 &562678549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  actions:
-  - {fileID: 562678552}
-  - {fileID: 562678555}
---- !u!114 &562678550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  actions:
-  - {fileID: 562678553}
-  - {fileID: 562678556}
---- !u!114 &562678551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  actions:
-  - {fileID: 562678554}
-  - {fileID: 562678554}
---- !u!114 &562678552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7731dc250ea48e2a9366bfff971596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  guarding: 1
---- !u!114 &562678553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7731dc250ea48e2a9366bfff971596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  guarding: 0
---- !u!114 &562678554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 429aad2e6483945e8a6f68efc40e66fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
---- !u!114 &562678555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a9d1d16004e45bbb8c4c7f002ab73f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
-  guardAmount: 0
---- !u!114 &562678556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562678541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d94b37bf3e9e84a258a1bb080194a57c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 562678542}
+  game: {fileID: 1230606952}
+  startingX: 3
+  startingY: 7
+  position: {fileID: 0}
+  health: 35
+  maxHealth: 35
+  defense: 0
+  damage: 2
+  projectiles: []
+  enemy: {fileID: 1082168118}
+  alive: 0
+  waveMinion: 0
 --- !u!1 &567220407
 GameObject:
   m_ObjectHideFlags: 0
@@ -11683,19 +11308,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1082168117}
-  - component: {fileID: 1082168116}
-  - component: {fileID: 1082168130}
-  - component: {fileID: 1082168129}
-  - component: {fileID: 1082168128}
-  - component: {fileID: 1082168127}
-  - component: {fileID: 1082168126}
-  - component: {fileID: 1082168125}
-  - component: {fileID: 1082168124}
-  - component: {fileID: 1082168123}
-  - component: {fileID: 1082168122}
-  - component: {fileID: 1082168121}
-  - component: {fileID: 1082168120}
-  - component: {fileID: 1082168119}
   - component: {fileID: 1082168118}
   m_Layer: 0
   m_Name: knight_enemy
@@ -11704,35 +11316,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1082168116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331d432766db9414c9608295a3713260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game: {fileID: 1230606952}
-  startingX: 4
-  startingY: 7
-  position: {fileID: 0}
-  health: 35
-  maxHealth: 35
-  defense: 0
-  damage: 2
-  projectiles: []
-  minionsToInstantiate:
-  - {fileID: 562678541}
-  minionCounts: 03000000
-  minionStartingXs: 020000000300000005000000
-  minionStartingYs: 070000000700000007000000
-  minionWaveToInstantiate: []
-  minions: []
-  enemySprite: {fileID: 21300000, guid: 0beb81c1ef37142648abea22ac0cab29, type: 3}
 --- !u!4 &1082168117
 Transform:
   m_ObjectHideFlags: 0
@@ -11758,198 +11341,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1082168115}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a71b475e939e34aa0b5b652f19015540, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f6bc19e3ad8e4a658fcf6f31cac3d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  actions:
-  - {fileID: 1082168125}
-  - {fileID: 1082168124}
-  - {fileID: 1082168123}
-  - {fileID: 1082168122}
-  - {fileID: 1082168121}
-  - {fileID: 1082168120}
-  - {fileID: 1082168119}
---- !u!114 &1082168119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  actions:
-  - {fileID: 1082168118}
-  - {fileID: 1082168118}
---- !u!114 &1082168120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  actions:
-  - {fileID: 1082168124}
-  - {fileID: 1082168130}
---- !u!114 &1082168121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  actions:
-  - {fileID: 1082168129}
-  - {fileID: 1082168124}
---- !u!114 &1082168122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  actions:
-  - {fileID: 1082168130}
-  - {fileID: 1082168123}
---- !u!114 &1082168123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  actions:
-  - {fileID: 1082168126}
-  - {fileID: 1082168129}
---- !u!114 &1082168124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  actions:
-  - {fileID: 1082168127}
-  - {fileID: 1082168130}
---- !u!114 &1082168125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  actions:
-  - {fileID: 1082168128}
-  - {fileID: 1082168128}
---- !u!114 &1082168126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7731dc250ea48e2a9366bfff971596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  guarding: 1
---- !u!114 &1082168127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a7731dc250ea48e2a9366bfff971596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  guarding: 0
---- !u!114 &1082168128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 429aad2e6483945e8a6f68efc40e66fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
---- !u!114 &1082168129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a9d1d16004e45bbb8c4c7f002ab73f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
-  guardAmount: 0
---- !u!114 &1082168130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082168115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d94b37bf3e9e84a258a1bb080194a57c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1082168116}
+  game: {fileID: 1230606952}
+  startingX: 4
+  startingY: 7
+  position: {fileID: 0}
+  health: 35
+  maxHealth: 35
+  defense: 0
+  damage: 2
+  projectiles: []
+  minionsToInstantiate: []
+  minionCounts: 03000000
+  minionStartingXs: 020000000300000005000000
+  minionStartingYs: 070000000700000007000000
+  minionWaveToInstantiate:
+  - {fileID: 562678541}
+  minions: []
+  enemySprite: {fileID: 21300000, guid: 0beb81c1ef37142648abea22ac0cab29, type: 3}
 --- !u!1 &1085303786
 GameObject:
   m_ObjectHideFlags: 0
@@ -14379,13 +13790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1283418038}
-  - component: {fileID: 1283418042}
-  - component: {fileID: 1283418048}
-  - component: {fileID: 1283418047}
-  - component: {fileID: 1283418049}
-  - component: {fileID: 1283418045}
-  - component: {fileID: 1283418044}
-  - component: {fileID: 1283418043}
+  - component: {fileID: 1283418039}
   m_Layer: 0
   m_Name: bishop_enemy
   m_TagString: Untagged
@@ -14411,7 +13816,7 @@ Transform:
   - {fileID: 1085303787}
   m_Father: {fileID: 1905467356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1283418042
+--- !u!114 &1283418039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14420,28 +13825,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1283418037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9532041fb0447b9b1940e224057410, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1283418043}
---- !u!114 &1283418043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331d432766db9414c9608295a3713260, type: 3}
+  m_Script: {fileID: 11500000, guid: 8be545a1d309d4e76bf44087092cc846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1230606952}
   startingX: 4
   startingY: 7
   position: {fileID: 0}
-  health: 10
-  maxHealth: 10
+  health: 45
+  maxHealth: 45
   defense: 1
   damage: 2
   projectiles:
@@ -14455,86 +13847,6 @@ MonoBehaviour:
   minionWaveToInstantiate: []
   minions: []
   enemySprite: {fileID: 21300000, guid: a37668251b2364c8494e048b6b8925f7, type: 3}
---- !u!114 &1283418044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1283418043}
-  actions:
-  - {fileID: 1283418049}
-  - {fileID: 1283418045}
---- !u!114 &1283418045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8cfa313554f4848be48abd203f2433, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1283418043}
-  targetsToHeal: []
-  amount: 5
---- !u!114 &1283418047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e64a0259d4230496e93f050aa22926a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1283418043}
-  timeBetweenShots: 0.3
-  bestKills: 0
-  bestDamage: 0
-  bestHits: 0
-  kills: 0
-  damageDealt: 0
-  hits: 0
---- !u!114 &1283418048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52095a7485f2340e9a6eb9a722822f1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1283418043}
-  timeBetweenShot: 0.3
---- !u!114 &1283418049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283418037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f315382f038d4e72bd025e4825dfe86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1283418043}
-  weighExtraAmount: 1
-  weighExtraCol: 6
 --- !u!1 &1296474983
 GameObject:
   m_ObjectHideFlags: 0
@@ -14838,7 +14150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1362027709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3985bbf770af49d3a72175bc8bd2547, type: 3}
+  m_Script: {fileID: 11500000, guid: db83e7be353a04b198d1cceb3dc93d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1230606952}
@@ -14847,9 +14159,10 @@ MonoBehaviour:
   position: {fileID: 0}
   health: 50
   maxHealth: 50
-  defense: 1
+  defense: 2
   damage: 3
-  projectiles: []
+  projectiles:
+  - {fileID: 958326906}
   enemy: {fileID: 321856283}
   alive: 0
   waveMinion: 0
@@ -15414,10 +14727,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1417178098}
-  - component: {fileID: 1417178100}
   - component: {fileID: 1417178099}
-  - component: {fileID: 1417178101}
-  - component: {fileID: 1417178102}
   m_Layer: 0
   m_Name: rookEnemy
   m_TagString: Untagged
@@ -15451,48 +14761,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1417178096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3993262b9e5004e67aa5c79fef9ffdcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1417178102}
-  timeBetweenShot: 0.5
---- !u!114 &1417178100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417178096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9532041fb0447b9b1940e224057410, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1417178102}
---- !u!114 &1417178101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417178096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4a0636fc1194a0b9f156030594a2fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1417178102}
-  powerGain: 1
---- !u!114 &1417178102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417178096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93926bdbeb0fb4caa87c571b286d83f2, type: 3}
+  m_Script: {fileID: 11500000, guid: a9767a8bf132c4d989a4d57e846f05f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1230606952}
@@ -15502,7 +14771,7 @@ MonoBehaviour:
   health: 50
   maxHealth: 50
   defense: 2
-  damage: 1
+  damage: 2
   projectiles:
   - {fileID: 1821074206}
   minionsToInstantiate: []
@@ -20658,12 +19927,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1903949382}
-  - component: {fileID: 1903949386}
-  - component: {fileID: 1903949390}
-  - component: {fileID: 1903949392}
-  - component: {fileID: 1903949391}
-  - component: {fileID: 1903949388}
-  - component: {fileID: 1903949387}
   - component: {fileID: 1903949383}
   m_Layer: 0
   m_Name: 'bishop_minion '
@@ -20698,110 +19961,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1903949381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3985bbf770af49d3a72175bc8bd2547, type: 3}
+  m_Script: {fileID: 11500000, guid: 41e17a696881e4ab8ad0081a2c94055e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1230606952}
   startingX: 3
   startingY: 7
   position: {fileID: 0}
-  health: 10
-  maxHealth: 10
+  health: 45
+  maxHealth: 45
   defense: 1
   damage: 2
-  projectiles:
-  - {fileID: 1768738746}
-  enemy: {fileID: 1283418043}
+  projectiles: []
+  enemy: {fileID: 1283418039}
   alive: 0
   waveMinion: 0
---- !u!114 &1903949386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903949381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9532041fb0447b9b1940e224057410, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1903949383}
---- !u!114 &1903949387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903949381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3b70947dd424e4096e43df7caf9cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1903949383}
-  actions:
-  - {fileID: 1903949391}
-  - {fileID: 1903949388}
-  - {fileID: 1903949392}
---- !u!114 &1903949388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903949381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02aaa4390eb8549ff85092e76dfde40b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1903949383}
-  isEnemy: 0
-  powerGain: 1
---- !u!114 &1903949390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903949381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0118d81d4910e4b3d830253810a426ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1903949383}
-  bestBounced: {fileID: 0}
-  MoveSlashDamage: 2
---- !u!114 &1903949391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903949381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97a1cb1726514566bbe9d22e43ff5ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1903949383}
---- !u!114 &1903949392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903949381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f315382f038d4e72bd025e4825dfe86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  opponent: {fileID: 1903949383}
-  weighExtraAmount: 1
-  weighExtraCol: 6
 --- !u!1 &1905467355
 GameObject:
   m_ObjectHideFlags: 0
