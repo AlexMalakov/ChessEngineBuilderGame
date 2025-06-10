@@ -54,7 +54,7 @@ public class Encounter : MonoBehaviour
     }
 
     public virtual void startEnemyTurn() {
-        enemy.takeTurn();
+        StartCoroutine(enemy.takeTurn());
         //minoins attack?
     }
 

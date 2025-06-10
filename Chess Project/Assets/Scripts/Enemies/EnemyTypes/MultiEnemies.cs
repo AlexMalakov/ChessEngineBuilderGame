@@ -23,13 +23,13 @@ public abstract class MultiEnemies : Enemy
         base.onEncounterStart();
     }
 
-    public override void takeTurn() {
+    public override IEnumerator takeTurn() {
         if(!this.slain) {
-            base.takeTurn();
+            yield return base.takeTurn();
         } else {
             minionsFinished = 0;
             foreach(Minion m in this.minions) {
-                m.takeTurn();
+                yield return m.takeTurn();
             }
             this.onTurnOver();
         }

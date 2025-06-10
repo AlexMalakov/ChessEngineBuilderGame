@@ -12,7 +12,7 @@ public abstract class HostileEntity : Entity
 
     public abstract void initActions();
 
-    public virtual void takeTurn() {
+    public virtual IEnumerator takeTurn() {
         //grow to indicate it's doing it's action
         float elapsed = 0f;
         Vector3 initialScale = this.transform.localScale;
@@ -24,9 +24,9 @@ public abstract class HostileEntity : Entity
         }
 
         if(currentAct < actionQueue.Count) {
-            StartCoroutine(actionQueue[currentAct].takeAction());
+            yield return actionQueue[currentAct].takeAction();
         } else {
-            StartCoroutine(actionLoop[(currentAct - actionQueue.Count)%actionLoop.Count].takeAction());
+            yield return actionLoop[(currentAct - actionQueue.Count)%actionLoop.Count].takeAction();
         }
         currentAct++;
 
@@ -59,7 +59,7 @@ public abstract class HostileEntity : Entity
         float elapsed = 0f;
         Vector3 start = transform.position;
         while(elapsed < this.game.playerAttackDuration) {
-            transform.position = Vector3.Lerp(start, opponentSq.transform.position, elapsed/this.game.playerAttackDuration);
+            transform.position = Vector3.Lerp(start, target.position.transform.position, elapsed/this.game.playerAttackDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }

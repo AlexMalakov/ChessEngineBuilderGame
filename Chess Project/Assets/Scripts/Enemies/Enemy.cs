@@ -34,14 +34,14 @@ public abstract class Enemy : HostileEntity
         }
     }
 
-    public override void takeTurn() {
+    public override IEnumerator takeTurn() {
         enemyFinished = false;
         minionsFinished = 0;
 
-        base.takeTurn();
+        yield return base.takeTurn();
 
         foreach(Minion m in this.minions) {
-            m.takeTurn();
+            yield return m.takeTurn();
         }
     }
 

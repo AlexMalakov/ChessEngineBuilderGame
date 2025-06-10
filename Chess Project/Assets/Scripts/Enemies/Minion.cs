@@ -30,12 +30,13 @@ public abstract class Minion : HostileEntity
         }
     }
 
-    public override void takeTurn() {
+    public override IEnumerator takeTurn() {
         if(!this.alive) { //PLACE HOLDER, DEAD MINIONS DONT TAKE ACTIONS!
             this.enemy.onMinionFinished();
-            return;
+            yield return null;
+        } else {
+            yield return base.takeTurn();
         }
-        base.takeTurn();
     }
 
 
