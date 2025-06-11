@@ -71,7 +71,7 @@ public abstract class PieceUpgradeReward : Reward
     }
 
     //adds new sacrifice behavior/damage???
-    public virtual void changeOnSacrifice(ChessPiece p){}
+    public virtual void changeOnSacrifice(ChessPiece p, Square target){}
 
     public virtual void changePromote(ChessPiece p) {}
 

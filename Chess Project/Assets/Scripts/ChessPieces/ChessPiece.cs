@@ -215,7 +215,7 @@ public abstract class ChessPiece : Entity
 
         if(this.pieceUpgrades.ContainsKey(PieceMethods.onSacrifice)) {
             foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.onSacrifice]) {
-                upgrade.changeOnSacrifice(this);
+                upgrade.changeOnSacrifice(this, s);
             }
         }
 

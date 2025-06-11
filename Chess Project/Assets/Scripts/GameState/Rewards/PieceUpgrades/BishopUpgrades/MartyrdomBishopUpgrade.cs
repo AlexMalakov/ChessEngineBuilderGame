@@ -17,7 +17,7 @@ public class MartyrdomBishopUpgrade : PieceUpgradeReward
         return PieceType.ChessPiece;
     }
 
-    public override void changeOnSacrifice(ChessPiece p){
+    public override void changeOnSacrifice(ChessPiece p, Square target){
         if(p.getPieceType() == PieceType.Bishop) {
 
             if(oddSquareSac == 0 && evenSquareSac == 0) {
