@@ -49,7 +49,12 @@ public abstract class ChessPiece : Entity
         
         foreach (Square s in getPossibleMoves(false)) {
             if (s.x == square.x && s.y == square.y) {
-                StartCoroutine(this.slide(square));
+
+                if(square.hasHostile()) {
+                    StartCoroutine(this.onSacrifice(square));
+                } else {
+                    StartCoroutine(this.slide(square));
+                }
                 return true;
             }
         }
@@ -206,8 +211,39 @@ public abstract class ChessPiece : Entity
     }
 
     //runs when a piece moves into an enemy, and dies (will do something cool but nothing at the moment lol)
-    public void onSacrifice() {
+    public IEnumerator onSacrifice(Square s) {
 
+        if(this.pieceUpgrades.ContainsKey(PieceMethods.onSacrifice)) {
+            foreach(PieceUpgradeReward upgrade in this.pieceUpgrades[PieceMethods.onSacrifice]) {
+                upgrade.changeOnSacrifice(this);
+            }
+        }
+
+        float elapsed = 0f;
+        Vector3 initialScale = this.transform.localScale;
+        Vector3 targetScale = initialScale * this.game.sizeIncrease;
+        while(elapsed < this.game.pieceAttackGrowDuration) {
+            this.transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsed / this.game.pieceAttackGrowDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+
+
+
+        yield return new WaitForSeconds(.3f);
+
+        s.entity.takeDamage(this.getPieceDamage(s));
+        yield return this.attackAnimation(s);
+
+        elapsed = 0f;
+        while(elapsed < this.game.pieceAttackGrowDuration) {
+            this.transform.localScale = Vector3.Lerp(targetScale, initialScale, elapsed / this.game.pieceAttackGrowDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        this.onDeath();
     }
 
     //adds a piece upgrade into its list of upgrades, may change

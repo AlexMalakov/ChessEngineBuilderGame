@@ -16,6 +16,10 @@ public class LeapFrogPawnUpgrade : PieceUpgradeReward
 
     public override List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
         List<Square> additionalMoves = new List<Square>();
+        
+        if(defending || attacking) {
+            return additionalMoves;
+        }
 
         List<int[]> offsets = new List<int[]>();
         offsets.Add(new int[]{-1,-1});

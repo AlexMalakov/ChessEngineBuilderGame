@@ -27,7 +27,9 @@ public class WormholeSteedKnightUpgrade : PieceUpgradeReward
                 int len = this.game.getBoard().len; int height = this.game.getBoard().height;
                 int x = (((p.position.x + offset[0]) % len) + len) % len;
                 int y = (((p.position.y + offset[1]) % height) + height) % height;
-                additionalMoves.Add(this.game.getBoard().getSquareAt(x, y));
+                if(!this.game.getBoard().getSquareAt(x, y).hasChessPiece()) {
+                    additionalMoves.Add(this.game.getBoard().getSquareAt(x, y));
+                }
             }
         }
 

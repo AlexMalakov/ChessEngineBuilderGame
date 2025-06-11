@@ -14,6 +14,7 @@ public class HauntedManorRookUpgrade : PieceUpgradeReward
         return PieceType.Rook;
     }
     
+    //make sure it allows sacrificies and gives guard
     public override List<Square> changePossibleMoves(ChessPiece p, bool defending, bool attacking) {
         List<Square> additionalMoves = new List<Square>();
         if(defending || attacking) {
