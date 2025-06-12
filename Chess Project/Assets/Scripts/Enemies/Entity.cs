@@ -29,6 +29,8 @@ public abstract class Entity : MonoBehaviour
         if(health <= 0) {
             this.onDeath();
         }
+
+        StartCoroutine(this.game.getPopUpManager().displayNumbers(PopupType.DamageTaken, damage, this.transform));
     }
 
     public virtual void addStatusEffect(StatusEffect effect) {
