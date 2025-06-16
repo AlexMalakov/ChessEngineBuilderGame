@@ -15792,7 +15792,7 @@ MonoBehaviour:
   factory: {fileID: 0}
   mono: {fileID: 0}
   graveyard: {fileID: 67834020}
-  effectManager: {fileID: 0}
+  effectManager: {fileID: 1745348294}
   playersTurn: 1
   playerPremoveTurn: 0
   playerPremoves: 0
@@ -22123,7 +22123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f455ad4374ee40ed97918e9b16b3bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectObj: {fileID: 0}
+  effectObj: {fileID: 1094484188}
 --- !u!1 &1748783211
 GameObject:
   m_ObjectHideFlags: 0
