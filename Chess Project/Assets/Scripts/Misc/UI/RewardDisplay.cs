@@ -17,7 +17,7 @@ public class RewardDisplay : MonoBehaviour
 
         newHolder.GetComponent<RewardImageHolder>().assignReward(r);
         newHolder.SetActive(true);
-        newHolder.Position = startingPoint.position + new Vector3(0, -offset * yOffset, 0);
+        newHolder.transform.position = startingPoint.position + new Vector3(0, -count * yOffset, 0);
 
         count++;
 

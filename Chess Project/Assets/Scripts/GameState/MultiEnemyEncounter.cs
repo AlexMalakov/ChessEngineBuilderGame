@@ -17,10 +17,11 @@ public class MultiEnemyEncounter : Encounter
         return this.encounterName;
     }
 
-    public override string getEncounterStats() {
-        string stats = "";
+    public override List<string[]> getEncounterStats() {
+        List<string[]> stats = new List<string[]>();
         foreach(HostileEntity e in this.encounterEnemies) {
-            stats += "Health: " + e.health + "/" + e.maxHealth + "\nDamage: " + e.damage + "\nDefense: " + e.defense + "\n";
+            stats.Add(new string[]{e.name, e.health + "/" + e.maxHealth, e.damage + "", e.defense + ""});
+            // stats += "Health: " + e.health + "/" + e.maxHealth + "\nDamage: " + e.damage + "\nDefense: " + e.defense + "\n";
         }
         return stats;
     }

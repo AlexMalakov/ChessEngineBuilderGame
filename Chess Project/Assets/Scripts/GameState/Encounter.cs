@@ -76,8 +76,11 @@ public class Encounter : MonoBehaviour
         return this.enemy.gameObject.name;
     }
 
-    public virtual string getEncounterStats() {
-        return "Health: " + this.enemy.health + "/" + this.enemy.maxHealth 
-            + "\nDamage: " + this.enemy.damage + "\nDefense: " + this.enemy.defense;
+    public virtual List<string[]> getEncounterStats() {
+        List<string[]> stats = new List<string[]>();
+        stats.Add(new string[]{this.enemy.name, this.enemy.health + "/" + this.enemy.maxHealth, this.enemy.damage + "", this.enemy.defense + ""});
+        return stats;
+        // return "Health: " + this.enemy.health + "/" + this.enemy.maxHealth 
+        //     + "\nDamage: " + this.enemy.damage + "\nDefense: " + this.enemy.defense;
     }
 }
