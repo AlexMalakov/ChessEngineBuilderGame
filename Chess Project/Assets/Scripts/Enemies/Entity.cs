@@ -26,11 +26,11 @@ public abstract class Entity : MonoBehaviour
     public virtual void takeDamage(int damage) {
         health-=damage;
 
+        StartCoroutine(this.game.getPopUpManager().displayNumbers(PopupType.DamageTaken, damage, this.transform));
+
         if(health <= 0) {
             this.onDeath();
         }
-
-        StartCoroutine(this.game.getPopUpManager().displayNumbers(PopupType.DamageTaken, damage, this.transform));
     }
 
     public virtual void addStatusEffect(StatusEffect effect) {

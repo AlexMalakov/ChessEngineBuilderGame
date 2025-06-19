@@ -13,8 +13,13 @@ public class PopUp : MonoBehaviour
 
     bool active;
 
-    public void activateNumbers(PopupType type, int value) {
+    public void activateNumbers(PopupType type, int value) { //crit might have just been left unflipped
         
+        this.damage.SetActive(false);
+        this.block.SetActive(false);
+        this.damageTaken.SetActive(false);
+        this.crit.SetActive(false);
+
         text.color = Color.black;// or new Color(r, g, b, a)
         switch(type) {
             case PopupType.Damage:
@@ -32,6 +37,7 @@ public class PopUp : MonoBehaviour
                 damageTaken.SetActive(true);
                 break;
             case PopupType.Crit:
+                Debug.Log("CRIT!!!!!");
                 this.text.text = "";
                 crit.SetActive(true);
                 break;     
